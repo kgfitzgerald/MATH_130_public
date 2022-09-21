@@ -1,0 +1,95 @@
+---
+title: "Q/A - Check-in / Group Quiz Debrief"
+format: html
+editor: visual
+---
+
+**Student Questions:**
+
+*How is it possible to get in touch with a tutor and have an appointment?*
+
+-   Our Canvas page \> Important Course Links \> [FREE Tutoring](https://canvas.apu.edu/courses/42132/pages/free-tutoring)
+
+*Will future quizzes always be concept based?*
+
+-   Yep, Quiz 1 was pretty typical - requires conceptual understanding, not just plug and chug :)
+
+*Will we be doing group tests more?*
+
+-   Yep, 4 group quizzes throughout semester, next one is next Monday
+
+-   Exam 2 will be a group take-home exam (in November)
+
+**Group Quiz 1 - Highlights / Muddiest Points**
+
+*Problem 1: New Zealand socks/icy path experiment*
+
+-   Random assignment = experiment
+
+    -   Just because there is a control group doesn't mean it was an experiment - must have random assignment
+
+-   Random sampling: was randomness used in how participants were selected into the study?
+
+    -   Purpose of random sampling: to give all people (or units) the same chance of being selected into the study.
+
+    -   Takes care of sampling bias
+
+-   Random assignment: was randomness used to split participants into groups?
+
+    -   Purpose of random assignment: to produce groups that are as similar as possible before the explanatory variable (treatment) is imposed
+
+    -   Take care of confounding variables
+
+*Problem 2 part 1: APU clothing/campus*
+
+-   When identifying whether a variable is numeric or categorical ask: how would one observational unit answer this question?
+
+    -   Is THIS STUDENT wearing APU clothing? Yes/no
+
+    -   Can always ask numeric questions about categorical data (e.g. HOW MANY or WHAT PERCENTAGE of people are wearing APU clothing?) but those are SUMMARY statistics about a variable.
+
+*Problem 2 part 2: ER patients*
+
+-   The following are NOT variables
+
+    -   The number of patients in the ER
+
+    -   How many people came in
+
+-   The following ARE variables:
+
+    -   Reason for sickness/injury (categorical)
+
+    -   Age (numeric)
+
+    -   Time they came in (numeric)
+
+    -   Gender (categorical)
+
+    -   If patient has COVID (categorical)
+
+    -   How many miles they live from hospital (numeric)
+
+    -   Whether or not they were born in CA (categorical)
+
+    -   Blood pressure (numeric)
+
+    -   If they traveled over 10 miles: yes/no (categorical)
+
+*Problem 3: Gettysburg Address*
+
+-   4.295 is average world length for whole speech, so this is a parameter
+
+    -   Parameter = computed from population
+
+    -   Statistic = computed from sample
+
+-   Large sample does NOT take care of sampling bias
+
+    -   If method is biased, sample will still be biased, no matter how large it is
+
+**Will start class with more Q/A over Chapters 4 & 5 on Monday - Group Quiz in second half of class. Study tools:**
+
+-   Q/A Document posted on Campuswire
+
+-   Chapter Highlights handouts
