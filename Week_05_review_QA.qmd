@@ -1,55 +1,55 @@
 ---
-title: "Student Questions - Chapters 3 & 4"
+title: "Quiz Debrief & Student Questions"
 format: html
 editor: visual
 ---
 
+**Group Quiz 2 Debrief**
+
+-   What is one way we can ensure "yes" has a smaller standard deviation than "no"?
+
+![](images/movies_dotplot.png)
+
+-   What are the observational units? Think: what does one dot represent?
+
+    -   Re-read the problem text: "*Suppose that you re-create this study by interviewing faculty at your school, and suppose that your sample contains 8 people in each group (16 total)"*
+
+-   What are the variables?
+
+    -   General Tip: look at x- and y-axis, and any other way the visualization is broken down/split into categories. Be careful with histograms though - counts/frequencies aren't variables.
+
+    -   Why aren't "with children under 18" and "without children under 18" two variables?
+
+    -   Why is "\# of children" incorrect?
+
+    -   Why is "\# of people with children" incorrect?
+
+    -   General tip: an axis typically will only show 1 variable (not several), and if you see what you think is multiple variables on the same axis, it is likely multiple categories of 1 categorical variable:
+
+        ![](images/boxplots.png)
+
+-   What are the observational units in the boxplots above?
+
+    -   *"Data was collected on high temperatures for **each day of the month** during February and July in 4 different California cities"*
+
+-   What about California is causing the two peaks?
+
+    ![](images/high_temps.png)
+
+    -   Why is night vs. afternoon not a correct explanation here? Think: what are the observational units?
+
+-   What are the observational units and variables in the above histogram?
+
+    -   Think: there are multiple numbers being plotted here. Where do those multiple numbers come from?
+
+    -   *"The following graph displays high temperature data for cities around California on a particular day in July"*
+
+-   Recall classification of variables:
+
+    -   Numeric - can be discrete or continuous
+
+    -   Categorical - can be ordinal or not ordinal
+
+    -   Can't have categorical - discrete, for example
+
 **Student Questions:**
-
-*What is the difference between unbiased and random?*
-
--   Random sampling is an unbiased sampling method. Meaning, we will hit the right target, on average.
-
-    ![](images/bias-precision.png)
-
--   For example, random sampling fixes the Gettysburg address problem, and would give an unbiased estimate of the population mean.
-
--   BUT, there are lots of other types of bias:
-
-    -   non-response bias (people who don't opt into the study)
-
-    -   attrition bias (people drop out of study)
-
-    -   bias of estimators (formulas we use)
-
-    -   coverage bias (we only have a list of a subset of units in our population)
-
-    -   etc
-
--   *Can large samples with unbiased methods still result in biased results?*
-
-    -   Yes, maybe random sampling is used, and unbiased estimators (formulas) are used, but results can still suffer from a different type of bias (e.g. coverage bias)
-
--   *Can random assignment still have some sort of bias?*
-
-    -   Random sampling: takes care of sampling bias, and allows us to generalize to the population from which we drew our sample
-
-    -   Random assignment: takes care of confounding variables, and allows us to make causal claims
-
--   
-
--   *What's the easiest way to find standard deviation?*
-
-    -   Using R :) never have to calculate it by hand. R has a built in function `sd()` that computes it for us
-
-**Chapter 5 Review**
-
-| Col1 | Col2 | Col3 | Col4 | Col5 |
-|------|------|------|------|------|
-|      |      |      |      |      |
-|      |      |      |      |      |
-|      |      |      |      |      |
-|      |      |      |      |      |
-|      |      |      |      |      |
-|      |      |      |      |      |
-|      |      |      |      |      |
