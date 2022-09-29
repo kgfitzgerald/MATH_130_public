@@ -53,3 +53,33 @@ editor: visual
     -   Can't have categorical - discrete, for example
 
 **Student Questions:**
+
+-   Does it matter which way we do boxplots? Vertically or horizontally?
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+ggplot(midwest, aes(x = state, y = percbelowpoverty)) +
+  geom_boxplot()
+
+ggplot(midwest, aes(x = state, y = percbelowpoverty)) +
+  geom_boxplot() +
+  coord_flip()
+```
+
+-   How do you calculate standard deviation?
+
+    -   In R, never by hand :) More interested in your conceptual understanding of it as a measure of spread
+
+```{r}
+sd(midwest$percbelowpoverty)
+```
+
+-   How many tests do we do individually?
+
+    -   Exam 1: individual written exam, Oct 19
+
+    -   Final exam: individual written exam, Dec 12- 16
+
+    -   2-3 more group quizzes
+
+    -   1 group take-home exam
