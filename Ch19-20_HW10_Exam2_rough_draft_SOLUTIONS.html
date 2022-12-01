@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.1.251">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>SOLUTIONS: HW 10 / Exam 2 rough draft</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="Ch19-20_HW10_Exam2_rough_draft_SOLUTIONS_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Ch19-20_HW10_Exam2_rough_draft_SOLUTIONS_files/libs/quarto-html/quarto.js"></script>
+<script src="Ch19-20_HW10_Exam2_rough_draft_SOLUTIONS_files/libs/quarto-html/popper.min.js"></script>
+<script src="Ch19-20_HW10_Exam2_rough_draft_SOLUTIONS_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Ch19-20_HW10_Exam2_rough_draft_SOLUTIONS_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Ch19-20_HW10_Exam2_rough_draft_SOLUTIONS_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Ch19-20_HW10_Exam2_rough_draft_SOLUTIONS_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="Ch19-20_HW10_Exam2_rough_draft_SOLUTIONS_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Ch19-20_HW10_Exam2_rough_draft_SOLUTIONS_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Ch19-20_HW10_Exam2_rough_draft_SOLUTIONS_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="fullcontent">
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">SOLUTIONS: HW 10 / Exam 2 rough draft</h1>
+<p class="subtitle lead">Ch 19 &amp; 20: Inference for means using t_test</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<p>This activity continues to introduce you to how to how to conduct hypothesis tests and confidence intervals in R. This is the type of analysis you will be asked to conduct on Exam 2.</p>
+<section id="loading-packages" class="level2">
+<h2 class="anchored" data-anchor-id="loading-packages">Loading packages</h2>
+<p>For this analysis, we need the <code>tidyverse</code>, <code>infer</code>, and <code>NHANES</code> packages.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(infer)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(NHANES)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="a-note-about-typing-mathematical-symbols-in-r" class="level2">
+<h2 class="anchored" data-anchor-id="a-note-about-typing-mathematical-symbols-in-r">A note about typing mathematical symbols in R</h2>
+<p>Below are some examples for how to type common mathematical symbols we use in this class:</p>
+<ul>
+<li>Greek letter “mu”: <span class="math inline">\(\mu\)</span></li>
+<li>Greek letter “alpha”: <span class="math inline">\(\alpha\)</span></li>
+<li>“X-bar”: <span class="math inline">\(\bar{X}\)</span></li>
+<li>“p-hat”: <span class="math inline">\(\hat{p}\)</span></li>
+<li>Null hypothesis: <span class="math inline">\(H_0\)</span></li>
+<li>Alternative hypothesis: <span class="math inline">\(H_A\)</span></li>
+<li>Not equal to: <span class="math inline">\(\neq\)</span></li>
+</ul>
+<p>In general, you can type mathematical symbols/equations by placing them inside dollar signs. Placing them inside double dollar signs will cause the equations to be centered on the page. Underscores _ allow you to create subscripts. The following example combines several of the above pieces of notation to write out the alternative hypothesis for a difference in proportions:</p>
+<p><span class="math display">\[H_0: p_1 \neq p_2\]</span></p>
+</section>
+<section id="the-data" class="level2">
+<h2 class="anchored" data-anchor-id="the-data">The data</h2>
+<p>The US National Center for Health Statistics (NCHS) has conducted a series of health and nutrition surveys since the early 1960’s. Since 1999 approximately 5,000 individuals of all ages are interviewed in their homes every year and complete the health examination component of the survey. This data is available in the <code>NHANES</code> dataset, from the <code>NHANES</code> package. The following code loads this data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(NHANES)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The dataset contains data from a sample taken in 2009-2010 and a sample taken in 2011 - 2012. For this analysis, we fill focus only on 2011-2012. The code below filters the data to only keep the 2011 - 2012 data and names the new dataset <code>NHANES_1112</code>. It also drops rows that have missing values for some of our variables of interest.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>NHANES_1112 <span class="ot">&lt;-</span> NHANES <span class="sc">%&gt;%</span> </span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(SurveyYr <span class="sc">==</span> <span class="st">"2011_12"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>(Pulse, BMI)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Use <code>NHANES_1112</code> for all of the analyses below.</p>
+<section id="exercise-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
+<p>What are the observational units and how many are there?</p>
+<blockquote class="blockquote">
+<p>Individuals living in the US in 2011-2012; 4,254</p>
+</blockquote>
+</section>
+<section id="exercise-2" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
+<p>How many variables are there?</p>
+<blockquote class="blockquote">
+<p>76</p>
+</blockquote>
+</section>
+</section>
+<section id="research-question-1" class="level2">
+<h2 class="anchored" data-anchor-id="research-question-1">Research Question 1</h2>
+<p>Suppose we want to investigate whether the average heart rate of all US residents is less than 75 bpm. Use this research question to answer Exercises 3 - 13.</p>
+<section id="exercise-3" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-3">Exercise 3</h3>
+<p>What is the parameter of interest? What notation do we use for it?</p>
+<blockquote class="blockquote">
+<p>The parameter of interest average heart rate. Because this is a numeric variable, we are interested in a one mean, and we use the notation <span class="math inline">\(\mu\)</span>.</p>
+</blockquote>
+<p>The variable <code>Pulse</code> provides heart rate data in the <code>NHANES</code> dataset. Let’s look at a quick histogram of heart rates in our sample.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(NHANES_1112, <span class="fu">aes</span>(<span class="at">x =</span> Pulse)) <span class="sc">+</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="Ch19-20_HW10_Exam2_rough_draft_SOLUTIONS_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+</section>
+<section id="exercise-4" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-4">Exercise 4</h3>
+<p>Describe the shape of this distribution</p>
+<blockquote class="blockquote">
+<p>Unimodal, symmetric (possibly very slight right-skew)</p>
+</blockquote>
+</section>
+<section id="exercise-5" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-5">Exercise 5</h3>
+<p>State the null and alternative hypotheses for this research question (using symbols). <em>Hint: see the note about mathematical symbols at the top of this assignment.</em></p>
+<p><span class="math display">\[H_0: \mu = 75\]</span> <span class="math display">\[H_A: \mu &lt; 75\]</span></p>
+</section>
+</section>
+<section id="conducting-a-test-for-a-single-mean-using-t_test" class="level2">
+<h2 class="anchored" data-anchor-id="conducting-a-test-for-a-single-mean-using-t_test">Conducting a test for a single mean using <code>t_test()</code></h2>
+<p>Let’s conduct a hypothesis test to investigate this question, using significance level <span class="math inline">\(\alpha = 0.01\)</span>. In R, the function <code>t_test()</code> allows us to conduct inferences about means, using very similar syntax to how <code>prop_test()</code> conducts inferences about proportions. We need several inputs:</p>
+<ul>
+<li>the first input should be the name of the dataset</li>
+<li><code>response</code> = the name of the variable of interest</li>
+<li><code>mu</code> = the value specified under the null hypothesis</li>
+<li><code>alternative</code> = “two-sided” by default, can be changed to “greater” or “less” depending on how the alternative hypothesis is specified.</li>
+<li><code>conf_level</code> = a numeric value between 0 and 1 to specify the level of confidence. Default value is 0.95.</li>
+</ul>
+<section id="exercise-6" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-6">Exercise 6</h3>
+<p>Fill in the blanks in the code below to use <code>t_test()</code> to conduct the hypothesis test you defined above. Remove <code>eval = FALSE</code> from the code chunk once you’ve entered the correct code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t_test</span>(NHANES_1112, <span class="at">response =</span> Pulse, <span class="at">mu =</span> <span class="dv">75</span>, </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>            <span class="at">alternative =</span> <span class="st">"less"</span>, <span class="at">conf_level =</span> <span class="fl">0.99</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 7
+  statistic  t_df    p_value alternative estimate lower_ci upper_ci
+      &lt;dbl&gt; &lt;dbl&gt;      &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1   -7.3059  4253 1.6355e-13 less          73.642     -Inf   74.074</code></pre>
+</div>
+</div>
+<div class="cell">
+
+</div>
+</section>
+<section id="exercise-7" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-7">Exercise 7</h3>
+<p>Based on the output, what is the T-statistic for this test?</p>
+<blockquote class="blockquote">
+<p>-7.3059385</p>
+</blockquote>
+</section>
+<section id="exercise-8" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-8">Exercise 8</h3>
+<p>Explain why the T-statistic is positive or negative. Hint: recall how the T-statistic is calculated, and consider the average heart rate in this sample (computed via the code below).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(NHANES_1112<span class="sc">$</span>Pulse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  40.00   66.00   72.00   73.64   82.00  136.00 </code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>The T-statistic is calculated as <span class="math inline">\(\frac{\text{point estimate - null value}}{SE}\)</span>. Here the point estimate is 73.64 and the null value is 75, so subtracting gives a negative value (i.e.&nbsp;the point estimate is smaller than the null value).</p>
+</blockquote>
+</section>
+<section id="exercise-9" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-9">Exercise 9</h3>
+<p>Which column in the <code>t_test()</code> output gives this same value for the average <code>Pulse</code> in the sample? What two words do we usually use to refer to this value? What notation do we use for it?</p>
+<blockquote class="blockquote">
+<p>The <code>estimate</code> column gives this same value for the sample mean. We usually refer to this as the point estimate, or in this particular context, the sample mean. We use the notation <span class="math inline">\(\bar{x}\)</span>.</p>
+</blockquote>
+</section>
+<section id="exercise-10" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-10">Exercise 10</h3>
+<p>What is the p-value for this analysis?</p>
+<blockquote class="blockquote">
+<p>1.6355e-13, which is R’s way of writing the scientific notation: <span class="math inline">\(1.6355x10^{-13} = 0.00000000000016355\)</span>. Hence, the p-value is a <em>very</em> small number, close to 0.</p>
+</blockquote>
+</section>
+<section id="exercise-11" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-11">Exercise 11</h3>
+<p>Interpret the p-value in the context of this problem. A template statement is below:</p>
+<blockquote class="blockquote">
+<p>There is a 1.6355e-13 probability of observing a sample mean as extreme as 73.64, assuming the true average bpm in the population is 75 (i.e.&nbsp;assuming <span class="math inline">\(H_0\)</span> is true.</p>
+</blockquote>
+</section>
+<section id="exercise-12" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-12">Exercise 12</h3>
+<p>Use the p-value to draw an appropriate conclusion from the hypothesis test.</p>
+<blockquote class="blockquote">
+<p>Because our p-value is very small, and in particular is smaller than <span class="math inline">\(\alpha = 0.01\)</span>, we reject <span class="math inline">\(H_0\)</span>. There is sufficient evidence to claim that the average heart rate among the US population is less than 75.</p>
+</blockquote>
+<p>Note, the p-value was very small because we had a relatively large sample size (5,000 people). With large sample sizes, the uncertainty in our point estimate is much smaller, so we can detect even small discrepancies between our observed point estimate and the hypothesized value.</p>
+<p>This activity showed how to use <code>t_test()</code> to conduct a hypothesis test, but it can also be used to compute a confidence interval. In reality, we are likely more interested in constructing a confidence interval for the average heart rate than conducting a hypothesis test. The code below constructs a 99% confidence interval.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t_test</span>(NHANES_1112, <span class="at">response =</span> Pulse, <span class="at">conf_level =</span> <span class="fl">0.99</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 7
+  statistic  t_df p_value alternative estimate lower_ci upper_ci
+      &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1    396.11  4253       0 two.sided     73.642   73.163   74.121</code></pre>
+</div>
+</div>
+<p>Again, because of the large sample size, the width of our confidence interval is fairly narrow.</p>
+</section>
+<section id="exercise-13" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-13">Exercise 13</h3>
+<p>Interpret the above confidence interval</p>
+<blockquote class="blockquote">
+<p>We are 99% confident that the average heart rate in the US population is between 73.163 and 74.121 bpm.</p>
+</blockquote>
+</section>
+</section>
+<section id="research-question-2" class="level2">
+<h2 class="anchored" data-anchor-id="research-question-2">Research Question 2</h2>
+<p>Do men or women have a higher BMI on average, or is there no difference? Use this research question in Exercises 14 - 19.</p>
+<section id="exercise-14" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-14">Exercise 14</h3>
+<p>State the hypotheses to investigate this question (using symbols):</p>
+<p><span class="math display">\[H_0: \mu_1 = \mu_2\]</span> <span class="math display">\[H_A: \mu_1 \neq \mu_2\]</span></p>
+</section>
+<section id="exercise-15" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-15">Exercise 15</h3>
+<p>What is the parameter of interest? What notation do we use for it?</p>
+<blockquote class="blockquote">
+<p>The parameter of interest is a difference in means, in particular, the difference in average BMI between men and women. We use the notation <span class="math inline">\(\mu_1 - \mu_2\)</span>, where <span class="math inline">\(\mu_1\)</span> represents the average BMI for men, and <span class="math inline">\(\mu_2\)</span> represents the average BMI for women.</p>
+</blockquote>
+</section>
+</section>
+<section id="computing-the-point-estimate" class="level2">
+<h2 class="anchored" data-anchor-id="computing-the-point-estimate">Computing the point estimate</h2>
+<p>The following code computes the average BMI for each group (Gender).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>NHANES_1112 <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(Gender) <span class="sc">%&gt;%</span> </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_bmi =</span> <span class="fu">mean</span>(BMI))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 2
+  Gender avg_bmi
+  &lt;fct&gt;    &lt;dbl&gt;
+1 female  27.406
+2 male    27.459</code></pre>
+</div>
+</div>
+<section id="exercise-16" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-16">Exercise 16</h3>
+<p>What is the point estimate for this research question? What notation do we use for it?</p>
+<blockquote class="blockquote">
+<p>The relevant point estimate is 27.459 - 27.406 = 0.053. We use the notation <span class="math inline">\(\bar{X}_1 - \bar{X}_2\)</span></p>
+</blockquote>
+</section>
+<section id="exercise-17" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-17">Exercise 17</h3>
+<p>What would you need to change about the code above if you wanted to compute average BMI by Marital Status?</p>
+<blockquote class="blockquote">
+<p>replace <code>Gender</code> with <code>MaritalStatus</code> in the <code>group_by()</code> statement.</p>
+</blockquote>
+</section>
+</section>
+<section id="conducting-a-test-for-a-difference-in-means-using-t_test" class="level2">
+<h2 class="anchored" data-anchor-id="conducting-a-test-for-a-difference-in-means-using-t_test">Conducting a test for a difference in means using <code>t_test()</code></h2>
+<p>Let’s conduct a hypothesis test to investigate the question of whether males or females have higher BMI on average, using significance level <span class="math inline">\(\alpha = 0.01\)</span>. Similar to inference for one mean, <code>t_test()</code> is the function we use to conduct a hypothesis test for a difference in means. It returns the appropriate point estimate and p-value. As a reminder, the input needed for <code>t_test()</code> for a test of one mean is:</p>
+<ul>
+<li>the first input should be the name of the dataset</li>
+<li><code>response</code> = the name of the variable of interest</li>
+<li><code>mu</code> = the value specified under the null hypothesis</li>
+<li><code>alternative</code> = “two-sided” by default, can be changed to “greater” or “less” depending on how the alternative hypothesis is specified.</li>
+<li><code>conf_level</code> = a numeric value between 0 and 1 to specify the level of confidence. Default value is 0.95.</li>
+</ul>
+<p>The same code applies for a test of two means, with one change:</p>
+<ul>
+<li>add the argument <code>explanatory</code> to specify the name of the explanatory variable (that determines the two groups whose means should be compared)</li>
+</ul>
+<p>Additionally, note that the null value for a difference in means is often 0, which is the default value of <code>mu</code> in <code>t_test()</code>, so this argument does not have to be included in this case.</p>
+<section id="exercise-16-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-16-1">Exercise 16</h3>
+<p>Fill in the code to conduct the hypothesis test for the difference in male and female BMI. Use <span class="math inline">\(\alpha = 0.01\)</span>. Remove <code>eval = FALSE</code> when you have the correct code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">t_test</span>(NHANES_1112, <span class="at">response =</span> BMI, <span class="at">explanatory =</span> Gender,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">conf_level =</span> <span class="fl">0.99</span>, <span class="at">order =</span> <span class="fu">c</span>(<span class="st">"male"</span>, <span class="st">"female"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 7
+  statistic   t_df p_value alternative estimate lower_ci upper_ci
+      &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt; &lt;chr&gt;          &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+1   0.24647 4136.3 0.80533 two.sided   0.052302 -0.49456  0.59917</code></pre>
+</div>
+</div>
+</section>
+<section id="exercise-17-1" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-17-1">Exercise 17</h3>
+<p>What conclusion would you draw from this hypothesis test? Justify your conclusion using the p-value.</p>
+<blockquote class="blockquote">
+<p>The p-value for this test is 0.80533, which is greater than <span class="math inline">\(\alpha = 0.01\)</span>, so we fail to reject <span class="math inline">\(H_0\)</span>. There is insufficient evidence to claim that men and women have different average BMI.</p>
+</blockquote>
+</section>
+<section id="exercise-18" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-18">Exercise 18</h3>
+<p>Interpret the confidence interval provided by the output above.</p>
+<blockquote class="blockquote">
+<p>We are 99% confident that the true difference in average BMI between men and women in the US population is between -0.49456 and 0.59917</p>
+</blockquote>
+</section>
+<section id="exercise-19" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-19">Exercise 19</h3>
+<p>Explain how you could use this confidence interval to make a decision about your hypothesis test.</p>
+<blockquote class="blockquote">
+<p>Because this confidence interval includes 0 (i.e.&nbsp;the null value, since <span class="math inline">\(H_0: \mu_1 - \mu_2 = 0\)</span>), then we fail to reject <span class="math inline">\(H_0\)</span>.</p>
+</blockquote>
+</section>
+</section>
+
+</main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
