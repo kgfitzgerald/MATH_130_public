@@ -1,0 +1,266 @@
+---
+title: "SOLUTIONS: HW 10 / Exam 2 rough draft"
+subtitle: "Ch 19 & 20: Inference for means  using t_test"
+output: 
+  html_document:
+    theme: cerulean
+    highlight: pygments
+    toc: true
+    toc_float: true
+    number_section: false
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+options(pillar.sigfig = 5)
+```
+
+This activity continues to introduce you to how to how to conduct hypothesis tests and confidence intervals in R. This is the type of analysis you will be asked to conduct on Exam 2.
+
+## Loading packages
+
+For this analysis, we need the `tidyverse`, `infer`, and `NHANES` packages.
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(infer)
+library(NHANES)
+```
+
+## A note about typing mathematical symbols in R
+
+Below are some examples for how to type common mathematical symbols we use in this class:
+
+-   Greek letter "mu": $\mu$
+-   Greek letter "alpha": $\alpha$
+-   "X-bar": $\bar{X}$
+-   "p-hat": $\hat{p}$
+-   Null hypothesis: $H_0$
+-   Alternative hypothesis: $H_A$
+-   Not equal to: $\neq$
+
+In general, you can type mathematical symbols/equations by placing them inside dollar signs. Placing them inside double dollar signs will cause the equations to be centered on the page. Underscores \_ allow you to create subscripts. The following example combines several of the above pieces of notation to write out the alternative hypothesis for a difference in proportions:
+
+$$H_0: p_1 \neq p_2$$
+
+## The data
+
+The US National Center for Health Statistics (NCHS) has conducted a series of health and nutrition surveys since the early 1960's. Since 1999 approximately 5,000 individuals of all ages are interviewed in their homes every year and complete the health examination component of the survey. This data is available in the `NHANES` dataset, from the `NHANES` package. The following code loads this data.
+
+```{r, message = FALSE}
+data(NHANES)
+```
+
+The dataset contains data from a sample taken in 2009-2010 and a sample taken in 2011 - 2012. For this analysis, we fill focus only on 2011-2012. The code below filters the data to only keep the 2011 - 2012 data and names the new dataset `NHANES_1112`. It also drops rows that have missing values for some of our variables of interest.
+
+```{r}
+NHANES_1112 <- NHANES %>% 
+  filter(SurveyYr == "2011_12") %>% 
+  drop_na(Pulse, BMI)
+```
+
+Use `NHANES_1112` for all of the analyses below.
+
+### Exercise 1
+
+What are the observational units and how many are there?
+
+> Individuals living in the US in 2011-2012; 4,254
+
+### Exercise 2
+
+How many variables are there?
+
+> 76
+
+## Research Question 1
+
+Suppose we want to investigate whether the average heart rate of all US residents is less than 75 bpm. Use this research question to answer Exercises 3 - 13.
+
+### Exercise 3
+
+What is the parameter of interest? What notation do we use for it?
+
+> The parameter of interest average heart rate. Because this is a numeric variable, we are interested in a one mean, and we use the notation $\mu$.
+
+The variable `Pulse` provides heart rate data in the `NHANES` dataset. Let's look at a quick histogram of heart rates in our sample.
+
+```{r, message = FALSE, warning = FALSE}
+ggplot(NHANES_1112, aes(x = Pulse)) +
+  geom_histogram(color = "white")
+```
+
+### Exercise 4
+
+Describe the shape of this distribution
+
+> Unimodal, symmetric (possibly very slight right-skew)
+
+### Exercise 5
+
+State the null and alternative hypotheses for this research question (using symbols). *Hint: see the note about mathematical symbols at the top of this assignment.*
+
+$$H_0: \mu = 75$$ $$H_A: \mu < 75$$
+
+## Conducting a test for a single mean using `t_test()`
+
+Let's conduct a hypothesis test to investigate this question, using significance level $\alpha = 0.01$. In R, the function `t_test()` allows us to conduct inferences about means, using very similar syntax to how `prop_test()` conducts inferences about proportions. We need several inputs:
+
+-   the first input should be the name of the dataset
+-   `response` = the name of the variable of interest
+-   `mu` = the value specified under the null hypothesis
+-   `alternative` = "two-sided" by default, can be changed to "greater" or "less" depending on how the alternative hypothesis is specified.
+-   `conf_level` = a numeric value between 0 and 1 to specify the level of confidence. Default value is 0.95.
+
+### Exercise 6
+
+Fill in the blanks in the code below to use `t_test()` to conduct the hypothesis test you defined above. Remove `eval = FALSE` from the code chunk once you've entered the correct code.
+
+```{r}
+t_test(NHANES_1112, response = Pulse, mu = 75, 
+            alternative = "less", conf_level = 0.99)
+```
+
+```{r, echo = FALSE}
+t1 <- t_test(NHANES_1112, response = Pulse, mu = 75, 
+            alternative = "less", conf_level = 0.99)
+```
+
+### Exercise 7
+
+Based on the output, what is the T-statistic for this test?
+
+> `r t1[1,1]`
+
+### Exercise 8
+
+Explain why the T-statistic is positive or negative. Hint: recall how the T-statistic is calculated, and consider the average heart rate in this sample (computed via the code below).
+
+```{r}
+summary(NHANES_1112$Pulse)
+```
+
+> The T-statistic is calculated as $\frac{\text{point estimate - null value}}{SE}$. Here the point estimate is `r round(t1[1,5], 2)` and the null value is 75, so subtracting gives a negative value (i.e. the point estimate is smaller than the null value). 
+
+### Exercise 9
+
+Which column in the `t_test()` output gives this same value for the average `Pulse` in the sample? What two words do we usually use to refer to this value? What notation do we use for it?
+
+> The `estimate` column gives this same value for the sample mean. We usually refer to this as the point estimate, or in this particular context, the sample mean. We use the notation $\bar{x}$.
+
+### Exercise 10
+
+What is the p-value for this analysis?
+
+> 1.6355e-13, which is R's way of writing the scientific notation: $1.6355x10^{-13} = 0.00000000000016355$. Hence, the p-value is a *very* small number, close to 0. 
+
+### Exercise 11
+
+Interpret the p-value in the context of this problem. A template statement is below:
+
+> There is a 1.6355e-13 probability of observing a sample mean as extreme as `r round(t1[1,5], 2)`, assuming the true average bpm in the population is 75 (i.e. assuming $H_0$ is true.
+
+### Exercise 12
+
+Use the p-value to draw an appropriate conclusion from the hypothesis test.
+
+> Because our p-value is very small, and in particular is smaller than $\alpha = 0.01$, we reject $H_0$. There is sufficient evidence to claim that the average heart rate among the US population is less than 75. 
+
+Note, the p-value was very small because we had a relatively large sample size (5,000 people). With large sample sizes, the uncertainty in our point estimate is much smaller, so we can detect even small discrepancies between our observed point estimate and the hypothesized value.
+
+This activity showed how to use `t_test()` to conduct a hypothesis test, but it can also be used to compute a confidence interval. In reality, we are likely more interested in constructing a confidence interval for the average heart rate than conducting a hypothesis test. The code below constructs a 99% confidence interval.
+
+```{r}
+t_test(NHANES_1112, response = Pulse, conf_level = 0.99)
+```
+
+Again, because of the large sample size, the width of our confidence interval is fairly narrow.
+
+### Exercise 13
+
+Interpret the above confidence interval
+
+> We are 99% confident that the average heart rate in the US population is between 73.163 and 74.121 bpm. 
+
+## Research Question 2
+
+Do men or women have a higher BMI on average, or is there no difference? Use this research question in Exercises 14 - 19.
+
+### Exercise 14
+
+State the hypotheses to investigate this question (using symbols):
+
+$$H_0: \mu_1 = \mu_2$$ $$H_A: \mu_1 \neq \mu_2$$
+
+### Exercise 15
+
+What is the parameter of interest? What notation do we use for it?
+
+> The parameter of interest is a difference in means, in particular, the difference in average BMI between men and women. We use the notation $\mu_1 - \mu_2$, where $\mu_1$ represents the average BMI for men, and $\mu_2$ represents the average BMI for women. 
+
+## Computing the point estimate
+
+The following code computes the average BMI for each group (Gender).
+
+```{r}
+NHANES_1112 %>% 
+  group_by(Gender) %>% 
+  summarize(avg_bmi = mean(BMI))
+```
+
+### Exercise 16
+
+What is the point estimate for this research question? What notation do we use for it?
+
+> The relevant point estimate is 27.459 - 27.406 = `r 27.459 - 27.406`. We use the notation $\bar{X}_1 - \bar{X}_2$
+
+### Exercise 17
+
+What would you need to change about the code above if you wanted to compute average BMI by Marital Status?
+
+> replace `Gender` with `MaritalStatus` in the `group_by()` statement.
+
+## Conducting a test for a difference in means using `t_test()`
+
+Let's conduct a hypothesis test to investigate the question of whether males or females have higher BMI on average, using significance level $\alpha = 0.01$. Similar to inference for one mean, `t_test()` is the function we use to conduct a hypothesis test for a difference in means. It returns the appropriate point estimate and p-value. As a reminder, the input needed for `t_test()` for a test of one mean is:
+
+-   the first input should be the name of the dataset
+-   `response` = the name of the variable of interest
+-   `mu` = the value specified under the null hypothesis
+-   `alternative` = "two-sided" by default, can be changed to "greater" or "less" depending on how the alternative hypothesis is specified.
+-   `conf_level` = a numeric value between 0 and 1 to specify the level of confidence. Default value is 0.95.
+
+The same code applies for a test of two means, with one change:
+
+-   add the argument `explanatory` to specify the name of the explanatory variable (that determines the two groups whose means should be compared)
+
+Additionally, note that the null value for a difference in means is often 0, which is the default value of `mu` in `t_test()`, so this argument does not have to be included in this case.
+
+### Exercise 16
+
+Fill in the code to conduct the hypothesis test for the difference in male and female BMI. Use $\alpha = 0.01$. Remove `eval = FALSE` when you have the correct code.
+
+```{r}
+t_test(NHANES_1112, response = BMI, explanatory = Gender,
+       conf_level = 0.99, order = c("male", "female"))
+```
+
+### Exercise 17
+
+What conclusion would you draw from this hypothesis test? Justify your conclusion using the p-value.
+
+> The p-value for this test is 0.80533, which is greater than $\alpha = 0.01$, so we fail to reject $H_0$. There is insufficient evidence to claim that men and women have different average BMI. 
+
+### Exercise 18
+
+Interpret the confidence interval provided by the output above.
+
+> We are 99% confident that the true difference in average BMI between men and women in the US population is between -0.49456 and 0.59917
+
+### Exercise 19
+
+Explain how you could use this confidence interval to make a decision about your hypothesis test.
+
+> Because this confidence interval includes 0 (i.e. the null value, since $H_0: \mu_1 - \mu_2 = 0$), then we fail to reject $H_0$. 
