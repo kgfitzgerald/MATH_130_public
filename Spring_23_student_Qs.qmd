@@ -1,0 +1,88 @@
+---
+title: "Student Qs / Check-in Debriefs"
+subtitle: "Spring 2023"
+format: html
+editor: visual
+---
+
+# Course Logistics Questions
+
+## Week 2
+
+-   Will the group quiz have definition questions?
+
+    -   No, but you will be asked to apply definitions to answer questions
+
+    -   For example, you won't be asked "what is an explanatory variable" but you might be given a research scenario and asked to identify the explanatory variable.
+
+    -   Another example: you won't be asked "what's the difference between categorical and numerical variables"? but you might be asked to identify variables from a research scenario and classify them as categorical or numerical.
+
+-   How/when can we get help on Lab 00?
+
+    -   See the [demo](https://youtu.be/5sWYWVK8Ats) that Dr. Fitz recorded
+
+    -   Student hours on Wednesday (4:30 - 5:45) and Thursday (10-11)
+
+    -   [Free tutoring](https://canvas.apu.edu/courses/45159/pages/free-tutoring) available M/T/Th 3-6pm and W/F 10am-2pm
+
+    -   Post a question on [Campuswire](https://canvas.apu.edu/courses/45159/pages/campuswire-getting-started)
+
+    -   Last 10-15 minutes of class on Thursday will be time for questions
+
+-   Can we use the Chapter 1 highlights during the quiz?
+
+    -   Yes! The quizzes are open book and open note :)
+
+-   Will we get more vocabulary words for the chapter?
+
+    -   The important vocabulary / terminology will be included in the lecture slides
+
+    -   The textbook has a full list of terms at the end of each chapter - you are encouraged to look these over after reading the chapter as a refresher, but you won't be required to know the ones that aren't in the lecture slides
+
+## Chapter 1
+
+-   Why was telephone area code not ordinal?
+
+    -   The categories (e.g. 469, 323, etc) don't have a natural order/ranking/hierarchy to them.
+
+    -   For example, "bigger" area codes (larger numbers) aren't better than "smaller" area code in this case.
+
+    -   The "size" of the area code doesn't have any meaning
+
+## Chapter 2
+
+-   What were the key takeaways about sampling again?
+
+    -   Sampling bias is a feature of the sampling METHOD. That is, if your method is biased, you will end up with biased results
+
+    -   Having a large sample size doesn't fix sampling bias - if your method is biased, you will still have biased results, even if you collect a lot of data
+
+    -   Random sampling is the key to collecting unbiased samples.
+
+-   What are some ways around sampling bias?
+
+    -   **Random sampling!** Random sampling ensures we will NOT have sampling bias. That is, if we select a random sample of people (or other observational units) to be in our study, the summary statistics calculated from our data will be unbiased estimates of the corresponding true parameter values in the population
+
+-   What's the difference between inference and exploratory analysis?
+
+    -   Exploratory analysis = just exploring /analyzing/investigating the data in our SAMPLE (think: tasting a spoonful of soup)
+
+    -   Inference = using the results from our sample to draw a general conclusion about the broader POPULATION (think: using the spoonfull to draw a conclusion about what the whole pot of soup tastes like)
+
+-   Can you clarify associated vs independent?
+
+    -   Associated = two variables are related to one another, if we visualized them we would see a pattern/trend. Some examples:
+
+        -   Life expectancy and income
+
+        -   Height and weight
+
+        -   Hours of sleep and reported energy levels
+
+    -   Independent = two variables are NOT related to one another, if we visualized them, we would NOT see a pattern/trend (if a scatterplot, would just see random scatter). Some examples:
+
+        -   Eye color and what you ate for breakfast (e.g. people aren't more likely to choose certain breakfast foods just because their eyes are blue or brown - these two things are unrelated)
+
+        -   Day of month you were born and how many hours of Netflix you watched
+
+-   
