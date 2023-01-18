@@ -5,39 +5,7 @@ format: html
 editor: visual
 ---
 
-# Course Logistics Questions
-
-## Week 2
-
--   Will the group quiz have definition questions?
-
-    -   No, but you will be asked to apply definitions to answer questions
-
-    -   For example, you won't be asked "what is an explanatory variable" but you might be given a research scenario and asked to identify the explanatory variable.
-
-    -   Another example: you won't be asked "what's the difference between categorical and numerical variables"? but you might be asked to identify variables from a research scenario and classify them as categorical or numerical.
-
--   How/when can we get help on Lab 00?
-
-    -   See the [demo](https://youtu.be/5sWYWVK8Ats) that Dr. Fitz recorded
-
-    -   Student hours on Wednesday (4:30 - 5:45) and Thursday (10-11)
-
-    -   [Free tutoring](https://canvas.apu.edu/courses/45159/pages/free-tutoring) available M/T/Th 3-6pm and W/F 10am-2pm
-
-    -   Post a question on [Campuswire](https://canvas.apu.edu/courses/45159/pages/campuswire-getting-started)
-
-    -   Last 10-15 minutes of class on Thursday will be time for questions
-
--   Can we use the Chapter 1 highlights during the quiz?
-
-    -   Yes! The quizzes are open book and open note :)
-
--   Will we get more vocabulary words for the chapter?
-
-    -   The important vocabulary / terminology will be included in the lecture slides
-
-    -   The textbook has a full list of terms at the end of each chapter - you are encouraged to look these over after reading the chapter as a refresher, but you won't be required to know the ones that aren't in the lecture slides
+# Content Questions
 
 ## Chapter 1
 
@@ -85,4 +53,38 @@ editor: visual
 
         -   Day of month you were born and how many hours of Netflix you watched
 
--   
+# Course Logistics Questions
+
+## Week 2
+
+-   Will the group quiz have definition questions?
+
+    -   No, but you will be asked to apply definitions to answer questions
+
+    -   For example, you won't be asked "what is an explanatory variable" but you might be given a research scenario and asked to identify the explanatory variable.
+
+    -   Another example: you won't be asked "what's the difference between categorical and numerical variables"? but you might be asked to identify variables from a research scenario and classify them as categorical or numerical.
+
+-   How/when can we get help on Lab 00?
+
+    -   See the [demo](https://youtu.be/5sWYWVK8Ats) that Dr. Fitz recorded
+
+    -   Student hours on Wednesday (4:30 - 5:45) and Thursday (10-11)
+
+    -   [Free tutoring](https://canvas.apu.edu/courses/45159/pages/free-tutoring) available M/T/Th 3-6pm and W/F 10am-2pm
+
+    -   Post a question on [Campuswire](https://canvas.apu.edu/courses/45159/pages/campuswire-getting-started)
+
+    -   Last 10-15 minutes of class on Thursday will be time for questions
+
+-   Can we use the Chapter 1 highlights during the quiz?
+
+    -   Yes! The quizzes are open book and open note :)
+
+-   Will we get more vocabulary words for the chapter?
+
+    -   The important vocabulary / terminology will be included in the lecture slides
+
+    -   The textbook has a full list of terms at the end of each chapter - you are encouraged to look these over after reading the chapter as a refresher, but you won't be required to know the ones that aren't in the lecture slides
+
+# 
