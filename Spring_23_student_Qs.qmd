@@ -54,6 +54,102 @@ editor: visual
 
         -   Day of month you were born and how many hours of Netflix you watched
 
+## Group Quiz 1 Debrief
+
+### Problem 1
+
+Researchers studied whether metal bands used for tagging penguins are harmful to their survival. Researchers tagged 100 penguins with RFID chips, and then they randomly assigned half of the penguins to also receive a metal band. Researchers then kept track of which penguins survived throughout the study and which did not.
+
+***How can we tell this is an experiment?***
+
+-   Because there was random assignment
+
+-   Careful: all experiments must have treatment and control, but just because there is a treatment/control, doesn't mean it's an experiment.
+
+    -   Random assignment is the key distinguishing factor!
+
+    -   There are many (bad) observational studies that are trying to investigate a treatment - these studies don't use random assignment, so they haven't accounted for confounding variables, and their results may be invalid
+
+    -   Note, there are more sophisticated "quasi-experimental" methods for taking confounding variables into account in situations where random assignment is not possible, but we won't be covering them in this course :)
+
+***Did the researchers use randomness in order to give all penguins the same chance of being selected for the study?***
+
+-   This is asking: was random sampling used? That's the purpose of random sampling: to give all observational units the same chance of being selected for the study (which is what protects against sampling bias)
+
+***Did the researchers use randomness in order to produce groups that were as similar as possible in all respects before the explanatory variable was imposed?***
+
+-   This is asking: was random assignment used? That's the purpose of random assignment: to produce groups that are similar as possible before the treatment is imposed (which is what protects against confounding variables)
+
+Note: implementing a well-designed study often requires more effort, planning, and $ than a poorly designed study. There are LOTS of bad studies out there. If we aren't explicitly told that randomness was used in a study design, we should assume it wasn't.
+
+***The following answers received partial credit. Can you articulate why?***
+
+-   Explanatory variable: harmfulness of the bands
+
+-   Response variable: survival rate of the penguins
+
+### Problem 2
+
+Suppose that the observational units in a study are patients who entered the emergency room at Huntington Hospital in the previous week. For each of the following, indicate whether it is a categorical variable, a numerical variable, or not a variable with regard to these observational units.
+
+***Why are the following NOT variables?***
+
+-   Average wait time for the patient to be seen
+
+-   Whether or not wait times tend to be longer on weekends than weekdays
+
+### Problem 3
+
+**Examples of variables that can be collected when Super Bowl games are the observational units:**
+
+-   Team that won (categorical)
+
+-   Total points scored (numerical)
+
+-   Location of the game (categorical)
+
+-   Viewership/# of people who watched (numerical)
+
+**Examples of variables that can be collected when movies that won Best Picture are the observational units:**
+
+-   \# of male actors in the film (numerical)
+
+-   genre of the movie (categorical)
+
+***Why are the following NOT variables for the above observational units:***
+
+-   Average time length in movie
+
+-   How many movies have won in each genre
+
+-   \# of super bowl games played
+
+**Examples of research questions**
+
+-   Does the location of the game affect the total points scored?
+
+-   How many teams played in their home stadium? Do teams that play in their home stadium tend to win more often?
+
+-   What is the average viewership of the superbowl? Has viewership changed over time?
+
+-   What movie genre has the most movies that have won Best Picture?
+
+-   Is the team that scores first more likely to win?
+
+-   Do movies starring more male actors tend to win the Academy Award for Best Picture more often?
+
+**Tips for coming up with research questions:**
+
+-   What is the relationship between \_\_\_\_ and \_\_\_\_ ?
+
+-   What is the average \_\_\_\_ ? (for numeric variables)
+
+-   What proportion of \[observational units\] that \_\_\_\_\_\_ ? (for categorical variables)
+
+-   Does \[this group\] tend to \_\_\_\_\_ more often than \[that group\]?
+
+-   Does \_\_\_\_\_ change over time? (if you have data collected over time)
+
 # Course Logistics Questions
 
 ## Week 2
@@ -87,5 +183,37 @@ editor: visual
     -   The important vocabulary / terminology will be included in the lecture slides
 
     -   The textbook has a full list of terms at the end of each chapter - you are encouraged to look these over after reading the chapter as a refresher, but you won't be required to know the ones that aren't in the lecture slides
+
+## Week 3
+
+-   What are all the things I'm supposed to turn in every week again?
+
+    -   Attendance notecard \@ end of class (Tuesday & Thursday)
+
+    -   Discussion Post (Wednesday)
+
+    -   Reading Journal (Wednesday)
+
+    -   Homework (Saturday)
+
+    -   Lab (Saturday, only some weeks)
+
+    -   Weekly Check-in (Saturday)
+
+-   Can we go over the homework in class?
+
+    -   Generally don't plan to use class-time to discuss the homework
+
+    -   Instead: post your question on Campuswire, and I will respond there.
+
+        -   "Can you help explain \_\_\_ on HW 01?"
+
+        -   "Why is \_\_\_ not the correct answer to \_\_\_\_ ?"
+
+        -   "I only have one attempt left on \_\_\_\_! So far, I'm thinking \_\_\_\_\_. Can someone help with this?!"
+
+        -   "I got \_\_\_ right, but I'm still not sure I understand it. Can someone explain?"
+
+-   
 
 # 
