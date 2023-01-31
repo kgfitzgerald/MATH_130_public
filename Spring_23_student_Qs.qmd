@@ -54,6 +54,28 @@ editor: visual
 
         -   Day of month you were born and how many hours of Netflix you watched
 
+-   How does an observational study influence the variable?
+
+    -   Observational study is more about *how* the data is collected (i.e. no random assignment), rather than *what* data (variables) are collected
+
+    -   Observational studies also influence what conclusions we're allowed to draw (i.e. we cannot make causal conclusions based off of observational studies).
+
+-   Are the explanatory and response variables interchangeable at times? There are some times when a question/prompt asks to identify which is which (like the one in the homework for this week) that asked whether the income rate or the bachelor degree was the explanatory vs response variable. That one confused me, because I thought the explanatory should have been the income level, since that was what the research was trying to discover... But based on the graph it was the opposite way
+
+    -   Response = the main outcome variable the research is interested in
+
+    -   Explanatory = the variable that might help explain something about the outcome/response
+
+    -   In the income/education example:
+
+        -   you correctly said income is "what the research was trying to discover" - but this makes it the response variable
+
+        -   A person's education level generally helps explain something about their income level, making it the explanatory
+
+    -   Also like you mentioned, checking a visualization is a good way to discern the difference. Response = y-axis, Explanatory = x-axis
+
+    -   Another tip: which one occurs earlier in time? That's usually the explanatory. In this example, the education level is something in the past (a person already received a Bachelor's degree or they didn't), and it's helping to explain their income in the present.
+
 ## Group Quiz 1 Debrief
 
 ### Problem 1
@@ -214,6 +236,44 @@ Suppose that the observational units in a study are patients who entered the eme
 
         -   "I got \_\_\_ right, but I'm still not sure I understand it. Can someone explain?"
 
--   
+## Week 4
+
+-   Will we work on the lab again this week?
+
+    -   Not in class
+
+    -   Places to get help:
+
+        -   Campuswire
+
+        -   Student hours (Mon 1-2:30, Wed 4:30 - 5:45, Th 10-11)
+
+        -   Tutoring (M/T/Th 3 - 6pm, W/F 10am-2pm)
+
+-   Will the labs get harder?
+
+    -   You will be asked to do more complex tasks, but the procedures will start to feel more familiar
+
+    -   Suggestion: create Google doc (or something similar) with a running list of code examples
+
+        -   How to create a scatterplot
+
+        -   How to create a line plot
+
+        -   How to load a dataset
+
+        -   How to create a new variable
+
+-   Which chart design is appropriate for which stats you're presenting?
+
+    -   You will learn about this in Chapters 4 & 5! Keep good notes on this :)
+
+-   What do you consider excused vs. non-excused absence? And if we ever have to miss, how should we make it up?
+
+    -   Generally, if you let me know in advance, it's excused
+
+    -   You're responsible for all material covered in a class period - so make sure to watch the lecture recording (only available if you tell me you'll be gone in advance)
+
+    -   No make-up quizzes unless coordinated with me in advance. If you do arrange a make-up, you have to take it by yourself instead of in a group.
 
 # 
