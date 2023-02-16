@@ -172,6 +172,48 @@ Suppose that the observational units in a study are patients who entered the eme
 
 -   Does \_\_\_\_\_ change over time? (if you have data collected over time)
 
+## Group Quiz 2 Debrief
+
+### Problem 1
+
+![](images/image-36863512.png)
+
+![](images/julytemphist.png)
+
+-   Difference between histogram & bar plot!
+
+-   Histograms are displaying ONE numeric variable
+
+    -   frequency / count on the y-axis is not a variable
+
+    -   why we ONLY specify `aes(x = _____)` for `geom_histogram`
+
+-   Observational units = cities, not temperatures, not days
+
+-   Why is it incorrect to say the two clusters/peaks are high & low temperatures in July?
+
+### Problem 2
+
+Average house price is $425,000. Will more, less, or exactly 50% of houses cost more than the mean?
+
+-   House-prices are right-skewed, so mean is larger than the median
+
+-   Median = 50% split of the data, so if mean is above the median, \<50% will be above the mean
+
+It is very possible for 90% of a company's employees to make less than the average.
+
+-   July 2022 headline: Amazon CEO Andy Jassy earned 6,474 times the median Amazon employee\'s salary
+
+-   $213,000,000 vs. $32,855
+
+### Problem 3
+
+![](images/dotplot.png)
+
+-   Easiest to draw extreme cases - no spread vs. max spread
+
+-   Two variables: whether or not you have children under 18, \# of movies
+
 # Course Logistics Questions
 
 ## Week 2
