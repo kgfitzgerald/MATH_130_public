@@ -34,6 +34,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="Spring_23_student_Qs_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="Spring_23_student_Qs_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 </head>
 
@@ -55,11 +56,20 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#problem-2" id="toc-problem-2" class="nav-link" data-scroll-target="#problem-2">Problem 2</a></li>
   <li><a href="#problem-3" id="toc-problem-3" class="nav-link" data-scroll-target="#problem-3">Problem 3</a></li>
   </ul></li>
+  <li><a href="#chapter-4" id="toc-chapter-4" class="nav-link" data-scroll-target="#chapter-4">Chapter 4</a></li>
   <li><a href="#group-quiz-2-debrief" id="toc-group-quiz-2-debrief" class="nav-link" data-scroll-target="#group-quiz-2-debrief">Group Quiz 2 Debrief</a>
   <ul class="collapse">
   <li><a href="#problem-1-1" id="toc-problem-1-1" class="nav-link" data-scroll-target="#problem-1-1">Problem 1</a></li>
   <li><a href="#problem-2-1" id="toc-problem-2-1" class="nav-link" data-scroll-target="#problem-2-1">Problem 2</a></li>
   <li><a href="#problem-3-1" id="toc-problem-3-1" class="nav-link" data-scroll-target="#problem-3-1">Problem 3</a></li>
+  </ul></li>
+  <li><a href="#lab-02" id="toc-lab-02" class="nav-link" data-scroll-target="#lab-02">Lab 02</a></li>
+  <li><a href="#chapter-7" id="toc-chapter-7" class="nav-link" data-scroll-target="#chapter-7">Chapter 7</a></li>
+  <li><a href="#group-quiz-3-debrief" id="toc-group-quiz-3-debrief" class="nav-link" data-scroll-target="#group-quiz-3-debrief">Group Quiz 3 Debrief</a>
+  <ul class="collapse">
+  <li><a href="#problem-2-2" id="toc-problem-2-2" class="nav-link" data-scroll-target="#problem-2-2">Problem 2</a></li>
+  <li><a href="#problem-3-2" id="toc-problem-3-2" class="nav-link" data-scroll-target="#problem-3-2">Problem 3</a></li>
+  <li><a href="#problem-5" id="toc-problem-5" class="nav-link" data-scroll-target="#problem-5">Problem 5</a></li>
   </ul></li>
   </ul></li>
   <li><a href="#course-logistics-questions" id="toc-course-logistics-questions" class="nav-link" data-scroll-target="#course-logistics-questions">Course Logistics Questions</a>
@@ -67,8 +77,10 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#week-2" id="toc-week-2" class="nav-link" data-scroll-target="#week-2">Week 2</a></li>
   <li><a href="#week-3" id="toc-week-3" class="nav-link" data-scroll-target="#week-3">Week 3</a></li>
   <li><a href="#week-4" id="toc-week-4" class="nav-link" data-scroll-target="#week-4">Week 4</a></li>
+  <li><a href="#week-5" id="toc-week-5" class="nav-link" data-scroll-target="#week-5">Week 5</a></li>
+  <li><a href="#week-6" id="toc-week-6" class="nav-link" data-scroll-target="#week-6">Week 6</a></li>
+  <li><a href="#week-7" id="toc-week-7" class="nav-link" data-scroll-target="#week-7">Week 7</a></li>
   </ul></li>
-  <li><a href="#section" id="toc-section" class="nav-link" data-scroll-target="#section"></a></li>
   </ul>
 </nav>
 </div>
@@ -234,6 +246,16 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
+<section id="chapter-4" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-4">Chapter 4</h2>
+<ul>
+<li><p>When will we ever have to use a mosaic plot to organize data?</p>
+<ul>
+<li><p>Mosaic plots are useful anytime you’re trying to investigate the relationship between <em>two categorical variables,</em> especially when the sample size (number of observations) is not equal in each category</p></li>
+<li><p>In this class, you won’t need to create mosaic yourselves (although code is provided in Lab 02 to create one), but you should be able to interpret them</p></li>
+</ul></li>
+</ul>
+</section>
 <section id="group-quiz-2-debrief" class="level2">
 <h2 class="anchored" data-anchor-id="group-quiz-2-debrief">Group Quiz 2 Debrief</h2>
 <section id="problem-1-1" class="level3">
@@ -260,7 +282,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 <p>It is very possible for 90% of a company’s employees to make less than the average.</p>
 <ul>
-<li><p>July 2022 headline: Amazon CEO Andy Jassy earned 6,474 times the median Amazon employee's salary</p></li>
+<li><p>July 2022 headline: Amazon CEO Andy Jassy earned 6,474 times the median Amazon employee’s salary</p></li>
 <li><p>$213,000,000 vs.&nbsp;$32,855</p></li>
 </ul>
 </section>
@@ -270,6 +292,130 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><p>Easiest to draw extreme cases - no spread vs.&nbsp;max spread</p></li>
 <li><p>Two variables: whether or not you have children under 18, # of movies</p></li>
+</ul>
+</section>
+</section>
+<section id="lab-02" class="level2">
+<h2 class="anchored" data-anchor-id="lab-02">Lab 02</h2>
+<ul>
+<li><p>Question on the bonus: we were supposed to have only flights whose carriers were “AA”, “DL”, or “UA”, but in the LAB when inputting <code>filter(carrier == "AA", "DL", "UA"</code> it said that it was unable to accomplish it, so I tried inputting <code>filter(carrier == "AA", carrier == "DL", carrier == "UA"</code>. However, this rendered the dataset to have 0 variables, since no observational units would contain all three categories within them. So I had to list the reverse, and use the “!=” symbol to list everything that it <em>wasn’t.</em> So, long story short, I want to know how to do that in an easier way, because listing everything it wasn’t took much longer than being able to list the few that I did want. So how would I do that?</p>
+<ul>
+<li><p>Love the question! Two options:</p>
+<ul>
+<li><p>the symbol <code>|</code> means “or”, so we could do <code>filter(carrier == "AA" | carrier == "DL"| carrier == "UA")</code></p></li>
+<li><p>Utilize the function <code>%in%</code> to search within a list of options: <code>filter(carrier %in% c("AA", "DL", "UA"))</code></p></li>
+</ul></li>
+</ul></li>
+<li><p>How will you know if a graph will be skewed left or right based on the summary statistics alone?</p>
+<ul>
+<li><p>Recall what you know about the mean and median in skewed data: the mean gets pulled in the direction of the skew, so:</p>
+<ul>
+<li><p>Mean &gt; median indicates it is right-skewed</p></li>
+<li><p>Mean &lt; median indicates it is left-skewed</p></li>
+</ul></li>
+<li></li>
+</ul></li>
+</ul>
+</section>
+<section id="chapter-7" class="level2">
+<h2 class="anchored" data-anchor-id="chapter-7">Chapter 7</h2>
+<ul>
+<li><p>What is the intercept important for?</p>
+<ul>
+<li><p>In statistics, the slope is usually of more interest (it quantifies the relationship between x and y)</p></li>
+<li><p>However, mathematically, we still have to have an intercept to define a line (think back to algebra: y = mx + b)</p></li>
+</ul></li>
+<li><p>Can we please go over regression lines and calculating correlation?</p>
+<ul>
+<li><p>Regression line: <em>ŷ</em> = <em>b</em><sub>0</sub> + <em>b</em><sub>1</sub><em>x</em></p></li>
+<li><p>Correlation:</p>
+<ul>
+<li><p>Calculated as square root of <em>R</em><sup>2</sup>. That is, <span class="math inline">\(R = \sqrt{R^2}\)</span></p></li>
+<li><p>It will always have the same sign ( + /−) as the slope. So make sure to put a negative sign in front of <span class="math inline">\(\sqrt{R^2}\)</span> if the slope is negative (your calculator will always just give you a positive number when you take the square root)</p></li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="group-quiz-3-debrief" class="level2">
+<h2 class="anchored" data-anchor-id="group-quiz-3-debrief">Group Quiz 3 Debrief</h2>
+<section id="problem-2-2" class="level3">
+<h3 class="anchored" data-anchor-id="problem-2-2">Problem 2</h3>
+<ul>
+<li>Data on heights were originally collected in centimeters, and then converted to inches. Does this conversion affect the correlation between partners’ heights? Explain briefly.
+<ul>
+<li>Correlation is UNITLESS</li>
+<li>This is an example of needing to apply a concept to reason about a problem in a new context</li>
+</ul></li>
+</ul>
+</section>
+<section id="problem-3-2" class="level3">
+<h3 class="anchored" data-anchor-id="problem-3-2">Problem 3</h3>
+<ul>
+<li>Suppose we fit a regression line to predict an Instagram post’s number of likes from the posting account’s number of followers. For a particular post, we predict the number of views to be 437, and the residual for this is 14. Did we overestimate or underestimate the number of likes? Explain briefly.
+<ul>
+<li><em>e</em><sub><em>i</em></sub> = <em>y</em><sub><em>i</em></sub> − <em>ŷ</em><sub><em>i</em></sub></li>
+<li>residual = observed - predicted</li>
+<li>14 = <em>y</em><sub><em>i</em></sub> − 437</li>
+</ul></li>
+</ul>
+</section>
+<section id="problem-5" class="level3">
+<h3 class="anchored" data-anchor-id="problem-5">Problem 5</h3>
+<p><img src="images/height_girth.png" class="img-fluid"></p>
+<table class="table">
+<thead>
+<tr class="header">
+<th></th>
+<th>term</th>
+<th>estimate</th>
+<th>std.error</th>
+<th>statistic</th>
+<th>p.value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td><chr></chr></td>
+<td><dbl></dbl></td>
+<td><dbl></dbl></td>
+<td><dbl></dbl></td>
+<td><dbl></dbl></td>
+</tr>
+<tr class="even">
+<td>1</td>
+<td>(Intercept)</td>
+<td>105.9</td>
+<td>1.02</td>
+<td>6.79</td>
+<td>1.61e-11</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>shoulder</td>
+<td>0.608</td>
+<td>0.0304</td>
+<td>31.9</td>
+<td>3.78e-17</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What’s wrong with the following answers?</strong></p>
+<ul>
+<li><span class="math inline">\(\hat{y} = b_0 + b_1x\)</span> for the regression equation</li>
+<li>“<span class="math inline">\(b_0 = 105.9\)</span>” for interpretation of the slope</li>
+<li>“When x = 0, we expect y to equal 105.9 on average”</li>
+</ul>
+<p><strong>How to calculate the correlation coefficient?</strong></p>
+<ul>
+<li>The way to undo a “square” is to take the SQUARE ROOT</li>
+<li><span class="math inline">\(R = \sqrt{R^2}\)</span></li>
+<li>Pay attention to the sign! Should match the sign of the slope</li>
+</ul>
+<p><strong>How to interpret the correlation coefficient?</strong></p>
+<ul>
+<li>As [x] increases, [y] tends to [increase/decrease]</li>
+<li>There is a [weak/moderately strong/strong] [positive/negative] linear relationship between [x] and [y]</li>
 </ul>
 </section>
 </section>
@@ -365,9 +511,83 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 </ul>
 </section>
+<section id="week-5" class="level2">
+<h2 class="anchored" data-anchor-id="week-5">Week 5</h2>
+<ul>
+<li><p>Can I make up the quiz I missed?</p>
+<ul>
+<li><p>If you communicate with me in advance and have an excused absence, you can schedule a make-up quiz</p></li>
+<li><p>All other circumstances, make-ups are not allowed.</p></li>
+<li><p>It’s important for your learning and out of courtesy to your group members that you are present on the day of a quiz</p></li>
+<li><p>In the event that you have to make up the quiz, know that it will be done individually and not in a group</p></li>
+<li><p>In all circumstances, you must schedule the make-up quiz before solutions are discussed, which is usually the class period following the quiz</p></li>
+</ul></li>
+<li><p>Where can I get more help on the labs?</p>
+<ul>
+<li><p>Utilize your Lab Guide - all code needed for the lab is included in the guide, as well as some hints for what the exercises are asking</p></li>
+<li><p>LA Lab Help Session on Tuesday from 1 - 2pm</p></li>
+<li><p>Student hours</p>
+<ul>
+<li><p>Monday 1 - 2:30</p></li>
+<li><p>Wednesday 4:30 - 5:45</p></li>
+<li><p>Thursday 10 - 11</p></li>
+</ul></li>
+<li><p>Campuswire</p></li>
+<li><p>Tutoring Center (LOTS of hours - see Canvas)</p></li>
+</ul></li>
+<li><p>Will there be any more class-time spent on Lab 02?</p>
+<ul>
+<li><p>No - see above for other opportunities for help</p></li>
+<li><p>In general, only one class period will be dedicated to work on each lab. It is expected that you will work on the lab outside of class in order to complete it (it’s an assignment)</p></li>
+</ul></li>
+<li><p>Can you post the tutoring hours again?</p>
+<ul>
+<li>They can be found <a href="https://canvas.apu.edu/courses/45159/pages/free-tutoring">here on Canvas</a>.</li>
+</ul></li>
+</ul>
 </section>
-<section id="section" class="level1">
-<h1></h1>
+<section id="week-6" class="level2">
+<h2 class="anchored" data-anchor-id="week-6">Week 6</h2>
+<ul>
+<li><p>Will any of the concepts from Lab 02 be on Lab 03?</p>
+<ul>
+<li><p>Probably! The general code you’ve been learning for creating visualizations, filtering data, creating new variables, etc will continue to be relevant in future labs</p></li>
+<li><p>However, you will be using new datasets, and using R to accomplish new data analysis/statistical tasks each time. So for example, in Lab 03 you will apply regression analyses learned in Chapter 7, and in Lab 04 you will apply methods learned in Chapter 13</p></li>
+</ul></li>
+<li><p>Is there any way I can make up the labs for partial credit?</p>
+<ul>
+<li><p>Labs are accepted up to 1 week late (with a 5% deduction each day its late)</p></li>
+<li><p>Labs will remain a 0 if not turned in 7 days after deadline</p></li>
+<li><p>However, if you are facing any unusual or long-term life circumstances that are interfering with your ability to engage academically, come talk to me, and we can determine appropriate accommodations and a path forward</p></li>
+</ul></li>
+<li><p>Is there a time we can review the material we learned this week?</p>
+<ul>
+<li><p>All of Week 7 will be re-iterating the concepts learned in Week 6 (regression):</p>
+<ul>
+<li><p>Lab 03 (Tuesday) will be using regression to analyze data in R (we’ll start with a quick review of the main concepts)</p></li>
+<li><p>We’ll have a Kahoot review before the Group Quiz over Chapter 7 on Thursday</p></li>
+</ul></li>
+</ul></li>
+<li><p>Will we get packets or worksheets for future lectures?</p>
+<ul>
+<li><p>Will go back to slides as the main mode of content delivery after Chapter 7, but will continue to provide chapter highlight handouts as well as occasional activity worksheets</p></li>
+<li><p>Will see more handout type lecture material in Chapters 16 - 20</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="week-7" class="level2">
+<h2 class="anchored" data-anchor-id="week-7">Week 7</h2>
+<ul>
+<li><p>Will Lab 04 include questions about chapter 7?</p>
+<ul>
+<li>No.&nbsp;Lab 03 is focused on regression (Ch 7), Lab 04 will be focused on content from Chapter 13</li>
+</ul></li>
+<li><p>Is the delay of Lab 03 going to have an effect on the total # of labs?</p>
+<ul>
+<li>Nope! Believe it or not, there is only one more lab left! Lab 04, which will be in Week 10</li>
+</ul></li>
+</ul>
+</section>
 </section>
 
 </main>
