@@ -172,6 +172,14 @@ Suppose that the observational units in a study are patients who entered the eme
 
 -   Does \_\_\_\_\_ change over time? (if you have data collected over time)
 
+## Chapter 4
+
+-   When will we ever have to use a mosaic plot to organize data?
+
+    -   Mosaic plots are useful anytime you're trying to investigate the relationship between *two categorical variables,* especially when the sample size (number of observations) is not equal in each category
+
+    -   In this class, you won't need to create mosaic yourselves (although code is provided in Lab 02 to create one), but you should be able to interpret them
+
 ## Group Quiz 2 Debrief
 
 ### Problem 1
@@ -202,7 +210,7 @@ Average house price is $425,000. Will more, less, or exactly 50% of houses cost 
 
 It is very possible for 90% of a company's employees to make less than the average.
 
--   July 2022 headline: Amazon CEO Andy Jassy earned 6,474 times the median Amazon employee\'s salary
+-   July 2022 headline: Amazon CEO Andy Jassy earned 6,474 times the median Amazon employee's salary
 
 -   $213,000,000 vs. $32,855
 
@@ -213,6 +221,86 @@ It is very possible for 90% of a company's employees to make less than the avera
 -   Easiest to draw extreme cases - no spread vs. max spread
 
 -   Two variables: whether or not you have children under 18, \# of movies
+
+## Lab 02
+
+-   Question on the bonus: we were supposed to have only flights whose carriers were "AA", "DL", or "UA", but in the LAB when inputting `filter(carrier == "AA", "DL", "UA"` it said that it was unable to accomplish it, so I tried inputting `filter(carrier == "AA", carrier == "DL", carrier == "UA"`. However, this rendered the dataset to have 0 variables, since no observational units would contain all three categories within them. So I had to list the reverse, and use the "!=" symbol to list everything that it *wasn't.* So, long story short, I want to know how to do that in an easier way, because listing everything it wasn't took much longer than being able to list the few that I did want. So how would I do that?
+
+    -   Love the question! Two options:
+
+        -   the symbol `|` means "or", so we could do `filter(carrier == "AA" | carrier == "DL"| carrier == "UA")`
+
+        -   Utilize the function `%in%` to search within a list of options: `filter(carrier %in% c("AA", "DL", "UA"))`
+
+-   How will you know if a graph will be skewed left or right based on the summary statistics alone?
+
+    -   Recall what you know about the mean and median in skewed data: the mean gets pulled in the direction of the skew, so:
+
+        -   Mean \> median indicates it is right-skewed
+
+        -   Mean \< median indicates it is left-skewed
+
+    -   
+
+## Chapter 7
+
+-   What is the intercept important for?
+
+    -   In statistics, the slope is usually of more interest (it quantifies the relationship between x and y)
+
+    -   However, mathematically, we still have to have an intercept to define a line (think back to algebra: y = mx + b)
+
+-   Can we please go over regression lines and calculating correlation?
+
+    -   Regression line: *ŷ* = *b*<sub>0</sub> + *b*<sub>1</sub>*x*
+
+    -   Correlation:
+
+        -   Calculated as square root of *R*<sup>2</sup>. That is, $R = \sqrt{R^2}$
+
+        -   It will always have the same sign ( + /−) as the slope. So make sure to put a negative sign in front of $\sqrt{R^2}$ if the slope is negative (your calculator will always just give you a positive number when you take the square root)
+
+## Group Quiz 3 Debrief
+
+### Problem 2
+
+-   Data on heights were originally collected in centimeters, and then converted to inches. Does this conversion affect the correlation between partners' heights? Explain briefly.
+    -   Correlation is UNITLESS
+    -   This is an example of needing to apply a concept to reason about a problem in a new context
+
+### Problem 3
+
+-   Suppose we fit a regression line to predict an Instagram post's number of likes from the posting account's number of followers. For a particular post, we predict the number of views to be 437, and the residual for this is 14. Did we overestimate or underestimate the number of likes? Explain briefly.
+    -   *e*<sub>*i*</sub> = *y*<sub>*i*</sub> − *ŷ*<sub>*i*</sub>
+    -   residual = observed - predicted
+    -   14 = *y*<sub>*i*</sub> − 437
+
+### Problem 5
+
+![](images/height_girth.png)
+
+|     | term        | estimate | std.error | statistic | p.value  |
+|-----|-------------|----------|-----------|-----------|----------|
+|     | <chr>       | <dbl>    | <dbl>     | <dbl>     | <dbl>    |
+| 1   | (Intercept) | 105.9    | 1.02      | 6.79      | 1.61e-11 |
+| 2   | shoulder    | 0.608    | 0.0304    | 31.9      | 3.78e-17 |
+
+**What's wrong with the following answers?**
+
+-   *ŷ* = *b*<sub>0</sub> + *b*<sub>1</sub>*x* for the regression equation
+-   "*b*<sub>0</sub> = 105.9" for interpretation of the slope
+-   "When x = 0, we expect y to equal 105.9 on average"
+
+**How to calculate the correlation coefficient?**
+
+-   The way to undo a "square" is to take the SQUARE ROOT
+-   $R = \sqrt{R^2}$
+-   Pay attention to the sign! Should match the sign of the slope
+
+**How to interpret the correlation coefficient?**
+
+-   As \[x\] increases, \[y\] tends to \[increase/decrease\]
+-   There is a \[weak/moderately strong/strong\] \[positive/negative\] linear relationship between \[x\] and \[y\]
 
 # Course Logistics Questions
 
@@ -318,4 +406,85 @@ It is very possible for 90% of a company's employees to make less than the avera
 
     -   No make-up quizzes unless coordinated with me in advance. If you do arrange a make-up, you have to take it by yourself instead of in a group.
 
-# 
+## Week 5
+
+-   Can I make up the quiz I missed?
+
+    -   If you communicate with me in advance and have an excused absence, you can schedule a make-up quiz
+
+    -   All other circumstances, make-ups are not allowed.
+
+    -   It's important for your learning and out of courtesy to your group members that you are present on the day of a quiz
+
+    -   In the event that you have to make up the quiz, know that it will be done individually and not in a group
+
+    -   In all circumstances, you must schedule the make-up quiz before solutions are discussed, which is usually the class period following the quiz
+
+-   Where can I get more help on the labs?
+
+    -   Utilize your Lab Guide - all code needed for the lab is included in the guide, as well as some hints for what the exercises are asking
+
+    -   LA Lab Help Session on Tuesday from 1 - 2pm
+
+    -   Student hours
+
+        -   Monday 1 - 2:30
+
+        -   Wednesday 4:30 - 5:45
+
+        -   Thursday 10 - 11
+
+    -   Campuswire
+
+    -   Tutoring Center (LOTS of hours - see Canvas)
+
+-   Will there be any more class-time spent on Lab 02?
+
+    -   No - see above for other opportunities for help
+
+    -   In general, only one class period will be dedicated to work on each lab. It is expected that you will work on the lab outside of class in order to complete it (it's an assignment)
+
+-   Can you post the tutoring hours again?
+
+    -   They can be found [here on Canvas](https://canvas.apu.edu/courses/45159/pages/free-tutoring).
+
+## Week 6
+
+-   Will any of the concepts from Lab 02 be on Lab 03?
+
+    -   Probably! The general code you've been learning for creating visualizations, filtering data, creating new variables, etc will continue to be relevant in future labs
+
+    -   However, you will be using new datasets, and using R to accomplish new data analysis/statistical tasks each time. So for example, in Lab 03 you will apply regression analyses learned in Chapter 7, and in Lab 04 you will apply methods learned in Chapter 13
+
+-   Is there any way I can make up the labs for partial credit?
+
+    -   Labs are accepted up to 1 week late (with a 5% deduction each day its late)
+
+    -   Labs will remain a 0 if not turned in 7 days after deadline
+
+    -   However, if you are facing any unusual or long-term life circumstances that are interfering with your ability to engage academically, come talk to me, and we can determine appropriate accommodations and a path forward
+
+-   Is there a time we can review the material we learned this week?
+
+    -   All of Week 7 will be re-iterating the concepts learned in Week 6 (regression):
+
+        -   Lab 03 (Tuesday) will be using regression to analyze data in R (we'll start with a quick review of the main concepts)
+
+        -   We'll have a Kahoot review before the Group Quiz over Chapter 7 on Thursday
+
+-   Will we get packets or worksheets for future lectures?
+
+    -   Will go back to slides as the main mode of content delivery after Chapter 7, but will continue to provide chapter highlight handouts as well as occasional activity worksheets
+
+    -   Will see more handout type lecture material in Chapters 16 - 20
+
+## Week 7
+
+-   Will Lab 04 include questions about chapter 7?
+
+    -   No. Lab 03 is focused on regression (Ch 7), Lab 04 will be focused on content from Chapter 13
+
+-   Is the delay of Lab 03 going to have an effect on the total \# of labs?
+
+    -   Nope! Believe it or not, there is only one more lab left! Lab 04, which will be in Week 10
+
