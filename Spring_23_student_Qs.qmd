@@ -252,7 +252,11 @@ It is very possible for 90% of a company's employees to make less than the avera
 
 -   Can we please go over regression lines and calculating correlation?
 
+<<<<<<< HEAD
     -   Regression line: *ŷ* = *b*<sub>0</sub> + *b*<sub>1</sub>*x*
+=======
+    -   Regression line: *ŷ* = *b*<sub>0</sub> + *b*<sub>1</sub>*x*
+>>>>>>> d23ec93352290d55e7a5cf0428a504472ecd3baa
 
     -   Correlation:
 
