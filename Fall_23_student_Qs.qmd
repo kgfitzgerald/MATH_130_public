@@ -1,0 +1,61 @@
+---
+title: "Student Qs / Check-in Debriefs"
+subtitle: "Fall 2023"
+format: html
+toc: true
+editor: visual
+---
+
+# Logistics Questions
+
+**Q: Are there any other recommended sources we can use to study?**
+
+-   Beyond the lecture slides, the [textbook](https://openintro-ims.netlify.app) is the next go-to resource. I don't say this about all textbooks, but this one is actually good.
+-   My [YouTube playlist of Lab demos](https://www.youtube.com/playlist?list=PLDK1scxigct38sXce2Cn7LYuNYROsy7oS) will be an important resource when we start working on labs.
+-   [Teach me statistics in half and hour - seriously!](https://www.youtube.com/watch?v=kyjlxsLW1Is) YouTube video
+-   [Khan Academy](https://www.khanacademy.org/math/ap-statistics) has videos/resources on most statistical concepts we cover in this course
+
+**Q: Will we have access to the slides of classes to come so that we may study ahead of time?**
+
+-   Yes, slides for the whole semester have been made available on Campuswire (thanks to this question!)
+
+**Q: What is the late work / absence policy?**
+
+-   See syllabus for details. For homework, you get 3 late passes that give you 72 hour extension. Labs, discussion posts, and reading journals have a "best by date", but you can request an extension for up to one week by filling out the [Google Form](https://forms.gle/2FfbTyH8XyC482NN7).
+
+**Q: Will there be extra credit? Papers? Group assignments / projects?**
+
+-   Extra credit: no extra credit assignments, but some bonus points available on certain labs & on exams.
+-   Papers: One short faith integration reflection paper (400-500 words)
+-   Group assignments / projects: There will be 4 group quizzes and 1 group exam. No projects in this course.
+
+# Content Questions
+
+### Chapter 1
+
+**Q: What does categorical mean?**
+
+-   All variables are either numerical or categorical. Categorical are questions you would answer with a word or phrase (e.g. what is your gender?), whereas numerical are questions you would answer with a numeric value (e.g. how many hours of sleep did you get last night?)
+
+**Q: Can clusters in plot determine truly fair, random lottery or not?**
+
+-   Clusters are a type of pattern. Seeing any pattern in the data would indicate that it was NOT truly fair/random.
+
+# Other questions
+
+**Q: What interested you in coding?**
+
+-   Believe it or not I HATED coding when I first learned it. It was in a computer science course in college that taught the programming language C++. But the more I got interested in data and statistics, the more I realized coding was very useful in gleaning insight from lots of information! One of my favorite parts about coding now is using it to produce cool/insightful visualizations.
+
+**Q: What are your best study techniques for exams?**
+
+-   We'll talk a lot about this once the first exam gets closer, but it's not until Week 8 :)
+
+**Q: What's a misconception people have about data/statistics?**
+
+A: There are lots! We'll see many throughout the semester, but I'll comment on two that are pretty important to me (Dr. Fitz):
+
+-   Misconception: "data is objective".
+    -   Reality: there are lots of ways that bias can creep into our data. The research questions we ask, the data we collect, and the way we use that data are infused with (often hidden) values about who and what matters in the world. For example, we should examine if and when marginalized people and their experiences are being excluded from our data, particularly when that data is used in countless ways to drive decision-making and inform society about the state of the world.
+-   Misconception: "data is irrelevant to me / boring / all about numbers and spreadsheets".
+    -   Reality: data is everywhere, and you encounter it every day. My hope is the readings/videos you'll engage with via discussion posts will convince you of this!
