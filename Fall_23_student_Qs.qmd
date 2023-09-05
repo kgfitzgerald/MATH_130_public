@@ -8,9 +8,24 @@ editor: visual
 
 # Logistics Questions
 
+### Week 1
+
+**Q: Is it possible to have more student hours?**
+
+Unfortunately I'm not able to schedule additional student hours, but there are other key ways to get support:
+
+-   Post questions to Campuswire
+
+-   Joseph (our LA) will hold help sessions before the main Labs (01 - 04) are due and before exams
+
+-   Attend [FREE tutoring](https://canvas.apu.edu/courses/49388/pages/free-tutoring) for MATH 130.
+
+If you have utilized these other options and still feel like you would benefit from one-on-one time with me, send me an email (kfitzgerald\@apu.edu), and we can set up a time to chat. I'm also always happy to chat before / after class.
+
 **Q: Are there any other recommended sources we can use to study?**
 
 -   Beyond the lecture slides, the [textbook](https://openintro-ims.netlify.app) is the next go-to resource. I don't say this about all textbooks, but this one is actually good.
+-   For more practice problems, see the exercises at the end of each chapter. Answers to odd questions are provided in the [Appendix](https://openintro-ims.netlify.app/exercise-solutions).
 -   My [YouTube playlist of Lab demos](https://www.youtube.com/playlist?list=PLDK1scxigct38sXce2Cn7LYuNYROsy7oS) will be an important resource when we start working on labs.
 -   [Teach me statistics in half and hour - seriously!](https://www.youtube.com/watch?v=kyjlxsLW1Is) YouTube video
 -   [Khan Academy](https://www.khanacademy.org/math/ap-statistics) has videos/resources on most statistical concepts we cover in this course
@@ -29,9 +44,13 @@ editor: visual
 -   Papers: One short faith integration reflection paper (400-500 words)
 -   Group assignments / projects: There will be 4 group quizzes and 1 group exam. No projects in this course.
 
-# Content Questions
+# Lecture Content Questions
 
 ### Chapter 1
+
+**Q: Why do they use the word "discrete" when describing whole numbers?**
+
+A: Hmm, never considered this before! The word "discrete" (outside of stats) means "individually separate and distinct", which I guess fits with the statistical definition: each whole number is distinct (2 is different from 3, which is different from 4, etc), whereas as two decimal values could both round to the same whole number (e.g. 2.1 and 2.2 both round to 2). Fun fact, there is actually a whole area of mathematics called "discrete mathematics" that's concerned with the study of discrete mathematical objects (whole numbers, or integers, are one example) - people get whole PhDs on this stuff :)
 
 **Q: What does categorical mean?**
 
@@ -41,7 +60,19 @@ editor: visual
 
 -   Clusters are a type of pattern. Seeing any pattern in the data would indicate that it was NOT truly fair/random.
 
+# Lab Questions
+
+**Q: Does the .qmd automatically translate to .html or does another process need to happen manually first?**
+
+**A:** hitting "Render" (blue arrow) is what turns the .qmd into a .html :) Nothing else is needed.
+
 # Other questions
+
+### Week 1
+
+**Q: What interested you in statistics?**
+
+-   Come to student hours and/or let's get coffee/tea/lunch, and I'd love to chat with you about it! Short version: it was the perfect intersection between my love of math and my heart/concern for justice :) Work with incarcerated women, people experiencing homelessness, and an internship with World Vision combined to convince me of the need to use my quantitative skills for social good!
 
 **Q: What interested you in coding?**
 
@@ -59,3 +90,19 @@ A: There are lots! We'll see many throughout the semester, but I'll comment on t
     -   Reality: there are lots of ways that bias can creep into our data. The research questions we ask, the data we collect, and the way we use that data are infused with (often hidden) values about who and what matters in the world. For example, we should examine if and when marginalized people and their experiences are being excluded from our data, particularly when that data is used in countless ways to drive decision-making and inform society about the state of the world.
 -   Misconception: "data is irrelevant to me / boring / all about numbers and spreadsheets".
     -   Reality: data is everywhere, and you encounter it every day. My hope is the readings/videos you'll engage with via discussion posts will convince you of this!
+
+**Q: What is a research journal?**
+
+**A:** Professors often do research in addition to teaching, and we write articles describing our research/findings and publish them in academic research journals. For example, I have published in a few different journals:
+
+-   [Journal for Research on Educational Effectiveness](https://www.tandfonline.com/doi/full/10.1080/19345747.2022.2031366)
+
+-   [Educational Researcher](https://journals.sagepub.com/doi/10.3102/0013189X20960686)
+
+-   [Annals of Applied Statistics](https://projecteuclid.org/journals/annals-of-applied-statistics/volume-15/issue-1/An-evaluation-of-statistical-methods-for-aggregate-patterns-of-replication/10.1214/20-AOAS1387.short)
+
+-   [American Journal of Tropical Medicine and Hygiene](https://www.ajtmh.org/view/journals/tpmd/101/3/article-p654.xml)
+
+When you submit an article to be published in a research journal, it undergoes a process called "peer review", where the journal's editor sends it to 3-4 other professors/researchers in your field, and they provide critical feedback about the quality of the paper, how to make it better, whether it provides enough of a contribution to merit publication, etc. Often, papers will go through a couple rounds of peer review and re-submission before being accepted for publication. This is one way we ensure the quality of scientific studies and findings :)
+
+Ask your professors about the research they do! Many of them hire undergrads as research assistants, so this is definitely an opportunity you should seek out while at APU.

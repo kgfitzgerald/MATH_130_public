@@ -45,12 +45,19 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#logistics-questions" id="toc-logistics-questions" class="nav-link active" data-scroll-target="#logistics-questions">Logistics Questions</a></li>
-  <li><a href="#content-questions" id="toc-content-questions" class="nav-link" data-scroll-target="#content-questions">Content Questions</a>
+  <li><a href="#logistics-questions" id="toc-logistics-questions" class="nav-link active" data-scroll-target="#logistics-questions">Logistics Questions</a>
+  <ul class="collapse">
+  <li><a href="#week-1" id="toc-week-1" class="nav-link" data-scroll-target="#week-1">Week 1</a></li>
+  </ul></li>
+  <li><a href="#lecture-content-questions" id="toc-lecture-content-questions" class="nav-link" data-scroll-target="#lecture-content-questions">Lecture Content Questions</a>
   <ul class="collapse">
   <li><a href="#chapter-1" id="toc-chapter-1" class="nav-link" data-scroll-target="#chapter-1">Chapter 1</a></li>
   </ul></li>
-  <li><a href="#other-questions" id="toc-other-questions" class="nav-link" data-scroll-target="#other-questions">Other questions</a></li>
+  <li><a href="#lab-questions" id="toc-lab-questions" class="nav-link" data-scroll-target="#lab-questions">Lab Questions</a></li>
+  <li><a href="#other-questions" id="toc-other-questions" class="nav-link" data-scroll-target="#other-questions">Other questions</a>
+  <ul class="collapse">
+  <li><a href="#week-1-1" id="toc-week-1-1" class="nav-link" data-scroll-target="#week-1-1">Week 1</a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
@@ -76,9 +83,20 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="logistics-questions" class="level1">
 <h1>Logistics Questions</h1>
+<section id="week-1" class="level3">
+<h3 class="anchored" data-anchor-id="week-1">Week 1</h3>
+<p><strong>Q: Is it possible to have more student hours?</strong></p>
+<p>Unfortunately I’m not able to schedule additional student hours, but there are other key ways to get support:</p>
+<ul>
+<li><p>Post questions to Campuswire</p></li>
+<li><p>Joseph (our LA) will hold help sessions before the main Labs (01 - 04) are due and before exams</p></li>
+<li><p>Attend <a href="https://canvas.apu.edu/courses/49388/pages/free-tutoring">FREE tutoring</a> for MATH 130.</p></li>
+</ul>
+<p>If you have utilized these other options and still feel like you would benefit from one-on-one time with me, send me an email (kfitzgerald@apu.edu), and we can set up a time to chat. I’m also always happy to chat before / after class.</p>
 <p><strong>Q: Are there any other recommended sources we can use to study?</strong></p>
 <ul>
 <li>Beyond the lecture slides, the <a href="https://openintro-ims.netlify.app">textbook</a> is the next go-to resource. I don’t say this about all textbooks, but this one is actually good.</li>
+<li>For more practice problems, see the exercises at the end of each chapter. Answers to odd questions are provided in the <a href="https://openintro-ims.netlify.app/exercise-solutions">Appendix</a>.</li>
 <li>My <a href="https://www.youtube.com/playlist?list=PLDK1scxigct38sXce2Cn7LYuNYROsy7oS">YouTube playlist of Lab demos</a> will be an important resource when we start working on labs.</li>
 <li><a href="https://www.youtube.com/watch?v=kyjlxsLW1Is">Teach me statistics in half and hour - seriously!</a> YouTube video</li>
 <li><a href="https://www.khanacademy.org/math/ap-statistics">Khan Academy</a> has videos/resources on most statistical concepts we cover in this course</li>
@@ -98,10 +116,13 @@ ul.task-list li input[type="checkbox"] {
 <li>Group assignments / projects: There will be 4 group quizzes and 1 group exam. No projects in this course.</li>
 </ul>
 </section>
-<section id="content-questions" class="level1">
-<h1>Content Questions</h1>
+</section>
+<section id="lecture-content-questions" class="level1">
+<h1>Lecture Content Questions</h1>
 <section id="chapter-1" class="level3">
 <h3 class="anchored" data-anchor-id="chapter-1">Chapter 1</h3>
+<p><strong>Q: Why do they use the word “discrete” when describing whole numbers?</strong></p>
+<p>A: Hmm, never considered this before! The word “discrete” (outside of stats) means “individually separate and distinct”, which I guess fits with the statistical definition: each whole number is distinct (2 is different from 3, which is different from 4, etc), whereas as two decimal values could both round to the same whole number (e.g.&nbsp;2.1 and 2.2 both round to 2). Fun fact, there is actually a whole area of mathematics called “discrete mathematics” that’s concerned with the study of discrete mathematical objects (whole numbers, or integers, are one example) - people get whole PhDs on this stuff :)</p>
 <p><strong>Q: What does categorical mean?</strong></p>
 <ul>
 <li>All variables are either numerical or categorical. Categorical are questions you would answer with a word or phrase (e.g.&nbsp;what is your gender?), whereas numerical are questions you would answer with a numeric value (e.g.&nbsp;how many hours of sleep did you get last night?)</li>
@@ -112,8 +133,19 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 </section>
 </section>
+<section id="lab-questions" class="level1">
+<h1>Lab Questions</h1>
+<p><strong>Q: Does the .qmd automatically translate to .html or does another process need to happen manually first?</strong></p>
+<p><strong>A:</strong> hitting “Render” (blue arrow) is what turns the .qmd into a .html :) Nothing else is needed.</p>
+</section>
 <section id="other-questions" class="level1">
 <h1>Other questions</h1>
+<section id="week-1-1" class="level3">
+<h3 class="anchored" data-anchor-id="week-1-1">Week 1</h3>
+<p><strong>Q: What interested you in statistics?</strong></p>
+<ul>
+<li>Come to student hours and/or let’s get coffee/tea/lunch, and I’d love to chat with you about it! Short version: it was the perfect intersection between my love of math and my heart/concern for justice :) Work with incarcerated women, people experiencing homelessness, and an internship with World Vision combined to convince me of the need to use my quantitative skills for social good!</li>
+</ul>
 <p><strong>Q: What interested you in coding?</strong></p>
 <ul>
 <li>Believe it or not I HATED coding when I first learned it. It was in a computer science course in college that taught the programming language C++. But the more I got interested in data and statistics, the more I realized coding was very useful in gleaning insight from lots of information! One of my favorite parts about coding now is using it to produce cool/insightful visualizations.</li>
@@ -134,6 +166,17 @@ ul.task-list li input[type="checkbox"] {
 <li>Reality: data is everywhere, and you encounter it every day. My hope is the readings/videos you’ll engage with via discussion posts will convince you of this!</li>
 </ul></li>
 </ul>
+<p><strong>Q: What is a research journal?</strong></p>
+<p><strong>A:</strong> Professors often do research in addition to teaching, and we write articles describing our research/findings and publish them in academic research journals. For example, I have published in a few different journals:</p>
+<ul>
+<li><p><a href="https://www.tandfonline.com/doi/full/10.1080/19345747.2022.2031366">Journal for Research on Educational Effectiveness</a></p></li>
+<li><p><a href="https://journals.sagepub.com/doi/10.3102/0013189X20960686">Educational Researcher</a></p></li>
+<li><p><a href="https://projecteuclid.org/journals/annals-of-applied-statistics/volume-15/issue-1/An-evaluation-of-statistical-methods-for-aggregate-patterns-of-replication/10.1214/20-AOAS1387.short">Annals of Applied Statistics</a></p></li>
+<li><p><a href="https://www.ajtmh.org/view/journals/tpmd/101/3/article-p654.xml">American Journal of Tropical Medicine and Hygiene</a></p></li>
+</ul>
+<p>When you submit an article to be published in a research journal, it undergoes a process called “peer review”, where the journal’s editor sends it to 3-4 other professors/researchers in your field, and they provide critical feedback about the quality of the paper, how to make it better, whether it provides enough of a contribution to merit publication, etc. Often, papers will go through a couple rounds of peer review and re-submission before being accepted for publication. This is one way we ensure the quality of scientific studies and findings :)</p>
+<p>Ask your professors about the research they do! Many of them hire undergrads as research assistants, so this is definitely an opportunity you should seek out while at APU.</p>
+</section>
 </section>
 
 </main>
