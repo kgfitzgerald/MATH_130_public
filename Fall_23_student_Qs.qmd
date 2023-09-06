@@ -8,6 +8,12 @@ editor: visual
 
 # Logistics Questions
 
+### Week 2
+
+**Q: Will we start labs in class, or are they all just on your own?**
+
+-   We will always have at least half a class period if not a whole class period to work on each lab together. You likely will have a few exercises to finish up outside of class.
+
 ### Week 1
 
 **Q: Is it possible to have more student hours?**
@@ -47,6 +53,16 @@ If you have utilized these other options and still feel like you would benefit f
 # Lecture Content Questions
 
 ### Chapter 1
+
+**Q: Why do pie charts still get used if they're so inefficient?**
+
+-   Great question! Answer: because most people haven't been told/shown they're not effective and WHY! There is a lot of cognitive science research to inform best practices for data communication, but unfortunately most people aren't aware of it. You can now become an anti-pie chart evangelist :)
+
+-   See [The Science of Visual Data Communication: What Works](https://journals.sagepub.com/doi/full/10.1177/15291006211051956) for a comprehensive review of what the research says
+
+-   Check out [my paper](https://www.tandfonline.com/doi/full/10.1080/19345747.2022.2031366) if you're interested in seeing some of the research I do on data visualization :)
+
+-   Email me for a pdf of either of the above resources if you're interested
 
 **Q: Why do they use the word "discrete" when describing whole numbers?**
 
