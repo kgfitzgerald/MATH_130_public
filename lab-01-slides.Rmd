@@ -1,5 +1,5 @@
 ---
-title: "Visualising data with ggplot2"
+title: "Visualising data with ggplot"
 subtitle: "MATH 130"
 author: "Katie Fitzgerald"
 output:
@@ -24,7 +24,7 @@ library(ggridges)
 
 class: middle
 
-# ggplot2 `r emo::ji("heart")` `r emo::ji("penguin")`
+# ggplot `r emo::ji("heart")` `r emo::ji("penguin")`
 
 ---
 
