@@ -8,11 +8,31 @@ editor: visual
 
 # Logistics Questions
 
+### Week 3
+
+**Q: How do I get tutoring? Every time I look it says there is none**
+
+-   Thanks for bringing this to my attention! I followed up with the Tutoring Center and their hours are now available on the website.
+
+-   Drop-in hours are from 4 - 7pm, Monday - Thursday
+
+**Q: Will groups always be the same for quizzes?**
+
+-   Nope, they will change for each quiz
+
+**Q: Where will the help sessions be held?**
+
+-   TBD, but mostly likely a classroom in Segerstrom
+
 ### Week 2
 
 **Q: Will we start labs in class, or are they all just on your own?**
 
 -   We will always have at least half a class period if not a whole class period to work on each lab together. You likely will have a few exercises to finish up outside of class.
+
+**Q: Can student hours be on Zoom?**
+
+-   Yes! The Monday & Tuesday student hours both have a Zoom option (in addition to the in-person option at Segerstrom 112). See Canvas for the Zoom link.
 
 ### Week 1
 
@@ -75,6 +95,16 @@ A: Hmm, never considered this before! The word "discrete" (outside of stats) mea
 **Q: Can clusters in plot determine truly fair, random lottery or not?**
 
 -   Clusters are a type of pattern. Seeing any pattern in the data would indicate that it was NOT truly fair/random.
+
+### Chapters 4 & 5
+
+**Q: Is a normal distribution used to describe modality or skew, or perhaps does it describe both?**
+
+-   A normal distribution is unimodal and symmetric - so it incorporates both! We'll learn a lot more about the normal distribution in future chapters :)
+
+**Q: I sometimes mix up stacked bar plots and standardized bar plots and sometimes wonder how to differentiate between them?**
+
+-   I often get the terminology mixed up too! But the important things to know are that they're both for 2 categorical variables, and one (the stacked bar plot) shows counts on the y-axis (which means the bars might be different heights), and the other (standardized bar plot) shows proportions on the y-axis (which means the bars will be the same height - of 1.0).
 
 # Lab Questions
 
