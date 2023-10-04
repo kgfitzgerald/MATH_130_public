@@ -177,7 +177,7 @@ When you submit an article to be published in a research journal, it undergoes a
 
 Ask your professors about the research they do! Many of them hire undergrads as research assistants, so this is definitely an opportunity you should seek out while at APU.
 
-# Group Quiz Debrief
+# Group Quiz 1 Debrief
 
 -   Reminder of class norms:
 
@@ -242,3 +242,11 @@ Ask your professors about the research they do! Many of them hire undergrads as 
     -   Number of games that were won
 
     -   Whether or not they won or lost
+
+# Group Quiz 2 Debrief
+
+*Suppose that the average (mean) house price in a community is $425,000. Do you suspect that more than 50%, less than 50%, or exactly 50% of the houses cost more than the average (mean)?*
+
+-   Key is to realize 50th percentile is the median, so you need to discern if the mean is farther to the left, farther to the right, or the same as the median.
+
+-   House prices are right-skewed, so the mean is larger than (farther to the right than) the median. This means that *less than 50%* will be greater than the mean.
