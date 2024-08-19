@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Visualising data with ggplot</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Katie Fitzgerald" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.min.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Visualising data with ggplot
+]
+.subtitle[
+## MATH 130
+]
+.author[
+### Katie Fitzgerald
+]
+
+---
+
+
+
+
+
+layout: true
+  
+
+
+---
+
+
+
+class: middle
+
+# ggplot ❤️ 🐧
+
+---
+
+## `ggplot()`
+
+- Structure of the code for plots can be summarized as
+
+
+```r
+ggplot(dataset, aes(x = [x-variable], 
+                    y = [y-variable])) +
+   geom_xxx() +
+   other options
+```
+
+---
+
+## Data: Palmer Penguins
+
+Measurements for penguin species, island in Palmer Archipelago, size (flipper length, body mass, bill dimensions), and sex.
+
+.pull-left-narrow[
+&lt;img src="images/penguins.png" width="80%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right-wide[
+
+```r
+library(palmerpenguins)
+glimpse(penguins)
+```
+
+```
+## Rows: 344
+## Columns: 8
+## $ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adeli…
+## $ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torg…
+## $ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.…
+## $ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.…
+## $ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195…
+## $ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 362…
+## $ sex               &lt;fct&gt; male, female, female, NA, female, mal…
+## $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2…
+```
+]
+
+---
+
+# 1 categorical variable: bar plot
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-5-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(penguins, aes(x = species)) + 
+  geom_bar()
+```
+]
+]
+
+---
+
+# 2 categorical variables: stacked bar plot
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(penguins, aes(x = island, fill = species)) +
+  geom_bar()
+```
+]
+]
+
+---
+
+# 2 categorical: standardized bar plot
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(penguins, aes(x = island, fill = species)) +
+  geom_bar(position = "fill")
+```
+]
+]
+
+---
+
+# 1 numeric variable: histogram
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(penguins, aes(x = bill_depth_mm)) +
+  geom_histogram(color = "white")
+```
+
+```
+## Warning: Removed 2 rows containing non-finite values
+## (`stat_bin()`).
+```
+]
+]
+
+---
+
+# 1 num. &amp; 1 cat. variable: faceted histogram
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-9-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_histogram(color = "white") + 
+  facet_wrap(~ species, ncol = 1)
+```
+
+```
+## Warning: Removed 2 rows containing non-finite values
+## (`stat_bin()`).
+```
+]
+]
+
+---
+
+# 1 num. &amp; 1 cat. variable: ridge plot
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-10-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(penguins, aes(x = body_mass_g, y = species)) +
+  geom_density_ridges()
+```
+
+```
+## Warning: Removed 2 rows containing non-finite values
+## (`stat_density_ridges()`).
+```
+]
+]
+
+---
+
+# 2 numeric variables: scatterplot
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(penguins, aes(x = body_mass_g, y = bill_depth_mm)) +
+  geom_point()
+```
+
+```
+## Warning: Removed 2 rows containing missing values
+## (`geom_point()`).
+```
+]
+]
+
+---
+
+# More than 2: scatterplot w/ color
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(penguins, aes(x = body_mass_g, 
+                     y = bill_depth_mm, color = species)) +
+  geom_point()
+```
+
+```
+## Warning: Removed 2 rows containing missing values
+## (`geom_point()`).
+```
+]
+]
+
+---
+
+# More than 2: faceted scatterplot w/ color
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+```r
+ggplot(penguins, aes(x = body_mass_g, 
+                     y = bill_depth_mm, color = species)) +
+  geom_point() +
+  facet_wrap(~sex)
+```
+
+```
+## Warning: Removed 2 rows containing missing values
+## (`geom_point()`).
+```
+]
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

@@ -1,0 +1,295 @@
+---
+title: "Lab 03 slides"
+subtitle: "MATH 130"
+author: "Katie Fitzgerald"
+output:
+  xaringan::moon_reader:
+    css: ["xaringan-themer.css", "slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(gghighlight)
+library(broom)
+library(palmerpenguins)
+```
+
+class: middle
+
+# Recap: `ggplot()`, `summarize()`, `group_by()`, `summary()`
+
+---
+
+## `ggplot()`
+
+Structure of the code for plots can be summarized as
+
+```{r eval = FALSE}
+ggplot(dataset, aes(x = [x-variable], 
+                    y = [y-variable])) +
+   geom_xxx()
+```
+
+Examples: (see Labs 01 & 02 for more)
+
+```{r, eval = FALSE}
+ggplot(penguins, aes(x = body_mass_g, y = species)) +
+  geom_boxplot()
+
+ggplot(basketball, aes(x = age)) + 
+  geom_histogram(binwidth = 2, color = "white")
+
+ggplot(penguins, aes(x = bill_length_mm, 
+                     y = flipper_length_mm)) +
+  geom_point()
+```
+
+---
+
+## `summarize()`
+
+General structure of `summarize()`, used to compute summary statistics:
+
+```{r, eval = FALSE}
+dataset %>% 
+  summarize(user_defined_label = function(variable, na.rm = TRUE))
+```
+
+Example: 
+
+```{r}
+penguins %>% 
+  summarize(avg_body_mass = mean(body_mass_g, na.rm = TRUE))
+```
+
+
+---
+
+# One summary statistic at a time
+
+.panelset[
+.panel[.panel-name[Output]
+```{r ref.label = "one-stat", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+
+```
+]
+.panel[.panel-name[Code]
+
+```{r one-stat, fig.show='hide', eval = FALSE}
+penguins %>% 
+  summarize(avg_body_mass = mean(body_mass_g, na.rm = TRUE))
+
+penguins %>% 
+  summarize(sd_body_mass = sd(body_mass_g, na.rm = TRUE))
+```
+]
+]
+
+---
+
+# Two summary statistics at a time
+
+.panelset[
+.panel[.panel-name[Output]
+```{r ref.label = "two-stats", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+
+```
+]
+.panel[.panel-name[Code]
+
+```{r two-stats, fig.show='hide', eval = FALSE}
+penguins %>% 
+  summarize(avg_body_mass = mean(body_mass_g, na.rm = TRUE),
+            sd_body_mass = sd(body_mass_g, na.rm = TRUE))
+```
+]
+]
+
+---
+
+## `group_by()`
+
+Add `group_by()` before `summarize()` to calculate summary statistics **for each group** (i.e. for each level of a categorical variable)
+
+
+General structure: 
+
+```{r, eval = FALSE}
+dataset %>% 
+  group_by(categorical_variable) %>% 
+  summarize(user_defined_label = function(variable, na.rm = TRUE))
+```
+
+---
+
+## Summary statistics for multiple groups
+
+.panelset[
+.panel[.panel-name[Output]
+```{r ref.label = "group-by", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+
+```
+]
+.panel[.panel-name[Code]
+
+```{r group-by, fig.show='hide', eval = FALSE}
+penguins %>% 
+  group_by(species) %>% 
+  summarize(avg_body_mass = mean(body_mass_g, na.rm = TRUE),
+            sd_body_mass = sd(body_mass_g, na.rm = TRUE))
+```
+]
+]
+
+---
+
+## `summary()` and `$`
+
+Use the dollar sign to access an individual variable in a dataset
+
+General structure:
+
+```{r, eval = FALSE}
+summary(dataset$variable)
+```
+
+Example: 
+
+```{r}
+summary(penguins$body_mass_g)
+```
+
+
+---
+
+class: middle
+
+# Regression in R (new code for Lab 03)
+
+---
+
+## The data
+
+```{r, warning = FALSE}
+scorecard <- read_csv("data/scorecard.csv")
+glimpse(scorecard)
+```
+
+
+---
+
+## Fitting a regression model
+
+```{r, eval = FALSE}
+model_name <- lm(y_variable ~ x_variable, dataset)
+
+tidy(model_name)
+```
+
++ `lm` stands for "linear model" and is the function that actually fits the least squares regression model
+
+--
+
++ Nothing will appear in output after running the first line of code, but a new object called `model_name` will appear in your Environment
+
+--
+
++ `tidy()` is the function we use to see the regression table output
+
+--
+
++ Whatever you name your model is what should go inside `tidy()`
+
+---
+
+## Fitting a regression model: `lm()` and `tidy()`
+
+```{r fit-tidy, fig.show='hide'}
+model1 <- lm(pell_pct ~ firstgen_pct, scorecard)
+
+tidy(model1)
+```
+
+
+
+--
+
+The `estimate` column contains the intercept $(b_0)$ and slope $(b_1)$!
+
+When you see a table of output like this, you don't have to calculate the intercept or slope!
+
+--
+
+$$\hat{y} = 6.92 + 0.967x$$
+---
+
+## Visualizing a regression model
+
+.panelset[
+.panel[.panel-name[Output]
+```{r ref.label = "reg-viz", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+
+```
+]
+.panel[.panel-name[Code]
+
+```{r reg-viz, fig.show='hide', eval = FALSE}
+ggplot(scorecard, aes(x = firstgen_pct, y = pell_pct)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+]
+]
+
+---
+
+## Calculating $R^2$
+
+The `glance()` function will calculate $R^2$
+
+```{r}
+glance(model1)
+glance(model1)[1]
+```
+
+Whatever you name your model is what you should put inside `glance()`
+
+---
+
+## Recap: Regression in R
+
+```{r, eval = FALSE}
+model_name <- lm(______ ~ ______, ______)
+
+tidy(______)
+
+ggplot(______, aes(x = ______, y = ______)) +
+  geom____() +
+  geom____(method = "lm", se = FALSE)
+
+glance(______)[1]
+```
+
+--
+
+```{r, eval = FALSE}
+model_name <- lm(y_variable ~ x_variable, dataset)
+
+tidy(model_name)
+
+ggplot(dataset, aes(x = x_variable, y = y_variable)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+glance(model_name)[1]
+```
+

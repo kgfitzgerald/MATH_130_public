@@ -1,0 +1,252 @@
+---
+title: "Student Qs / Check-in Debriefs"
+subtitle: "Fall 2023"
+format: html
+toc: true
+editor: visual
+---
+
+# Logistics Questions
+
+### Week 5
+
+**Q: Is there another time there will be lab help with our LA?**
+
+**A:** For Lab 02, the times to get help are:
+
+-   Wednesday 9/27, in-class help session with Joseph
+
+-   Monday 10/2, in-class help session after group quiz is turned in
+
+-   Monday 10/2, 4:15 - 5:30 student hours
+
+-   Tuesday 10/3, 2:30 - 4pm student hours
+
+-   Thursday 10/5, 10 - 11:30 student hours
+
+-   Monday - Thursday, 3 - 7pm, Tutoring Center
+
+-   Anytime: post questions to Campuswire
+
+**Q: Can you go over some of the homework questions?**
+
+-   We generally won't spend class-time on the homework, BUT, you can post a specific question on Campuswire, and we can discuss there and/or utilize any of the above times mentioned for lab help to get in-person help / clarification on the homework as well
+
+### Week 3
+
+**Q: How do I get tutoring? Every time I look it says there is none**
+
+-   Thanks for bringing this to my attention! I followed up with the Tutoring Center and their hours are now available on the website.
+
+-   Drop-in hours are from 4 - 7pm, Monday - Thursday
+
+**Q: Will groups always be the same for quizzes?**
+
+-   Nope, they will change for each quiz
+
+**Q: Where will the help sessions be held?**
+
+-   TBD, but mostly likely a classroom in Segerstrom
+
+### Week 2
+
+**Q: Will we start labs in class, or are they all just on your own?**
+
+-   We will always have at least half a class period if not a whole class period to work on each lab together. You likely will have a few exercises to finish up outside of class.
+
+**Q: Can student hours be on Zoom?**
+
+-   Yes! The Monday & Tuesday student hours both have a Zoom option (in addition to the in-person option at Segerstrom 112). See Canvas for the Zoom link.
+
+### Week 1
+
+**Q: Is it possible to have more student hours?**
+
+Unfortunately I'm not able to schedule additional student hours, but there are other key ways to get support:
+
+-   Post questions to Campuswire
+
+-   Joseph (our LA) will hold help sessions before the main Labs (01 - 04) are due and before exams
+
+-   Attend [FREE tutoring](https://canvas.apu.edu/courses/49388/pages/free-tutoring) for MATH 130.
+
+If you have utilized these other options and still feel like you would benefit from one-on-one time with me, send me an email (kfitzgerald\@apu.edu), and we can set up a time to chat. I'm also always happy to chat before / after class.
+
+**Q: Are there any other recommended sources we can use to study?**
+
+-   Beyond the lecture slides, the [textbook](https://openintro-ims.netlify.app) is the next go-to resource. I don't say this about all textbooks, but this one is actually good.
+-   For more practice problems, see the exercises at the end of each chapter. Answers to odd questions are provided in the [Appendix](https://openintro-ims.netlify.app/exercise-solutions).
+-   My [YouTube playlist of Lab demos](https://www.youtube.com/playlist?list=PLDK1scxigct38sXce2Cn7LYuNYROsy7oS) will be an important resource when we start working on labs.
+-   [Teach me statistics in half and hour - seriously!](https://www.youtube.com/watch?v=kyjlxsLW1Is) YouTube video
+-   [Khan Academy](https://www.khanacademy.org/math/ap-statistics) has videos/resources on most statistical concepts we cover in this course
+
+**Q: Will we have access to the slides of classes to come so that we may study ahead of time?**
+
+-   Yes, slides for the whole semester have been made available on Campuswire (thanks to this question!)
+
+**Q: What is the late work / absence policy?**
+
+-   See syllabus for details. For homework, you get 3 late passes that give you 72 hour extension. Labs, discussion posts, and reading journals have a "best by date", but you can request an extension for up to one week by filling out the [Google Form](https://forms.gle/2FfbTyH8XyC482NN7).
+
+**Q: Will there be extra credit? Papers? Group assignments / projects?**
+
+-   Extra credit: no extra credit assignments, but some bonus points available on certain labs & on exams.
+-   Papers: One short faith integration reflection paper (400-500 words)
+-   Group assignments / projects: There will be 4 group quizzes and 1 group exam. No projects in this course.
+
+# Lecture Content Questions
+
+### Chapter 1
+
+**Q: Why do pie charts still get used if they're so inefficient?**
+
+-   Great question! Answer: because most people haven't been told/shown they're not effective and WHY! There is a lot of cognitive science research to inform best practices for data communication, but unfortunately most people aren't aware of it. You can now become an anti-pie chart evangelist :)
+
+-   See [The Science of Visual Data Communication: What Works](https://journals.sagepub.com/doi/full/10.1177/15291006211051956) for a comprehensive review of what the research says
+
+-   Check out [my paper](https://www.tandfonline.com/doi/full/10.1080/19345747.2022.2031366) if you're interested in seeing some of the research I do on data visualization :)
+
+-   Email me for a pdf of either of the above resources if you're interested
+
+**Q: Why do they use the word "discrete" when describing whole numbers?**
+
+A: Hmm, never considered this before! The word "discrete" (outside of stats) means "individually separate and distinct", which I guess fits with the statistical definition: each whole number is distinct (2 is different from 3, which is different from 4, etc), whereas as two decimal values could both round to the same whole number (e.g. 2.1 and 2.2 both round to 2). Fun fact, there is actually a whole area of mathematics called "discrete mathematics" that's concerned with the study of discrete mathematical objects (whole numbers, or integers, are one example) - people get whole PhDs on this stuff :)
+
+**Q: What does categorical mean?**
+
+-   All variables are either numerical or categorical. Categorical are questions you would answer with a word or phrase (e.g. what is your gender?), whereas numerical are questions you would answer with a numeric value (e.g. how many hours of sleep did you get last night?)
+
+**Q: Can clusters in plot determine truly fair, random lottery or not?**
+
+-   Clusters are a type of pattern. Seeing any pattern in the data would indicate that it was NOT truly fair/random.
+
+### Chapters 4 & 5
+
+**Q: Is a normal distribution used to describe modality or skew, or perhaps does it describe both?**
+
+-   A normal distribution is unimodal and symmetric - so it incorporates both! We'll learn a lot more about the normal distribution in future chapters :)
+
+**Q: I sometimes mix up stacked bar plots and standardized bar plots and sometimes wonder how to differentiate between them?**
+
+-   I often get the terminology mixed up too! But the important things to know are that they're both for 2 categorical variables, and one (the stacked bar plot) shows counts on the y-axis (which means the bars might be different heights), and the other (standardized bar plot) shows proportions on the y-axis (which means the bars will be the same height - of 1.0).
+
+# Lab Questions
+
+**Q: Does the .qmd automatically translate to .html or does another process need to happen manually first?**
+
+**A:** hitting "Render" (blue arrow) is what turns the .qmd into a .html :) Nothing else is needed.
+
+# Other questions
+
+### Week 1
+
+**Q: What interested you in statistics?**
+
+-   Come to student hours and/or let's get coffee/tea/lunch, and I'd love to chat with you about it! Short version: it was the perfect intersection between my love of math and my heart/concern for justice :) Work with incarcerated women, people experiencing homelessness, and an internship with World Vision combined to convince me of the need to use my quantitative skills for social good!
+
+**Q: What interested you in coding?**
+
+-   Believe it or not I HATED coding when I first learned it. It was in a computer science course in college that taught the programming language C++. But the more I got interested in data and statistics, the more I realized coding was very useful in gleaning insight from lots of information! One of my favorite parts about coding now is using it to produce cool/insightful visualizations.
+
+**Q: What are your best study techniques for exams?**
+
+-   We'll talk a lot about this once the first exam gets closer, but it's not until Week 8 :)
+
+**Q: What's a misconception people have about data/statistics?**
+
+A: There are lots! We'll see many throughout the semester, but I'll comment on two that are pretty important to me (Dr. Fitz):
+
+-   Misconception: "data is objective".
+    -   Reality: there are lots of ways that bias can creep into our data. The research questions we ask, the data we collect, and the way we use that data are infused with (often hidden) values about who and what matters in the world. For example, we should examine if and when marginalized people and their experiences are being excluded from our data, particularly when that data is used in countless ways to drive decision-making and inform society about the state of the world.
+-   Misconception: "data is irrelevant to me / boring / all about numbers and spreadsheets".
+    -   Reality: data is everywhere, and you encounter it every day. My hope is the readings/videos you'll engage with via discussion posts will convince you of this!
+
+**Q: What is a research journal?**
+
+**A:** Professors often do research in addition to teaching, and we write articles describing our research/findings and publish them in academic research journals. For example, I have published in a few different journals:
+
+-   [Journal for Research on Educational Effectiveness](https://www.tandfonline.com/doi/full/10.1080/19345747.2022.2031366)
+
+-   [Educational Researcher](https://journals.sagepub.com/doi/10.3102/0013189X20960686)
+
+-   [Annals of Applied Statistics](https://projecteuclid.org/journals/annals-of-applied-statistics/volume-15/issue-1/An-evaluation-of-statistical-methods-for-aggregate-patterns-of-replication/10.1214/20-AOAS1387.short)
+
+-   [American Journal of Tropical Medicine and Hygiene](https://www.ajtmh.org/view/journals/tpmd/101/3/article-p654.xml)
+
+When you submit an article to be published in a research journal, it undergoes a process called "peer review", where the journal's editor sends it to 3-4 other professors/researchers in your field, and they provide critical feedback about the quality of the paper, how to make it better, whether it provides enough of a contribution to merit publication, etc. Often, papers will go through a couple rounds of peer review and re-submission before being accepted for publication. This is one way we ensure the quality of scientific studies and findings :)
+
+Ask your professors about the research they do! Many of them hire undergrads as research assistants, so this is definitely an opportunity you should seek out while at APU.
+
+# Group Quiz 1 Debrief
+
+-   Reminder of class norms:
+
+    -   Everyone has expertise
+
+    -   Be present
+
+    -   Participate to the best of your ability
+
+    -   Share talk time
+
+    -   Critique ideas, not people
+
+    -   Treat everyone with respect
+
+    -   Embrace discomfort
+
+    -   Normalize time to think
+
+-   Will have a different (randomized) group each time - see Canvas for next group assignments
+
+-   What type of variable(s) is a histogram good for?
+
+-   With patients who entered the ER as the observational units, the following ARE variables:
+
+    -   how long the patient waits
+
+    -   whether or not the patient has health insurance
+
+    -   day of the week the patient arrives
+
+    -   cost of the ER visit
+
+-   With patients who entered the ER as the observational units, the following are NOT variables:
+
+    -   Average wait time for a patient
+
+    -   Whether or not wait times tend to be longer on weekends than weekdays
+
+-   With Super Bowls as observational units, the following ARE good examples of variables:
+
+    -   How long the game was
+
+    -   Were there any injuries?
+
+    -   How much $ the game produced
+
+    -   Winning team
+
+    -   How many points winning team scored
+
+    -   Whether or not the winning team made any field goals
+
+    -   Total points scored in the game by touchdowns
+
+-   With Super Bowls as observational units, the following are NOT variables:
+
+    -   \# of games played
+
+    -   Do you have good team work?
+
+    -   Number of games that were won
+
+    -   Whether or not they won or lost
+
+# Group Quiz 2 Debrief
+
+*Suppose that the average (mean) house price in a community is $425,000. Do you suspect that more than 50%, less than 50%, or exactly 50% of the houses cost more than the average (mean)?*
+
+-   Key is to realize 50th percentile is the median, so you need to discern if the mean is farther to the left, farther to the right, or the same as the median.
+
+-   House prices are right-skewed, so the mean is larger than (farther to the right than) the median. This means that *less than 50%* will be greater than the mean.

@@ -1,0 +1,200 @@
+---
+title: "Lab 04 slides"
+subtitle: "MATH 130"
+author: "Katie Fitzgerald"
+output:
+  xaringan::moon_reader:
+    css: ["xaringan-themer.css", "slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(ggdist)
+library(distributional)
+```
+
+class: middle
+
+# Normal distribution in R: `pnorm()` and `qnorm()`
+
+---
+
+# `pnorm()`
+
+.pull-left[
+Recall: Z-scores follow a normal distribution with mean 0 and standard deviation 1
+
+To calculate $P(Z < 1.7)$:
+
+```{r}
+pnorm(1.7, mean = 0, sd = 1)
+```
+
+]
+
+.pull-right[
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+ggplot() +
+  stat_dist_halfeye(aes(y = "N(0,1)", 
+                        dist = dist_normal(0, 1),
+                        fill = stat(x < 1.7))) +
+  labs(y = "", x = "x") +
+  #viridis color scale is color-blind friendly
+  #set direction = -1 so TRUE is dark instead of light
+  scale_fill_viridis_d(direction = -1, guide = "none") +
+  coord_cartesian(expand = FALSE, ylim = c(0.9, 2)) +
+  theme_minimal() +
+  theme(text = element_text(size = 40)) 
+```
+
+]
+
+--
+
+By default, R assumes `mean = 0`, and `sd = 1`, so we can leave these arguments off if our context matches the default:
+
+```{r}
+pnorm(1.7)
+```
+
+---
+
+# "Upper tail" probabilities (yellow)
+
+.pull-left[
+By default, R will tell you the LOWER tail probability. In other words, it tells you the probability that falls to the LEFT of the cutoff (purple shaded region).
+
+$P(Z < -0.5)$
+
+```{r}
+pnorm(-0.5)
+```
+
+]
+
+.pull-right[
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+ggplot() +
+  stat_dist_halfeye(aes(y = "N(0,1)", 
+                        dist = dist_normal(0, 1),
+                        fill = stat(x < -0.5))) +
+  labs(y = "", x = "x") +
+  #viridis color scale is color-blind friendly
+  #set direction = -1 so TRUE is dark instead of light
+  scale_fill_viridis_d(direction = -1, guide = "none") +
+  coord_cartesian(expand = FALSE, ylim = c(0.9, 2)) +
+  theme_minimal() +
+  theme(text = element_text(size = 40)) 
+```
+
+If we want the UPPER (right) tail probability (yellow shaded region), we have to add `lower.tail = FALSE`:
+
+$P(Z > -0.5)$
+
+```{r}
+pnorm(-0.5, lower.tail = FALSE)
+```
+
+]
+---
+
+# "Upper tail" probabilities (yellow)
+
+.pull-left[
+
+Notice, $P(Z > -0.5) = 1 - P(Z < -0.5)$. Or, in other words, the yellow shaded region is 1 minus the purple shaded region. So the following are two equivalent ways of calculating the upper tail probability:
+
+```{r}
+pnorm(-0.5, lower.tail = FALSE)
+1 - pnorm(-0.5)
+```
+
+]
+
+.pull-right[
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+ggplot() +
+  stat_dist_halfeye(aes(y = "N(0,1)", 
+                        dist = dist_normal(0, 1),
+                        fill = stat(x < -0.5))) +
+  labs(y = "", x = "x") +
+  #viridis color scale is color-blind friendly
+  #set direction = -1 so TRUE is dark instead of light
+  scale_fill_viridis_d(direction = -1, guide = "none") +
+  coord_cartesian(expand = FALSE, ylim = c(0.9, 2)) +
+  theme_minimal() +
+  theme(text = element_text(size = 40)) 
+```
+
+]
+
+
+---
+
+# `pnorm()` vs. `qnorm()`
+
++ `pnorm()` is for when we know the cutoff value (e.g. 1.7, or -0.5), and we want to know the probability (i.e. how much is shaded).
+
++ `qnorm()` is for when we know the probability (i.e. how much is shaded), and we want to know the cutoff value.
+
+```{r}
+pnorm(1.7)
+
+qnorm(0.9554345)
+```
+
++ They are INVERSE functions of one another
+
+---
+
+# `qnorm()`
+
+`qnorm()` is good for finding percentiles. 
+
+For example, what is the 75th percentile of SAT scores, which follow a normal distribution with mean 1500 and sd 300?
+
+.pull-left[
+
+```{r}
+qnorm(0.75, mean = 1500, sd = 300)
+```
+
+]
+
+.pull-right[
+
+```{r, echo = FALSE, warning = FALSE, message = FALSE}
+ggplot() +
+  stat_dist_halfeye(aes(y = "N(0,1)", 
+                        dist = dist_normal(1500, 300),
+                        fill = stat(x < qnorm(.75, 1500, 300)))) +
+  labs(y = "", x = "x") +
+  #viridis color scale is color-blind friendly
+  #set direction = -1 so TRUE is dark instead of light
+  scale_fill_viridis_d(direction = -1, guide = "none") +
+  coord_cartesian(expand = FALSE, ylim = c(0.9, 2)) +
+  theme_minimal() +
+  theme(text = element_text(size = 40)) 
+```
+
+]
+
+What do you expect the following code to output?
+
+```{r, eval = FALSE}
+qnorm(0.5)
+```
+
+
