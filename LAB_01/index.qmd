@@ -37,29 +37,16 @@ editor_options:
 callout-icon: false
 ---
 
-::: {.callout-note collapse="true" title="Methods/Facilitation notes" appearance="minimal"}
-+ This module would be suitable for an in-class lab or take-home assignment in an introductory statistics course. 
-
-+ It assumes a basic familiarity with the RStudio Environment has already been covered, but no prior programming experiences is expected.
-
-+ Students should be provided with the following data file (.csv) and Quarto document (.qmd) to produce visualizations and write up their answers to each exercise. Their final deliverable is to turn in an .html document produced by "Rendering" the .qmd. 
-  
-  + [data](volleyball_ncaa_div1_2022_23_clean.csv)
-  + [Student Quarto template](student_template.qmd)
-
-+ [Posit Cloud](https://posit.cloud/) (via an Instructor account) or [Github classroom](https://classroom.github.com) are good options for disseminating files to students, but simply uploading files to your university's course management system works, too.
-:::
-
 # Introduction
 
-In this module, you will be analyzing data from the NCAA Division I Women's Volleyball season in 2022-3. The goal of this module is to help you explore data through visualization and to deepen your understanding of variable types (e.g. categorical, numerical). Data comes in many different forms, and an important part of being a good analyst is knowing what visualizations and analyses are appropriate and will provide insight into the data you have.
+In this lab, you will be analyzing data from the NCAA Division I Women's Volleyball season in 2022-3. The goal of this lab is to help you explore data through visualization and to deepen your understanding of variable types (e.g. categorical, numerical). Data comes in many different forms, and an important part of being a good analyst is knowing what visualizations and analyses are appropriate and will provide insight into the data you have.
 
 ::: column-margin
 This data was originally curated by [Jack Fay, A.J. Dykstra, and Ivan Ramler](https://data.scorenetwork.org/volleyball/volleyball_ncaa_team_stats.html).
 :::
 
 ::: {.callout-note title="Learning Objectives" appearance="minimal"}
-By the end of this module, you will be able to:
+By the end of this lab, you will be able to:
 
 -   Read (import) a dataset into your RStudio Environment
 
@@ -283,7 +270,7 @@ f. What conference and region is this team in?
 
 ## Creating visualizations
 
-R (and the `tidyverse` package in particular) has some powerful functions for making visualizations. The type of visualization you should create depends on the type(s) of variable(s) you are exploring. In the remainder of this module, you will explore the `volleyball` data via visualizations.
+R (and the `tidyverse` package in particular) has some powerful functions for making visualizations. The type of visualization you should create depends on the type(s) of variable(s) you are exploring. In the remainder of this lab, you will explore the `volleyball` data via visualizations.
 
 # One numerical variable
 

@@ -7,8 +7,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="YOUR NAME HERE">
+<meta name="dcterms.date" content="2024-08-26">
 
-<title>Volleyball - Women’s NCAA Division I</title>
+<title>Lab 00: Global Health</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -3076,12 +3077,12 @@ vertical-align: -.125em;
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#getting-started-volleyball-data" id="toc-getting-started-volleyball-data" class="nav-link active" data-scroll-target="#getting-started-volleyball-data">Getting started: Volleyball data</a>
+  <li><a href="#your-first-data-visualization" id="toc-your-first-data-visualization" class="nav-link active" data-scroll-target="#your-first-data-visualization">Your First Data Visualization</a>
   <ul class="collapse">
   <li><a href="#exercise-1" id="toc-exercise-1" class="nav-link" data-scroll-target="#exercise-1">Exercise 1</a></li>
   <li><a href="#exercise-2" id="toc-exercise-2" class="nav-link" data-scroll-target="#exercise-2">Exercise 2</a></li>
   </ul></li>
-  <li><a href="#one-numeric-variable" id="toc-one-numeric-variable" class="nav-link" data-scroll-target="#one-numeric-variable">One numeric variable</a>
+  <li><a href="#creating-objects-in-r" id="toc-creating-objects-in-r" class="nav-link" data-scroll-target="#creating-objects-in-r">Creating objects in R</a>
   <ul class="collapse">
   <li><a href="#exercise-3" id="toc-exercise-3" class="nav-link" data-scroll-target="#exercise-3">Exercise 3</a></li>
   <li><a href="#exercise-4" id="toc-exercise-4" class="nav-link" data-scroll-target="#exercise-4">Exercise 4</a></li>
@@ -3117,7 +3118,7 @@ vertical-align: -.125em;
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Volleyball - Women’s NCAA Division I</h1>
+<h1 class="title">Lab 00: Global Health</h1>
 </div>
 
 
@@ -3131,6 +3132,12 @@ vertical-align: -.125em;
           </div>
   </div>
     
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 26, 2024</p>
+    </div>
+  </div>
   
     
   </div>
@@ -3140,186 +3147,172 @@ vertical-align: -.125em;
 </header>
 
 
-<section id="getting-started-volleyball-data" class="level1">
-<h1>Getting started: Volleyball data</h1>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co">#loads package</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>volleyball <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;volleyball_ncaa_div1_2022_23_clean.csv&quot;</span>) <span class="co">#loads data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(volleyball)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>Rows: 334
-Columns: 15
-$ team                 &lt;chr&gt; &quot;Lafayette&quot;, &quot;Delaware St.&quot;, &quot;Yale&quot;, &quot;Coppin St.&quot;…
-$ conference           &lt;chr&gt; &quot;Patriot&quot;, &quot;MEAC&quot;, &quot;Ivy League&quot;, &quot;MEAC&quot;, &quot;Atlanti…
-$ region               &lt;chr&gt; &quot;East&quot;, &quot;Southeast&quot;, &quot;East&quot;, &quot;Southeast&quot;, &quot;East&quot;,…
-$ aces_per_set         &lt;dbl&gt; 2.33, 2.20, 2.15, 2.15, 2.03, 1.98, 1.93, 1.91, 1…
-$ assists_per_set      &lt;dbl&gt; 11.01, 11.45, 12.60, 10.56, 11.61, 11.46, 12.26, …
-$ team_attacks_per_set &lt;dbl&gt; 34.54, 29.98, 35.39, 32.52, 34.10, 31.53, 37.03, …
-$ blocks_per_set       &lt;dbl&gt; 1.31, 2.17, 1.82, 1.81, 1.83, 2.39, 1.73, 1.85, 1…
-$ digs_per_set         &lt;dbl&gt; 13.60, 12.58, 15.29, 14.22, 14.27, 12.59, 15.39, …
-$ hitting_pctg         &lt;dbl&gt; 0.180, 0.250, 0.242, 0.194, 0.201, 0.226, 0.227, …
-$ kills_per_set        &lt;dbl&gt; 11.93, 12.12, 13.90, 11.54, 12.40, 12.24, 13.70, …
-$ opp_hitting_pctg     &lt;dbl&gt; 0.227, 0.137, 0.155, 0.170, 0.188, 0.175, 0.202, …
-$ w                    &lt;dbl&gt; 8, 24, 23, 23, 18, 17, 19, 16, 18, 20, 29, 15, 10…
-$ l                    &lt;dbl&gt; 15, 7, 3, 11, 13, 13, 13, 13, 13, 10, 4, 14, 20, …
-$ win_pctg             &lt;dbl&gt; 0.348, 0.774, 0.885, 0.676, 0.581, 0.567, 0.594, …
-$ winning_season       &lt;chr&gt; &quot;no&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;yes&quot;, &quot;…</code></pre>
-</div>
-</div>
+<section id="your-first-data-visualization" class="level1">
+<h1>Your First Data Visualization</h1>
 <section id="exercise-1" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-1">Exercise 1</h2>
-<p>a. YOUR ANSWER HERE</p>
-<p>b. YOUR ANSWER HERE</p>
-<p>c. YOUR ANSWER HERE</p>
-<p>d. YOUR ANSWER HERE</p>
-<p>e. YOUR ANSWER HERE</p>
+<ol type="a">
+<li><p>YOUR ANSWER HERE</p></li>
+<li><p>YOUR ANSWER HERE</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#paste code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 </section>
 <section id="exercise-2" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-2">Exercise 2</h2>
-<p>a. YOUR ANSWER HERE</p>
-<p>b. YOUR ANSWER HERE</p>
-<p>c. YOUR ANSWER HERE</p>
-<p>d. YOUR ANSWER HERE</p>
-<p>e. YOUR ANSWER HERE</p>
-<p>f. YOUR ANSWER HERE</p>
+<ol type="a">
+<li><p>YOUR ANSWER HERE</p></li>
+<li><p>YOUR ANSWER HERE</p></li>
+</ol>
 </section>
 </section>
-<section id="one-numeric-variable" class="level1">
-<h1>One numeric variable</h1>
+<section id="creating-objects-in-r" class="level1">
+<h1>Creating objects in R</h1>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="dv">9</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <section id="exercise-3" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-3">Exercise 3</h2>
-<p>a.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>b. YOUR ANSWER HERE</p>
-<p>c. YOUR ANSWER HERE</p>
 </section>
 <section id="exercise-4" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-4">Exercise 4</h2>
-<p>a.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#your code here - remove the hashtag! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>b. YOUR ANSWER HERE</p>
-<p>c.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co">#your code here - remove the hashtag! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>d. YOUR ANSWER HERE</p>
-<p>e. YOUR ANSWER HERE</p>
+<p>[This exercise is completed by making changes to the top of this .qmd document]</p>
 </section>
 <section id="exercise-5" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-5">Exercise 5</h2>
-<p>a. YOUR ANSWER HERE</p>
-<p>b. YOUR ANSWER HERE</p>
-<p>c. YOUR ANSWER HERE</p>
-<p>d. YOUR ANSWER HERE</p>
+<ol type="a">
+<li><p>YOUR ANSWER HERE</p></li>
+<li><p>YOUR ANSWER HERE</p></li>
+<li><p>YOUR ANSWER HERE</p></li>
+<li><p>YOUR ANSWER HERE</p></li>
+</ol>
 </section>
 <section id="exercise-6" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-6">Exercise 6</h2>
-<p>a.</p>
+<ol type="a">
+<li></li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>b. YOUR ANSWER HERE</p>
+<ol start="2" type="a">
+<li>YOUR ANSWER HERE</li>
+</ol>
 </section>
 </section>
 <section id="two-numeric-variables" class="level1">
 <h1>Two numeric variables</h1>
 <section id="exercise-7" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-7">Exercise 7</h2>
-<p>a.</p>
+<ol type="a">
+<li></li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>b. YOUR ANSWER HERE</p>
+<ol start="2" type="a">
+<li>YOUR ANSWER HERE</li>
+</ol>
 </section>
 </section>
 <section id="two-categorical-variables" class="level1">
 <h1>Two categorical variables</h1>
 <section id="exercise-8" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-8">Exercise 8</h2>
-<p>a.</p>
+<ol type="a">
+<li></li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag! </span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag! </span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag! </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>b. YOUR ANSWER HERE</p>
-<p>c. YOUR ANSWER HERE</p>
+<ol start="2" type="a">
+<li><p>YOUR ANSWER HERE</p></li>
+<li><p>YOUR ANSWER HERE</p></li>
+</ol>
 </section>
 </section>
 <section id="one-numeric-one-categorical-variable" class="level1">
 <h1>One numeric &amp; one categorical variable</h1>
 <section id="exercise-9" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-9">Exercise 9</h2>
-<p>a.</p>
+<ol type="a">
+<li></li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>b. YOUR ANSWER HERE</p>
-<p>c. YOUR ANSWER HERE</p>
+<ol start="2" type="a">
+<li><p>YOUR ANSWER HERE</p></li>
+<li><p>YOUR ANSWER HERE</p></li>
+</ol>
 </section>
 </section>
 <section id="more-than-two-variables" class="level1">
 <h1>More than two variables</h1>
 <section id="exercise-10" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-10">Exercise 10</h2>
-<p>a.</p>
+<ol type="a">
+<li></li>
+</ol>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>b. YOUR ANSWER HERE</p>
-<p>c. YOUR ANSWER HERE</p>
+<ol start="2" type="a">
+<li><p>YOUR ANSWER HERE</p></li>
+<li><p>YOUR ANSWER HERE</p></li>
+</ol>
 </section>
 <section id="exercise-11" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-11">Exercise 11</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>YOUR ANSWER HERE</p>
 </section>
 <section id="exercise-12" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-12">Exercise 12</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>YOUR ANSWER HERE</p>
 </section>
 <section id="exercise-13" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-13">Exercise 13</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>YOUR ANSWER HERE</p>
 </section>
 <section id="exercise-14" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-14">Exercise 14</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>YOUR ANSWER HERE</p>
 </section>
 <section id="exercise-15" class="level2">
 <h2 class="anchored" data-anchor-id="exercise-15">Exercise 15</h2>
-<p>a. YOUR ANSWER HERE</p>
-<p>b. YOUR ANSWER HERE</p>
-<p>c. YOUR ANSWER HERE</p>
-<p>d. YOUR ANSWER HERE</p>
+<ol type="a">
+<li><p>YOUR ANSWER HERE</p></li>
+<li><p>YOUR ANSWER HERE</p></li>
+<li><p>YOUR ANSWER HERE</p></li>
+<li><p>YOUR ANSWER HERE</p></li>
+</ol>
 </section>
 <section id="bonus" class="level2">
 <h2 class="anchored" data-anchor-id="bonus">BONUS</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># your code here - remove the hashtag!</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>YOUR ANSWER HERE</p>
 </section>
