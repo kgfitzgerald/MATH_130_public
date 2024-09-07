@@ -262,6 +262,9 @@ You saw that `glimpse()` is one way to get a quick look at your data. Often, you
 This will open up your data in a new viewer tab so that you can view it like a spreadsheet (like Google Sheets or Excel\*). Once open, you can sort the data by clicking on a column. 
 
 ::: column-margin :::
+
+\
+\
 \*Unlike Google Sheets or Excel, however, you won't be able to *edit* the data directly in the spreadsheet.
 :::
 
@@ -361,11 +364,11 @@ c. Based on this histogram, how would you answer the research question (how many
 :::
 
 ::: {.callout-note  title="Exercise 4"}
-a. Copy, paste, tweak the `ggplot()` code above to explore the distribution of `blocks_per_set`.
+a. Copy, paste, tweak your `ggplot()` code from Exercise 3 to explore the distribution of `blocks_per_set`.
 
 b. Describe the shape of the distribution and interpret what you see.
 
-c. Copy, paste, tweak the `ggplot()` code above to explore the distribution of `aces_per_set`.
+c. Copy, paste, tweak your `ggplot()` code again to explore the distribution of `aces_per_set` (your code chunk for Exercise 4 should produce *two* visualizations)
 
 d. Describe the shape of the distribution and interpret what you see.
 
