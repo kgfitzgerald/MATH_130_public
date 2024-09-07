@@ -1,0 +1,73 @@
+---
+title: "Lab 02: Los Angeles County Poverty & Food Insecurity"
+author:
+  - name: Katie Fitzgerald
+    email: kfitzgerald@apu.edu
+    affiliation:
+      - id: apu
+        name: Azusa Pacific University
+date: August 19, 2024
+format:
+  html:
+    grid:
+      margin-width: 350px
+toc: true
+toc-location: left
+description: Practice summarizing data 
+editor_options:
+  chunk_output_type: console
+callout-icon: false
+---
+
+# Introduction
+
+In this lab, you will be analyzing data about poverty and food insecurity in Los Angeles County. The goal of this lab is to help you practice summarizing data by computing sums, proportions, and measures of center and spread. 
+
+::: column-margin
+This data originates from the U.S. Census Bureau and was originally curated by [Neighborhood Data for Social Change](https://la.myneighborhooddata.org). Dr. Fitzgerald then combined multiple datasets for use in this lab.
+:::
+
+::: {.callout-note title="Learning Objectives" appearance="minimal"}
+By the end of this lab, you will be able to:
+
++ Compute summary statistics including mean, median, minimum, maximum, standard deviation, variance, quartiles, and IQR
+
++ Compute summary statistics by group, i.e. for each level of a categorical variable
+
++ Use summary statistics to investigate research questions
+
++ Choose appropriate summary statistics based on the distribution of data (i.e. whether it is skewed or symmetric)
+:::
+
+# Getting Started
+
+::: {.callout-important}
+
+#### Action required
+
+To get started on Lab 02:
+
+1.  Log-in to Posit Cloud and navigate to the MATH_130_F24 workspace
+2.  Click "Start" on Lab 02
+3.  In the Files pane (lower right quadrant), click the file
+    "Lab_02.qmd" to open it
+4.  Run the code chunks at the top of the .qmd to load the necessary packages and data
+
+:::
+
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse) #load package
+
+la_data_1522 <- read_csv("la_county_food_insecurity.csv")
+
+glimpse(la_data_1522)
+```
+
+## The data
+
+[TO ADD]
+
+# Summarizing Data
+
+

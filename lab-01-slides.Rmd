@@ -18,13 +18,39 @@ output:
 
 ```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
-library(palmerpenguins)
 library(ggridges)
 ```
 
 class: middle
 
-# ggplot `r emo::ji("heart")` `r emo::ji("penguin")`
+# Why are we learning to code? 
+
+---
+
+# Computers are ESSENTIAL for modern data analysis
+
+--
+
+- In Lab 00, the dataset had 1704 rows. 
+- In the gapminder video, Hans Rosling analyzed 120,000 data points
+- Its not uncommon for datasets to have hundreds of thousands or even millions of rows
+
+--
+
+## Why not point and click software?
+
+- Reproducibility / open science practices
+
+--
+
+- Exposure to tools used by real data scientists
+    + If you like what you see in this class, consider adding a [Data Science Minor!](https://www.apu.edu/programs/data-science-minor/). Built with non-math majors in mind - no calculus required :)
+
+---
+
+class: middle
+
+# ggplot `r emo::ji("heart")` `r emo::ji("volleyball")`
 
 ---
 
@@ -41,20 +67,39 @@ ggplot(dataset, aes(x = [x-variable],
 
 ---
 
-## Data: Palmer Penguins
+## Data: Volleyball
 
-Measurements for penguin species, island in Palmer Archipelago, size (flipper length, body mass, bill dimensions), and sex.
+NCAA women's volleyball season-level statistics for 2022-2023 season.
 
 .pull-left-narrow[
 ```{r echo=FALSE, out.width="80%"}
-knitr::include_graphics("images/penguins.png")
+knitr::include_graphics("images/vball.jpeg")
 ```
 ]
 .pull-right-wide[
 ```{r}
-library(palmerpenguins)
-glimpse(penguins)
+library(tidyverse)
+volleyball <- read_csv("./data/volleyball_ncaa_div1_2022_23_clean.csv") 
+glimpse(volleyball)
 ```
+]
+
+---
+
+# 1 numeric variable: histogram
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "hist", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+```
+]
+.panel[.panel-name[Code]
+
+```{r hist, fig.show = "hide"}
+ggplot(volleyball, aes(x = kills_per_set)) +
+  geom_histogram(color = "white")
+```
+]
 ]
 
 ---
@@ -69,7 +114,7 @@ glimpse(penguins)
 .panel[.panel-name[Code]
 
 ```{r one-cat, fig.show = "hide"}
-ggplot(penguins, aes(x = species)) + 
+ggplot(volleyball, aes(y = conference)) + 
   geom_bar()
 ```
 ]
@@ -87,7 +132,7 @@ ggplot(penguins, aes(x = species)) +
 .panel[.panel-name[Code]
 
 ```{r two-cat-stacked, fig.show = "hide"}
-ggplot(penguins, aes(x = island, fill = species)) +
+ggplot(volleyball, aes(y = conference, fill = winning_season)) +
   geom_bar()
 ```
 ]
@@ -105,26 +150,9 @@ ggplot(penguins, aes(x = island, fill = species)) +
 .panel[.panel-name[Code]
 
 ```{r two-cat-standardized, fig.show = "hide"}
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(position = "fill")
-```
-]
-]
-
----
-
-# 1 numeric variable: histogram
-
-.panelset[
-.panel[.panel-name[Plot]
-```{r ref.label = "hist", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
-```
-]
-.panel[.panel-name[Code]
-
-```{r hist, fig.show = "hide"}
-ggplot(penguins, aes(x = bill_depth_mm)) +
-  geom_histogram(color = "white")
+ggplot(volleyball, aes(y = conference, fill = winning_season)) +
+  geom_bar(position = "fill") +
+  labs(x = "proportion")
 ```
 ]
 ]
@@ -141,9 +169,9 @@ ggplot(penguins, aes(x = bill_depth_mm)) +
 .panel[.panel-name[Code]
 
 ```{r facet-hist, fig.show = "hide"}
-ggplot(penguins, aes(x = body_mass_g)) +
-  geom_histogram(color = "white") + 
-  facet_wrap(~ species, ncol = 1)
+ggplot(volleyball, aes(x = team_attacks_per_set)) +
+  geom_histogram(color = "white", binwidth = 0.5) + 
+  facet_wrap(~ region, ncol = 1)
 ```
 ]
 ]
@@ -160,8 +188,26 @@ ggplot(penguins, aes(x = body_mass_g)) +
 .panel[.panel-name[Code]
 
 ```{r ridgeplot, fig.show = "hide"}
-ggplot(penguins, aes(x = body_mass_g, y = species)) +
-  geom_density_ridges()
+ggplot(volleyball, aes(x = team_attacks_per_set, y = region)) +
+   geom_density_ridges()
+```
+]
+]
+
+---
+
+# 1 num. & 1 cat. variable: side-by-side boxplot
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "boxplot", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+```
+]
+.panel[.panel-name[Code]
+
+```{r boxplot, fig.show = "hide"}
+ggplot(volleyball, aes(x = team_attacks_per_set, y = region)) +
+   geom_boxplot()
 ```
 ]
 ]
@@ -178,7 +224,7 @@ ggplot(penguins, aes(x = body_mass_g, y = species)) +
 .panel[.panel-name[Code]
 
 ```{r scatter, fig.show = "hide"}
-ggplot(penguins, aes(x = body_mass_g, y = bill_depth_mm)) +
+ggplot(volleyball, aes(x = digs_per_set, y = kills_per_set)) +
   geom_point()
 ```
 ]
@@ -196,8 +242,8 @@ ggplot(penguins, aes(x = body_mass_g, y = bill_depth_mm)) +
 .panel[.panel-name[Code]
 
 ```{r two-plus, fig.show = "hide"}
-ggplot(penguins, aes(x = body_mass_g, 
-                     y = bill_depth_mm, color = species)) +
+ggplot(volleyball, aes(x = hitting_pctg, y = opp_hitting_pctg,
+                        color = win_pctg)) +
   geom_point()
 ```
 ]
@@ -215,10 +261,10 @@ ggplot(penguins, aes(x = body_mass_g,
 .panel[.panel-name[Code]
 
 ```{r four, fig.show = "hide"}
-ggplot(penguins, aes(x = body_mass_g, 
-                     y = bill_depth_mm, color = species)) +
+ggplot(volleyball, aes(x = hitting_pctg, y = opp_hitting_pctg,
+                       color = win_pctg)) +
   geom_point() +
-  facet_wrap(~sex)
+  facet_wrap(~region)
 ```
 ]
 ]

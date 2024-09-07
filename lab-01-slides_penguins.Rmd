@@ -1,0 +1,251 @@
+---
+title: "Visualising data with ggplot"
+subtitle: "MATH 130"
+author: "Katie Fitzgerald"
+output:
+  xaringan::moon_reader:
+    css: ["xaringan-themer.css", "slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(palmerpenguins)
+library(ggridges)
+```
+
+class: middle
+
+# Why are we learning to code? 
+
+---
+
+# Computers are ESSENTIAL for modern data analysis
+
+--
+
+- In Lab 00, the dataset had 1704 rows. 
+- In the gapminder video, Hans Rosling analyzed 120,000 data points
+- Its not uncommon for datasets to have hundreds of thousands or even millions of rows
+
+--
+
+## Why not point and click software?
+
+- Reproducibility / open science practices
+
+--
+
+- Exposure to tools used by real data scientists
+    + If you like what you see in this class, consider adding a [Data Science Minor!](https://www.apu.edu/programs/data-science-minor/). Built with non-math majors in mind - no calculus required :)
+
+---
+
+class: middle
+
+# ggplot `r emo::ji("heart")` `r emo::ji("volleyball")`
+
+---
+
+## `ggplot()`
+
+- Structure of the code for plots can be summarized as
+
+```{r eval = FALSE}
+ggplot(dataset, aes(x = [x-variable], 
+                    y = [y-variable])) +
+   geom_xxx() +
+   other options
+```
+
+---
+
+## Data: Palmer Penguins
+
+Measurements for penguin species, island in Palmer Archipelago, size (flipper length, body mass, bill dimensions), and sex.
+
+.pull-left-narrow[
+```{r echo=FALSE, out.width="80%"}
+knitr::include_graphics("images/penguins.png")
+```
+]
+.pull-right-wide[
+```{r}
+library(palmerpenguins)
+glimpse(penguins)
+```
+]
+
+---
+
+# 1 categorical variable: bar plot
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "one-cat", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+```
+]
+.panel[.panel-name[Code]
+
+```{r one-cat, fig.show = "hide"}
+ggplot(penguins, aes(x = species)) + 
+  geom_bar()
+```
+]
+]
+
+---
+
+# 2 categorical variables: stacked bar plot
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "two-cat-stacked", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+```
+]
+.panel[.panel-name[Code]
+
+```{r two-cat-stacked, fig.show = "hide"}
+ggplot(penguins, aes(x = island, fill = species)) +
+  geom_bar()
+```
+]
+]
+
+---
+
+# 2 categorical: standardized bar plot
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "two-cat-standardized", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+```
+]
+.panel[.panel-name[Code]
+
+```{r two-cat-standardized, fig.show = "hide"}
+ggplot(penguins, aes(x = island, fill = species)) +
+  geom_bar(position = "fill")
+```
+]
+]
+
+---
+
+# 1 numeric variable: histogram
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "hist", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+```
+]
+.panel[.panel-name[Code]
+
+```{r hist, fig.show = "hide"}
+ggplot(penguins, aes(x = bill_depth_mm)) +
+  geom_histogram(color = "white")
+```
+]
+]
+
+---
+
+# 1 num. & 1 cat. variable: faceted histogram
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "facet-hist", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+```
+]
+.panel[.panel-name[Code]
+
+```{r facet-hist, fig.show = "hide"}
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_histogram(color = "white") + 
+  facet_wrap(~ species, ncol = 1)
+```
+]
+]
+
+---
+
+# 1 num. & 1 cat. variable: ridge plot
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "ridgeplot", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+```
+]
+.panel[.panel-name[Code]
+
+```{r ridgeplot, fig.show = "hide"}
+ggplot(penguins, aes(x = body_mass_g, y = species)) +
+  geom_density_ridges()
+```
+]
+]
+
+---
+
+# 2 numeric variables: scatterplot
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "scatter", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+```
+]
+.panel[.panel-name[Code]
+
+```{r scatter, fig.show = "hide"}
+ggplot(penguins, aes(x = body_mass_g, y = bill_depth_mm)) +
+  geom_point()
+```
+]
+]
+
+---
+
+# More than 2: scatterplot w/ color
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "two-plus", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+```
+]
+.panel[.panel-name[Code]
+
+```{r two-plus, fig.show = "hide"}
+ggplot(penguins, aes(x = body_mass_g, 
+                     y = bill_depth_mm, color = species)) +
+  geom_point()
+```
+]
+]
+
+---
+
+# More than 2: faceted scatterplot w/ color
+
+.panelset[
+.panel[.panel-name[Plot]
+```{r ref.label = "four", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+```
+]
+.panel[.panel-name[Code]
+
+```{r four, fig.show = "hide"}
+ggplot(penguins, aes(x = body_mass_g, 
+                     y = bill_depth_mm, color = species)) +
+  geom_point() +
+  facet_wrap(~sex)
+```
+]
+]

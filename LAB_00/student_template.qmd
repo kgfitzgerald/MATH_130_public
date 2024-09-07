@@ -18,9 +18,9 @@ editor_options:
 
 ## Exercise 1
 
-a. YOUR ANSWER HERE
+a.  YOUR ANSWER HERE
 
-b. YOUR ANSWER HERE
+b.  YOUR ANSWER HERE
 
 ```{r}
 #paste code here - remove the hashtag!
@@ -28,16 +28,15 @@ b. YOUR ANSWER HERE
 
 ## Exercise 2
 
-a. YOUR ANSWER HERE
+a.  YOUR ANSWER HERE
 
-b. YOUR ANSWER HERE
+b.  YOUR ANSWER HERE
 
 # Creating objects in R
 
 ```{r}
 x <- 9
 ```
-
 
 ## Exercise 3
 
@@ -47,10 +46,8 @@ x <- 9
 
 ## Exercise 4
 
-[This exercise is completed by making changes to the top of your .qmd document]
+\[This exercise is completed by making changes to the top of your .qmd document\]
 
 ## Exercise 5
 
-[This exercise is completed by turning in your final .html document on Canvas]
-
-
+\[This exercise is completed by turning in your final .html document on Canvas\]

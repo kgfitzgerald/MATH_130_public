@@ -97,23 +97,33 @@ During this lab, you'll investigate the following research questions (don't worr
 
 # Getting started: Volleyball data
 
+::: {.callout-important}
+
+#### Action required
+
+To get started on Lab 01:
+
+1.  Log-in to Posit Cloud and navigate to the MATH_130_F24 workspace
+2.  Click "Start" on Lab 01
+3.  In the Files pane (lower right quadrant), click the file
+    "Lab_01.qmd" to open it
+
+:::
+
 The first step to any analysis in R is to **load necessary packages and data**. 
 
 ::: column-margin
 You can think of **packages** like apps on your phone; they extend the functionality and give you access to many more features beyond what comes in the “base package”.
 :::
 
+
+::: {.callout-important}
+
+#### Action required
+
+As you follow along in the lab, you should run each corresponding code chunk in your .qmd document. To "Run" a code chunk, you can press the green "Play" button in the top right corner of the code chunk in your .qmd. You can also place your cursor anywhere in the line(s) of code you want to run and press "command + return" (Mac) or "Ctrl + Enter" (Windows).
+
 Running the following code will load the `tidyverse` and `ggridges` packages and the `volleyball` data we will be using in this lab.
-
-
-
-::: column-margin
-**TIP**: As you follow along in the lab, you should run each corresponding code chunk in your .qmd document. To "Run" a code chunk, you can press the green "Play" button in the top right corner of the code chunk in your .qmd. You can also place your cursor anywhere in the line(s) of code you want to run and press "command + return" (Mac) or "Ctrl + Enter" (Windows).
-:::
-
-::: column-margin
-**TIP**: Using a hashtag in R allows you to add comments to your code (in plain English). Data scientists often use comments to explain what each piece of the code is doing.
-:::
 
 ```{r, warning = FALSE, message = FALSE}
 library(tidyverse) #loads package
@@ -121,6 +131,15 @@ library(ggridges)
 
 volleyball <- read_csv("volleyball_ncaa_div1_2022_23_clean.csv") #loads data
 ```
+:::
+
+
+
+::: column-margin
+**TIP**: Using a hashtag in R allows you to add comments to your code (in plain English). Data scientists often use comments to explain what each piece of the code is doing.
+:::
+
+
 
 ```{r setup, include = FALSE}
 theme_set(theme_minimal())

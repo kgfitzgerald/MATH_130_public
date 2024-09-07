@@ -258,24 +258,52 @@ Research Questions
 </section>
 <section id="getting-started-volleyball-data" class="level1 page-columns page-full">
 <h1>Getting started: Volleyball data</h1>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Action required
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To get started on Lab 01:</p>
+<ol type="1">
+<li>Log-in to Posit Cloud and navigate to the MATH_130_F24 workspace</li>
+<li>Click “Start” on Lab 01</li>
+<li>In the Files pane (lower right quadrant), click the file “Lab_01.qmd” to open it</li>
+</ol>
+</div>
+</div>
 <p>The first step to any analysis in R is to <strong>load necessary packages and data</strong>.</p>
 
 <div class="no-row-height column-margin column-container"><div class="">
 <p>You can think of <strong>packages</strong> like apps on your phone; they extend the functionality and give you access to many more features beyond what comes in the “base package”.</p>
-</div></div><p>Running the following code will load the <code>tidyverse</code> and <code>ggridges</code> packages and the <code>volleyball</code> data we will be using in this lab.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong>TIP</strong>: As you follow along in the lab, you should run each corresponding code chunk in your .qmd document. To “Run” a code chunk, you can press the green “Play” button in the top right corner of the code chunk in your .qmd. You can also place your cursor anywhere in the line(s) of code you want to run and press “command + return” (Mac) or “Ctrl + Enter” (Windows).</p>
-</div><div class="">
-<p><strong>TIP</strong>: Using a hashtag in R allows you to add comments to your code (in plain English). Data scientists often use comments to explain what each piece of the code is doing.</p>
-</div></div>
+</div></div><div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Action required
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As you follow along in the lab, you should run each corresponding code chunk in your .qmd document. To “Run” a code chunk, you can press the green “Play” button in the top right corner of the code chunk in your .qmd. You can also place your cursor anywhere in the line(s) of code you want to run and press “command + return” (Mac) or “Ctrl + Enter” (Windows).</p>
+<p>Running the following code will load the <code>tidyverse</code> and <code>ggridges</code> packages and the <code>volleyball</code> data we will be using in this lab.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co">#loads package</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>volleyball <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"volleyball_ncaa_div1_2022_23_clean.csv"</span>) <span class="co">#loads data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can use the <code>glimpse()</code> function to get a quick look (errr.. glimpse) at our <code>volleyball</code> data. The <code>glimpse</code> code provides the number of observations (Rows) and the number of variables (Columns) in the dataset. The “Rows” and “Columns” are referred to as the <strong>dimensions</strong> of the dataset. It also shows us the names of the variables (<code>team</code>, <code>conference</code>, …, <code>winning_season</code>) and the first few observations for each variable (e.g.&nbsp;the first three teams in the dataset are Lafayette, Deleware St., and Yale).</p>
+</div>
+</div>
+
+<div class="no-row-height column-margin column-container"><div class="">
+<p><strong>TIP</strong>: Using a hashtag in R allows you to add comments to your code (in plain English). Data scientists often use comments to explain what each piece of the code is doing.</p>
+</div></div><p>We can use the <code>glimpse()</code> function to get a quick look (errr.. glimpse) at our <code>volleyball</code> data. The <code>glimpse</code> code provides the number of observations (Rows) and the number of variables (Columns) in the dataset. The “Rows” and “Columns” are referred to as the <strong>dimensions</strong> of the dataset. It also shows us the names of the variables (<code>team</code>, <code>conference</code>, …, <code>winning_season</code>) and the first few observations for each variable (e.g.&nbsp;the first three teams in the dataset are Lafayette, Deleware St., and Yale).</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(volleyball)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

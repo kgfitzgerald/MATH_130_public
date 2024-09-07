@@ -292,7 +292,7 @@ x*2
 In the code chunk for Exercise 3 in your .qmd, 
 
 a. write a line of code that multiplies x by your favorite number
-b. write a line of code that creates an object `y` and assigns it the value `437`. *Hint: see the code chunk above for how we created the object y*
+b. write a line of code that creates an object `y` and assigns it the value `437`. *Hint: see the code chunk above for how we created the object x*
 c. write a line of code that calculate x*y. Make sure the correct answer (3933) appears in your html when you Render.
 :::
 

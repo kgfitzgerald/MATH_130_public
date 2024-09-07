@@ -42,7 +42,34 @@ layout: true
 
 class: middle
 
-# ggplot ❤️ 🐧
+# Why are we learning to code? 
+
+---
+
+# Computers are ESSENTIAL for modern data analysis
+
+--
+
+- In Lab 00, the dataset had 1704 rows. 
+- In the gapminder video, Hans Rosling analyzed 120,000 data points
+- Its not uncommon for datasets to have hundreds of thousands or even millions of rows
+
+--
+
+## Why not point and click software?
+
+- Reproducibility / open science practices
+
+--
+
+- Exposure to tools used by real data scientists
+    + If you like what you see in this class, consider adding a [Data Science Minor!](https://www.apu.edu/programs/data-science-minor/). Built with non-math majors in mind - no calculus required :)
+
+---
+
+class: middle
+
+# ggplot ❤️ 🏐
 
 ---
 
@@ -51,7 +78,7 @@ class: middle
 - Structure of the code for plots can be summarized as
 
 
-```r
+``` r
 ggplot(dataset, aes(x = [x-variable], 
                     y = [y-variable])) +
    geom_xxx() +
@@ -60,37 +87,45 @@ ggplot(dataset, aes(x = [x-variable],
 
 ---
 
-## Data: Palmer Penguins
+## Data: Volleyball
 
-Measurements for penguin species, island in Palmer Archipelago, size (flipper length, body mass, bill dimensions), and sex.
+NCAA women's volleyball season-level statistics for 2022-2023 season.
 
 .pull-left-narrow[
-&lt;img src="images/penguins.png" width="80%" style="display: block; margin: auto;" /&gt;
+&lt;img src="images/vball.jpeg" width="80%" style="display: block; margin: auto;" /&gt;
 ]
 .pull-right-wide[
 
-```r
-library(palmerpenguins)
-glimpse(penguins)
+``` r
+library(tidyverse)
+volleyball &lt;- read_csv("./data/volleyball_ncaa_div1_2022_23_clean.csv") 
+glimpse(volleyball)
 ```
 
 ```
-## Rows: 344
-## Columns: 8
-## $ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adeli…
-## $ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torg…
-## $ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.…
-## $ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.…
-## $ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195…
-## $ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 362…
-## $ sex               &lt;fct&gt; male, female, female, NA, female, mal…
-## $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2…
+## Rows: 334
+## Columns: 15
+## $ team                 &lt;chr&gt; "Lafayette", "Delaware St.", "Yale…
+## $ conference           &lt;chr&gt; "Patriot", "MEAC", "Ivy League", "…
+## $ region               &lt;chr&gt; "East", "Southeast", "East", "Sout…
+## $ aces_per_set         &lt;dbl&gt; 2.33, 2.20, 2.15, 2.15, 2.03, 1.98…
+## $ assists_per_set      &lt;dbl&gt; 11.01, 11.45, 12.60, 10.56, 11.61,…
+## $ team_attacks_per_set &lt;dbl&gt; 34.54, 29.98, 35.39, 32.52, 34.10,…
+## $ blocks_per_set       &lt;dbl&gt; 1.31, 2.17, 1.82, 1.81, 1.83, 2.39…
+## $ digs_per_set         &lt;dbl&gt; 13.60, 12.58, 15.29, 14.22, 14.27,…
+## $ hitting_pctg         &lt;dbl&gt; 0.180, 0.250, 0.242, 0.194, 0.201,…
+## $ kills_per_set        &lt;dbl&gt; 11.93, 12.12, 13.90, 11.54, 12.40,…
+## $ opp_hitting_pctg     &lt;dbl&gt; 0.227, 0.137, 0.155, 0.170, 0.188,…
+## $ w                    &lt;dbl&gt; 8, 24, 23, 23, 18, 17, 19, 16, 18,…
+## $ l                    &lt;dbl&gt; 15, 7, 3, 11, 13, 13, 13, 13, 13, …
+## $ win_pctg             &lt;dbl&gt; 0.348, 0.774, 0.885, 0.676, 0.581,…
+## $ winning_season       &lt;chr&gt; "no", "yes", "yes", "yes", "yes", …
 ```
 ]
 
 ---
 
-# 1 categorical variable: bar plot
+# 1 numeric variable: histogram
 
 .panelset[
 .panel[.panel-name[Plot]
@@ -99,8 +134,26 @@ glimpse(penguins)
 .panel[.panel-name[Code]
 
 
-```r
-ggplot(penguins, aes(x = species)) + 
+``` r
+ggplot(volleyball, aes(x = kills_per_set)) +
+  geom_histogram(color = "white")
+```
+]
+]
+
+---
+
+# 1 categorical variable: bar plot
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+``` r
+ggplot(volleyball, aes(y = conference)) + 
   geom_bar()
 ```
 ]
@@ -112,13 +165,13 @@ ggplot(penguins, aes(x = species)) +
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-6-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
 
-```r
-ggplot(penguins, aes(x = island, fill = species)) +
+``` r
+ggplot(volleyball, aes(y = conference, fill = winning_season)) +
   geom_bar()
 ```
 ]
@@ -130,37 +183,15 @@ ggplot(penguins, aes(x = island, fill = species)) +
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;" /&gt;
-]
-.panel[.panel-name[Code]
-
-
-```r
-ggplot(penguins, aes(x = island, fill = species)) +
-  geom_bar(position = "fill")
-```
-]
-]
-
----
-
-# 1 numeric variable: histogram
-
-.panelset[
-.panel[.panel-name[Plot]
 &lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-8-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
 
-```r
-ggplot(penguins, aes(x = bill_depth_mm)) +
-  geom_histogram(color = "white")
-```
-
-```
-## Warning: Removed 2 rows containing non-finite values
-## (`stat_bin()`).
+``` r
+ggplot(volleyball, aes(y = conference, fill = winning_season)) +
+  geom_bar(position = "fill") +
+  labs(x = "proportion")
 ```
 ]
 ]
@@ -176,15 +207,10 @@ ggplot(penguins, aes(x = bill_depth_mm)) +
 .panel[.panel-name[Code]
 
 
-```r
-ggplot(penguins, aes(x = body_mass_g)) +
-  geom_histogram(color = "white") + 
-  facet_wrap(~ species, ncol = 1)
-```
-
-```
-## Warning: Removed 2 rows containing non-finite values
-## (`stat_bin()`).
+``` r
+ggplot(volleyball, aes(x = team_attacks_per_set)) +
+  geom_histogram(color = "white", binwidth = 0.5) + 
+  facet_wrap(~ region, ncol = 1)
 ```
 ]
 ]
@@ -200,14 +226,27 @@ ggplot(penguins, aes(x = body_mass_g)) +
 .panel[.panel-name[Code]
 
 
-```r
-ggplot(penguins, aes(x = body_mass_g, y = species)) +
-  geom_density_ridges()
+``` r
+ggplot(volleyball, aes(x = team_attacks_per_set, y = region)) +
+   geom_density_ridges()
 ```
+]
+]
 
-```
-## Warning: Removed 2 rows containing non-finite values
-## (`stat_density_ridges()`).
+---
+
+# 1 num. &amp; 1 cat. variable: side-by-side boxplot
+
+.panelset[
+.panel[.panel-name[Plot]
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+``` r
+ggplot(volleyball, aes(x = team_attacks_per_set, y = region)) +
+   geom_boxplot()
 ```
 ]
 ]
@@ -218,19 +257,14 @@ ggplot(penguins, aes(x = body_mass_g, y = species)) +
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-11-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
 
-```r
-ggplot(penguins, aes(x = body_mass_g, y = bill_depth_mm)) +
+``` r
+ggplot(volleyball, aes(x = digs_per_set, y = kills_per_set)) +
   geom_point()
-```
-
-```
-## Warning: Removed 2 rows containing missing values
-## (`geom_point()`).
 ```
 ]
 ]
@@ -241,20 +275,20 @@ ggplot(penguins, aes(x = body_mass_g, y = bill_depth_mm)) +
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-12-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
 
-```r
-ggplot(penguins, aes(x = body_mass_g, 
-                     y = bill_depth_mm, color = species)) +
+``` r
+ggplot(volleyball, aes(x = hitting_pctg, y = opp_hitting_pctg,
+                        color = win_pctg)) +
   geom_point()
 ```
 
 ```
-## Warning: Removed 2 rows containing missing values
-## (`geom_point()`).
+## Warning: Removed 2 rows containing missing values or values outside the
+## scale range (`geom_point()`).
 ```
 ]
 ]
@@ -265,21 +299,21 @@ ggplot(penguins, aes(x = body_mass_g,
 
 .panelset[
 .panel[.panel-name[Plot]
-&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-13-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+&lt;img src="lab-01-slides_files/figure-html/unnamed-chunk-14-1.png" width="70%" style="display: block; margin: auto;" /&gt;
 ]
 .panel[.panel-name[Code]
 
 
-```r
-ggplot(penguins, aes(x = body_mass_g, 
-                     y = bill_depth_mm, color = species)) +
+``` r
+ggplot(volleyball, aes(x = hitting_pctg, y = opp_hitting_pctg,
+                       color = win_pctg)) +
   geom_point() +
-  facet_wrap(~sex)
+  facet_wrap(~region)
 ```
 
 ```
-## Warning: Removed 2 rows containing missing values
-## (`geom_point()`).
+## Warning: Removed 2 rows containing missing values or values outside the
+## scale range (`geom_point()`).
 ```
 ]
 ]
