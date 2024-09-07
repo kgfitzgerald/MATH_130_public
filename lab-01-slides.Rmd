@@ -48,6 +48,21 @@ class: middle
 
 ---
 
+# Can we work on labs more in class?
+
+- For each lab, we will spend about 45 mins to an hour of class-time to work on it. 
+- In college, you're expected to do more learning independently :)
+- BUT, there are LOTS of resources for help outside of class:
+    + Lab Demos YouTube playlist
+    + These Lab 01 slides
+    + Tips / hints within the lab instructions
+    + Student hours
+    + Tutoring Center
+    + LA help sessions
+    + Canvas HELP Forum
+
+---
+
 class: middle
 
 # ggplot `r emo::ji("heart")` `r emo::ji("volleyball")`
