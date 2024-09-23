@@ -7,13 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Katie Fitzgerald">
-<meta name="author" content="Jazmine Gurrola">
-<meta name="author" content="Joseph Hsieh">
-<meta name="author" content="Tuan Dat Tran">
-<meta name="dcterms.date" content="2024-05-30">
-<meta name="description" content="Exploring volleyball statistics through visualization">
+<meta name="dcterms.date" content="2024-08-19">
+<meta name="description" content="Practice summarizing data and investigating political claims">
 
-<title>Volleyball - Women’s NCAA Division I</title>
+<title>Lab 02: 2023 NYPD Stop, Question, Frisk</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -85,81 +82,43 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
-  <li><a href="#getting-started-volleyball-data" id="toc-getting-started-volleyball-data" class="nav-link" data-scroll-target="#getting-started-volleyball-data">Getting started: Volleyball data</a>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link active" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#getting-started-nypd-data" id="toc-getting-started-nypd-data" class="nav-link" data-scroll-target="#getting-started-nypd-data">Getting Started: NYPD Data</a></li>
+  <li><a href="#summarizing-data" id="toc-summarizing-data" class="nav-link" data-scroll-target="#summarizing-data">Summarizing Data</a>
   <ul class="collapse">
-  <li><a href="#volleyball-lingo" id="toc-volleyball-lingo" class="nav-link" data-scroll-target="#volleyball-lingo">Volleyball lingo</a></li>
-  <li><a href="#variable-descriptions" id="toc-variable-descriptions" class="nav-link" data-scroll-target="#variable-descriptions">Variable descriptions</a></li>
-  <li><a href="#viewing-your-data" id="toc-viewing-your-data" class="nav-link" data-scroll-target="#viewing-your-data">Viewing your data</a></li>
-  <li><a href="#creating-visualizations" id="toc-creating-visualizations" class="nav-link" data-scroll-target="#creating-visualizations">Creating visualizations</a></li>
+  <li><a href="#the-summary-function" id="toc-the-summary-function" class="nav-link" data-scroll-target="#the-summary-function">The <code>summary</code> function</a></li>
+  <li><a href="#using-summarize-to-compute-chosen-summary-statistics" id="toc-using-summarize-to-compute-chosen-summary-statistics" class="nav-link" data-scroll-target="#using-summarize-to-compute-chosen-summary-statistics">Using <code>summarize()</code> to compute chosen summary statistics</a></li>
+  <li><a href="#summarizing-categorical-data" id="toc-summarizing-categorical-data" class="nav-link" data-scroll-target="#summarizing-categorical-data">Summarizing categorical data</a></li>
   </ul></li>
-  <li><a href="#one-numerical-variable" id="toc-one-numerical-variable" class="nav-link" data-scroll-target="#one-numerical-variable">One numerical variable</a></li>
-  <li><a href="#one-categorical-variable" id="toc-one-categorical-variable" class="nav-link" data-scroll-target="#one-categorical-variable">One categorical variable</a></li>
-  <li><a href="#two-numeric-variables" id="toc-two-numeric-variables" class="nav-link" data-scroll-target="#two-numeric-variables">Two numeric variables</a></li>
-  <li><a href="#two-categorical-variables" id="toc-two-categorical-variables" class="nav-link" data-scroll-target="#two-categorical-variables">Two categorical variables</a></li>
-  <li><a href="#one-numeric-one-categorical-variable" id="toc-one-numeric-one-categorical-variable" class="nav-link" data-scroll-target="#one-numeric-one-categorical-variable">One numeric &amp; one categorical variable</a></li>
-  <li><a href="#more-than-2-variables" id="toc-more-than-2-variables" class="nav-link" data-scroll-target="#more-than-2-variables">More than 2 variables</a></li>
-  <li><a href="#practice-on-new-research-questions" id="toc-practice-on-new-research-questions" class="nav-link" data-scroll-target="#practice-on-new-research-questions">Practice on new research questions</a></li>
-  <li><a href="#wrap-up-reflection" id="toc-wrap-up-reflection" class="nav-link" data-scroll-target="#wrap-up-reflection">Wrap-up / reflection</a></li>
-  <li><a href="#bonus-practice" id="toc-bonus-practice" class="nav-link" data-scroll-target="#bonus-practice">BONUS practice</a></li>
+  <li><a href="#comparing-across-groups" id="toc-comparing-across-groups" class="nav-link" data-scroll-target="#comparing-across-groups">Comparing across groups</a>
+  <ul class="collapse">
+  <li><a href="#using-group_by" id="toc-using-group_by" class="nav-link" data-scroll-target="#using-group_by">Using <code>group_by()</code></a></li>
+  </ul></li>
   </ul>
 </nav>
 </div>
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
 </div>
-<main class="content page-columns page-full" id="quarto-document-content">
+<main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Volleyball - Women’s NCAA Division I</h1>
-  <div class="quarto-categories">
-    <div class="quarto-category">Variable types</div>
-    <div class="quarto-category">ggplot basics</div>
-    <div class="quarto-category">Exploratory Data Analysis (EDA)</div>
-    <div class="quarto-category">Histograms</div>
-    <div class="quarto-category">Bar plots (simple &amp; stacked)</div>
-    <div class="quarto-category">Scatterplots</div>
-    <div class="quarto-category">Ridge plots</div>
-    <div class="quarto-category">Boxplots</div>
-  </div>
-  </div>
+<h1 class="title">Lab 02: 2023 NYPD Stop, Question, Frisk</h1>
+</div>
 
 <div>
   <div class="description">
-    Exploring volleyball statistics through visualization
+    Practice summarizing data and investigating political claims
   </div>
 </div>
 
 <div class="quarto-title-meta-author">
-  <div class="quarto-title-meta-heading">Authors</div>
+  <div class="quarto-title-meta-heading">Author</div>
   <div class="quarto-title-meta-heading">Affiliation</div>
   
     <div class="quarto-title-meta-contents">
     <p class="author">Katie Fitzgerald <a href="mailto:kfitzgerald@apu.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Azusa Pacific University
-          </p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Jazmine Gurrola </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Azusa Pacific University
-          </p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Joseph Hsieh </p>
-  </div>
-  <div class="quarto-title-meta-contents">
-        <p class="affiliation">
-            Azusa Pacific University
-          </p>
-      </div>
-    <div class="quarto-title-meta-contents">
-    <p class="author">Tuan Dat Tran </p>
   </div>
   <div class="quarto-title-meta-contents">
         <p class="affiliation">
@@ -174,7 +133,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 30, 2024</p>
+      <p class="date">August 19, 2024</p>
     </div>
   </div>
   
@@ -186,13 +145,39 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="introduction" class="level1 page-columns page-full">
+<section id="acknowledgements" class="level1">
+<h1>Acknowledgements</h1>
+<p>This lab is adapted from a <a href="https://skewthescript.org">Skew the Script</a> activity.</p>
+</section>
+<section id="introduction" class="level1">
 <h1>Introduction</h1>
-<p>In this lab, you will be analyzing data from the NCAA Division I Women’s Volleyball season in 2022-3. The goal of this lab is to help you explore data through visualization and to deepen your understanding of variable types (e.g.&nbsp;categorical, numerical). Data comes in many different forms, and an important part of being a good analyst is knowing what visualizations and analyses are appropriate and will provide insight into the data you have.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>This data was originally curated by <a href="https://data.scorenetwork.org/volleyball/volleyball_ncaa_team_stats.html">Jack Fay, A.J. Dykstra, and Ivan Ramler</a>.</p>
-</div></div><div class="callout callout-style-simple callout-note no-icon callout-titled" title="Learning Objectives">
+<p>New York City’s Stop, Question, Frisk program allows police to stop people on the street and search them for weapons or contraband. During a stop, if police find evidence of criminal items or activity, they report a criminal offense. Then, they can make an arrest or issue a summons. NYPD officers record detailed data on every stop. This NYPD data is publicly available on the <a href="https://www1.nyc.gov/site/nypd/stats/reports-analysis/stopfrisk.page">NYC.GOV website</a>. The <code>sqf_2023</code> dataset contains data from all stops in 2023.</p>
+<div class="callout callout-style-default callout-caution no-icon callout-titled" title="Research Questions">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Research Questions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>During this lab, you’ll investigate the following research questions:</p>
+<ul>
+<li>How old do people who are stopped, questioned, and frisked by the NYPD tend to be?</li>
+<li>Do stop rates differ by Borough?</li>
+<li>Are some Boroughs policed more than others, relative to their population size?</li>
+<li>Do stop rates differ by race?</li>
+<li>Do crime rates differ by Borough or race?</li>
+<li>Do the data provide evidence to support critics’ or proponents’ claims about the policy?</li>
+</ul>
+</div>
+</div>
+</div>
+<p>The goal of this lab is to use data to explore a social good question and to help you practice summarizing data by computing sums, proportions, and measures of center and spread.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Learning Objectives">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -204,104 +189,73 @@ Learning Objectives
 <div class="callout-body-container callout-body">
 <p>By the end of this lab, you will be able to:</p>
 <ul>
-<li><p>Read (import) a dataset into your RStudio Environment</p></li>
-<li><p>Identify variable types and determine appropriate visualizations for investigating your data</p></li>
-<li><p>Use R to visualize the following types of variables:</p>
-<ul>
-<li><p>one numeric variable (histogram, boxplot)</p></li>
-<li><p>two numeric variables (scatterplot)</p></li>
-<li><p>one categorical variable (simple bar plot)</p></li>
-<li><p>two categorical variables (stacked and standardized bar plots)</p></li>
-<li><p>one numeric + one categorical variable (faceted histogram, ridge plots, side-by-side boxplots)</p></li>
-<li><p>more than two variables (scatterplot with color or size aesthetic)</p></li>
-</ul></li>
-<li><p>Interpret visualizations to investigate a research question</p></li>
+<li><p>Compute summary statistics including mean, median, minimum, maximum, standard deviation, variance, quartiles, and IQR</p></li>
+<li><p>Compute summary statistics by group, i.e.&nbsp;for each level of a categorical variable</p></li>
+<li><p>Use summary statistics to investigate research questions</p></li>
+<li><p>Choose appropriate summary statistics based on the distribution of data (i.e.&nbsp;whether it is skewed or symmetric)</p></li>
 </ul>
 </div>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><br>
-<br>
-<br>
-<br>
-</p>
-<p><strong>NOTE</strong>: <strong>R</strong> is the name of the programming language itself and <strong>RStudio</strong> is a convenient interface. To throw even more lingo in, you may be accessing RStudio through a web-based version called <strong>Posit Cloud</strong>. But R is the programming language you are learning :)</p>
-</div></div><div class="callout callout-style-default callout-caution no-icon callout-titled" title="Research Questions">
-<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-2-contents" aria-controls="callout-2" aria-expanded="false" aria-label="Toggle callout">
+</section>
+<section id="getting-started-nypd-data" class="level1">
+<h1>Getting Started: NYPD Data</h1>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-Research Questions
+Action required
 </div>
-<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
 </div>
-<div id="callout-2" class="callout-2-contents callout-collapse collapse">
 <div class="callout-body-container callout-body">
-<p>During this lab, you’ll investigate the following research questions (don’t worry if you’re new to volleyball, we’ll introduce lingo soon!):</p>
-<ul>
-<li>Which NCAA Division I women’s volleyball team had the best and worst records during the 2022-3 season? What percentage of matches did they win?</li>
-<li>How many kills are typically scored per set?</li>
-<li>What is the most common way of scoring a point in volleyball (kill, block, or ace)?</li>
-<li>Which region has the most teams? Which conference has the most teams? How many teams are in a typical conference?</li>
-<li>If your defense tends to be strong (e.g.&nbsp;lots of digs), does your offense also tend to be strong (lots of kills)?</li>
-<li>Which conference had the most teams with winning seasons? Which conference had the least?</li>
-<li>Does the average number of blocks vary by region?</li>
-<li>What’s the relationship between a team’s hitting percentage, their opponent’s hitting percentage, and their win percentage?</li>
-<li>If a team has strong hitters (that get lots of kills), are they also more likely to have strong blockers?</li>
-<li>What’s the relationship between assists and kills?</li>
-</ul>
+<p>To get started on Lab 02:</p>
+<ol type="1">
+<li>Log-in to Posit Cloud and navigate to the MATH_130_F24 workspace</li>
+<li>Click “Start” on Lab 02</li>
+<li>In the Files pane (lower right quadrant), click the file “Lab_02.qmd” to open it</li>
+<li>Click the grey/white Settings icon and select “Preview in Viewer Pane”</li>
+<li>Click the Render button (blue arrow) to Render the .qmd into an html. The html should pop up on the right-hand side of Posit Cloud in the Viewer Pane.</li>
+<li>Run the code chunks at the top of the .qmd to load the necessary packages and data.</li>
+</ol>
+<p>As you follow along in the lab, you should run each corresponding code chunk in your .qmd document. To “Run” a code chunk, you can press the green “Play” button in the top right corner of the code chunk in your .qmd. You can also place your cursor anywhere in the line(s) of code you want to run and press “command + return” (Mac) or “Ctrl + Enter” (Windows).</p>
 </div>
 </div>
-</div>
-</section>
-<section id="getting-started-volleyball-data" class="level1 page-columns page-full">
-<h1>Getting started: Volleyball data</h1>
-<p>The first step to any analysis in R is to <strong>load necessary packages and data</strong>.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>You can think of <strong>packages</strong> like apps on your phone; they extend the functionality and give you access to many more features beyond what comes in the “base package”.</p>
-</div></div><p>Running the following code will load the <code>tidyverse</code> and <code>ggridges</code> packages and the <code>volleyball</code> data we will be using in this lab.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong>TIP</strong>: As you follow along in the lab, you should run each corresponding code chunk in your .qmd document. To “Run” a code chunk, you can press the green “Play” button in the top right corner of the code chunk in your .qmd. You can also place your cursor anywhere in the line(s) of code you want to run and press “command + return” (Mac) or “Ctrl + Enter” (Windows).</p>
-</div><div class="">
-<p><strong>TIP</strong>: Using a hashtag in R allows you to add comments to your code (in plain English). Data scientists often use comments to explain what each piece of the code is doing.</p>
-</div></div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co">#loads package</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggridges)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>volleyball <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"volleyball_ncaa_div1_2022_23_clean.csv"</span>) <span class="co">#loads data</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co">#load package</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sqf_2023 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"sqf_2023.rds"</span>) <span class="co">#loads data</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tibble.width =</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<p>We can use the <code>glimpse()</code> function to get a quick look (errr.. glimpse) at our <code>volleyball</code> data. The <code>glimpse</code> code provides the number of observations (Rows) and the number of variables (Columns) in the dataset. The “Rows” and “Columns” are referred to as the <strong>dimensions</strong> of the dataset. It also shows us the names of the variables (<code>team</code>, <code>conference</code>, …, <code>winning_season</code>) and the first few observations for each variable (e.g.&nbsp;the first three teams in the dataset are Lafayette, Deleware St., and Yale).</p>
+<p>The orginal data from NYPD has 82 columns, with details on many aspects of each stop, question, frisk encounter. For this analysis, we will explore only the first 15 columns. For convenience &amp; ease of use, we will create a new dataset with just these 15 columns. We’ll call the new data frame <code>sqf_selected</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(volleyball)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creates dataset with fewer columns needed for analysis</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="ot">&lt;-</span> sqf_2023 <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(sqf_selected)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Rows: 334
+<pre><code>Rows: 16,971
 Columns: 15
-$ team                 &lt;chr&gt; "Lafayette", "Delaware St.", "Yale", "Coppin St."…
-$ conference           &lt;chr&gt; "Patriot", "MEAC", "Ivy League", "MEAC", "Atlanti…
-$ region               &lt;chr&gt; "East", "Southeast", "East", "Southeast", "East",…
-$ aces_per_set         &lt;dbl&gt; 2.33, 2.20, 2.15, 2.15, 2.03, 1.98, 1.93, 1.91, 1…
-$ assists_per_set      &lt;dbl&gt; 11.01, 11.45, 12.60, 10.56, 11.61, 11.46, 12.26, …
-$ team_attacks_per_set &lt;dbl&gt; 34.54, 29.98, 35.39, 32.52, 34.10, 31.53, 37.03, …
-$ blocks_per_set       &lt;dbl&gt; 1.31, 2.17, 1.82, 1.81, 1.83, 2.39, 1.73, 1.85, 1…
-$ digs_per_set         &lt;dbl&gt; 13.60, 12.58, 15.29, 14.22, 14.27, 12.59, 15.39, …
-$ hitting_pctg         &lt;dbl&gt; 0.180, 0.250, 0.242, 0.194, 0.201, 0.226, 0.227, …
-$ kills_per_set        &lt;dbl&gt; 11.93, 12.12, 13.90, 11.54, 12.40, 12.24, 13.70, …
-$ opp_hitting_pctg     &lt;dbl&gt; 0.227, 0.137, 0.155, 0.170, 0.188, 0.175, 0.202, …
-$ w                    &lt;dbl&gt; 8, 24, 23, 23, 18, 17, 19, 16, 18, 20, 29, 15, 10…
-$ l                    &lt;dbl&gt; 15, 7, 3, 11, 13, 13, 13, 13, 13, 10, 4, 14, 20, …
-$ win_pctg             &lt;dbl&gt; 0.348, 0.774, 0.885, 0.676, 0.581, 0.567, 0.594, …
-$ winning_season       &lt;chr&gt; "no", "yes", "yes", "yes", "yes", "yes", "yes", "…</code></pre>
+$ stop_id                  &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14…
+$ stop_frisk_date          &lt;date&gt; 2023-01-01, 2023-01-01, 2023-01-01, 2023-01-…
+$ stop_frisk_time          &lt;chr&gt; "00:44:00", "00:49:00", "05:31:00", "04:59:00…
+$ year2                    &lt;dbl&gt; 2023, 2023, 2023, 2023, 2023, 2023, 2023, 202…
+$ month2                   &lt;ord&gt; January, January, January, January, January, …
+$ day2                     &lt;ord&gt; Sunday, Sunday, Sunday, Sunday, Sunday, Sunda…
+$ stop_duration_minutes    &lt;dbl&gt; 10, 3, 5, 2, 14, 19, 1, 5, 25, 10, 13, 1, 10,…
+$ suspect_arrested_flag    &lt;fct&gt; N, Y, N, N, Y, N, N, N, N, Y, Y, N, Y, Y, N, …
+$ summons_issued_flag      &lt;fct&gt; N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, …
+$ suspect_reported_age     &lt;dbl&gt; 32, 23, 30, 20, 25, 14, 26, 41, NA, 65, 29, N…
+$ suspect_sex              &lt;fct&gt; MALE, MALE, MALE, MALE, MALE, MALE, MALE, MAL…
+$ suspect_race_description &lt;fct&gt; BLACK, WHITE HISPANIC, WHITE HISPANIC, BLACK,…
+$ suspect_height           &lt;dbl&gt; 6.10, 5.70, 6.00, 6.00, 6.00, 6.10, 5.40, 5.9…
+$ suspect_weight           &lt;dbl&gt; 150, 150, NA, 275, 190, 145, 170, 148, 180, 2…
+$ stop_location_boro_name  &lt;fct&gt; MANHATTAN, BROOKLYN, BROOKLYN, QUEENS, BRONX,…</code></pre>
 </div>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong>ERROR?</strong> Did you get a error message that says <code>could not find function "glimpse"</code>? This means you need to load the <code>tidyverse</code> package. You can do this by running the code <code>library(tidyverse)</code> from the previous code chunk. A shortcut is to hit the “fast-forward” button (next to the “Play” button in your code chunk), which will run all code chunks above your current one.</p>
-</div></div><div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 1">
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 1">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -313,167 +267,136 @@ Exercise 1
 <div class="callout-body-container callout-body">
 <ol type="a">
 <li><p>What are the <strong>dimensions</strong> of this dataset?</p></li>
-<li><p>What are the <strong>observational units</strong> for this data? That is, what does one row represent?</p></li>
-<li><p>How many <strong>categorical variables</strong> are there? List the names of these variables.</p></li>
-<li><p>How many <strong>continuous numeric variables</strong> are there?</p></li>
-<li><p>How many <strong>discrete numeric variables</strong> are there? List the names of these variables.</p></li>
+<li><p>What are the <strong>observational units</strong> for this data? That is, what does one row represent? <em>Hint: you may want to view the dataset as a spreadsheet to help you answer this</em></p></li>
+<li><p>Briefly summarize what information is recorded about these observational units. (You don’t need to/shouldn’t list all the variable names).</p></li>
 </ol>
 </div>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><br>
-<strong>TIP:</strong> Type your answers to each exercise in the .qmd document.<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<strong>TIP:</strong> To distinguish between continuous and discrete, ask yourself “can this variable have decimal values or only whole-numbers?” Read more about variable types <a href="win_loss_pctg">here</a>.</p>
-</div></div><section id="volleyball-lingo" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="volleyball-lingo">Volleyball lingo</h2>
-<p>Before proceeding with any analysis, let’s make sure we know some volleyball lingo in order to understand what information is contained in each variable (column) in our dataset.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>Totally new to volleyball? Watch this 4-minute video: <a href="https://www.youtube.com/watch?v=9g7nYQv-kPM">The Rules of Volleyball - EXPLAINED!</a></p>
-</div><section id="be-the-first-team-to-win-3-sets-to-25-points" class="level4">
-<h4 class="anchored" data-anchor-id="be-the-first-team-to-win-3-sets-to-25-points">Be the first team to win 3 sets to 25 points!!</h4>
-<p><img src="scoreboard.png" class="img-fluid"> Image source: <a href="https://boxoutsports.com/graphics/volleyball/final-score">BoxOut Sports</a></p>
-</section></div>
-<section id="the-basics" class="level4">
-<h4 class="anchored" data-anchor-id="the-basics">The basics</h4>
-<ul>
-<li>To win a volleyball <strong>match</strong>, your team must be the first to win 3 <strong>sets</strong></li>
-<li>A match can consist of 3, 4, or 5 sets (“best 3 out of 5”)</li>
-<li>Your team wins a <strong>set</strong> if you are the first to score 25 points
-<ul>
-<li>but you have to win by at least 2 points!</li>
-<li>and the 5th match (if necessary) only goes to 15 points</li>
-</ul></li>
-<li><strong>So how do you score points?</strong> By hitting the ball into your opponents side of the court without them successfully returning the ball. (Or by them committing an unforced error such as a missed serve or running into the net, but we won’t worry about that in this analysis).</li>
-<li>Play begins on each point with a <strong>serve</strong> from the back line and ends when the ball hits the ground.</li>
-</ul>
-<div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Volleyball “stats” that might occur during any given play
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ul>
-<li>An <a href="https://youtu.be/mrUlR6d7SIM?feature=shared&amp;t=42"><strong>ace</strong></a> is a serve that directly results in a point (the opponent does not successfully return the serve).</li>
-<li>An <strong>attack</strong> is on offensive play where a player strategically hits the ball over the net using an overhead motion</li>
-<li>A <a href="https://youtu.be/m8hD5M1hGK0?feature=shared"><strong>kill</strong></a> is when an attack results in a point for the attacking team (the opposing team doesn’t “dig” or successfully return the ball)</li>
-<li>An <a href="https://youtu.be/9dudLsvv5MA?feature=shared&amp;t=123"><strong>assist</strong></a> is recorded when a player passes or sets the ball to a teammate who attacks the ball for a kill. This is often done by a <strong>setter</strong> and is the 2nd touch of a play (after the pass, before the hit).</li>
-<li>A <a href="https://youtu.be/hdGKPN5_5Pw?feature=shared&amp;t=71"><strong>block</strong></a> is a defensive play at the net when a player successfully blocks the ball from an opponent’s attack, sending it back down into the opponent’s court, directly resulting in a point.</li>
-<li>A <a href="https://youtu.be/TUaKtfeqOj8?feature=shared&amp;t=47"><strong>dig</strong></a> is a defensive play when a player successfully passes the ball from an attack and keeps it in play</li>
-</ul>
-</div>
-</div>
 </section>
+<section id="summarizing-data" class="level1">
+<h1>Summarizing Data</h1>
+<section id="the-summary-function" class="level2">
+<h2 class="anchored" data-anchor-id="the-summary-function">The <code>summary</code> function</h2>
+<p>The <code>summary()</code> function in R is very convenient for getting a quick summary of every variable in a dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sqf_selected)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    stop_id      stop_frisk_date      stop_frisk_time        year2     
+ Min.   :    1   Min.   :2023-01-01   Length:16971       Min.   :2023  
+ 1st Qu.: 4244   1st Qu.:2023-04-02   Class :character   1st Qu.:2023  
+ Median : 8486   Median :2023-06-27   Mode  :character   Median :2023  
+ Mean   : 8486   Mean   :2023-06-29                      Mean   :2023  
+ 3rd Qu.:12728   3rd Qu.:2023-10-03                      3rd Qu.:2023  
+ Max.   :16971   Max.   :2023-12-31                      Max.   :2023  
+                                                                       
+     month2            day2      stop_duration_minutes suspect_arrested_flag
+ October:1734   Sunday   :2283   Min.   :  0.000       N:12071              
+ May    :1647   Monday   :1771   1st Qu.:  2.000       Y: 4900              
+ April  :1544   Tuesday  :2614   Median :  5.000                            
+ January:1468   Wednesday:2790   Mean   :  8.231                            
+ July   :1439   Thursday :2501   3rd Qu.: 10.000                            
+ March  :1407   Friday   :2466   Max.   :581.000                            
+ (Other):7732   Saturday :2546                                              
+ summons_issued_flag suspect_reported_age suspect_sex   
+ N:16459             Min.   :  0.00       FEMALE: 1028  
+ Y:  512             1st Qu.: 19.00       MALE  :15669  
+                     Median : 25.00       NA's  :  274  
+                     Mean   : 27.75                     
+                     3rd Qu.: 34.00                     
+                     Max.   :118.00                     
+                     NA's   :2529                       
+             suspect_race_description suspect_height  suspect_weight 
+ BLACK                   :9939        Min.   :0.000   Min.   :  0.0  
+ WHITE HISPANIC          :3447        1st Qu.:5.300   1st Qu.:150.0  
+ BLACK HISPANIC          :1719        Median :5.700   Median :160.0  
+ WHITE                   : 942        Mean   :5.644   Mean   :165.7  
+ ASIAN / PACIFIC ISLANDER: 288        3rd Qu.:5.900   3rd Qu.:180.0  
+ (Other)                 : 164        Max.   :9.200   Max.   :760.0  
+ NA's                    : 472        NA's   :1482    NA's   :1825   
+  stop_location_boro_name
+ BRONX        :6689      
+ BROOKLYN     :3984      
+ MANHATTAN    :3343      
+ QUEENS       :2393      
+ STATEN ISLAND: 562      
+                         
+                         </code></pre>
+</div>
+</div>
+<p>For categorical variables, it will provide counts of the number of observations in each category level. For numeric variables, it will provide the minimum value, Q1, the median, the mean, Q3, and the maximum value. It also tells you the number of observations that are missing (NA) for each variable.</p>
 </section>
-<section id="variable-descriptions" class="level2">
-<h2 class="anchored" data-anchor-id="variable-descriptions">Variable descriptions</h2>
-<p>The <code>volleyball</code> data you’ll be analyzing in this lab provides season-level team statistics for 334 teams during the 2022-3 season. Many of the variables are reported as an average “per set.” For example, if a team played 30 matches, this means they played anywhere from 90 to 150 sets during the season, so <code>aces_per_set</code> provides the number of aces they scored, on average, across those 90+ sets. The table below provides detailed descriptions of each variable.</p>
-<details>
-<summary>
-<b>Variable Descriptions</b>
-</summary>
-<table class="table">
-<colgroup>
-<col style="width: 12%">
-<col style="width: 87%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Variable</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><code>team</code></td>
-<td>college of the volleyball team</td>
-</tr>
-<tr class="even">
-<td><code>conference</code></td>
-<td>conference to which the team belongs</td>
-</tr>
-<tr class="odd">
-<td><code>region</code></td>
-<td>region to which the team belongs</td>
-</tr>
-<tr class="even">
-<td><code>aces_per_set</code></td>
-<td>the average amount of balls served that directly lead to a point (not including errors by the opponent) per set</td>
-</tr>
-<tr class="odd">
-<td><code>assists_per_set</code></td>
-<td>the average amount of sets, passes, or digs to a teammate that directly result in a kill per set</td>
-</tr>
-<tr class="even">
-<td><code>team_attacks_per_set</code></td>
-<td>the average amount of times the ball is sent to the other team’s court from an overhead motion per set</td>
-</tr>
-<tr class="odd">
-<td><code>blocks_per_set</code></td>
-<td>the average amount of times the ball is blocked from being hit on to the teams side per set</td>
-</tr>
-<tr class="even">
-<td><code>digs_per_set</code></td>
-<td>average amount of times the ball is passed by a player successfully after an opponents attack per set</td>
-</tr>
-<tr class="odd">
-<td><code>hitting_pctg</code></td>
-<td>total team kills minus team hitting errors all divided by total attempts</td>
-</tr>
-<tr class="even">
-<td><code>kills_per_set</code></td>
-<td>average amount of hits that directly result in a point per set</td>
-</tr>
-<tr class="odd">
-<td><code>opp_hitting_pctg</code></td>
-<td>the average hitting percentage of the teams opponent per set</td>
-</tr>
-<tr class="even">
-<td><code>w</code></td>
-<td>the amount of team wins for the season</td>
-</tr>
-<tr class="odd">
-<td><code>l</code></td>
-<td>the amount of team losses for the season</td>
-</tr>
-<tr class="even">
-<td><code>win_pctg</code></td>
-<td>the amount of total wins divided by the total matches of the season</td>
-</tr>
-<tr class="odd">
-<td><code>winning_season</code></td>
-<td>Indication (yes/no) of whether the team won 50% or more of its matches during the season</td>
-</tr>
-</tbody>
-</table>
-</details></section>
-<section id="viewing-your-data" class="level2 page-columns page-full">
-<h2 class="anchored" data-anchor-id="viewing-your-data">Viewing your data</h2>
-<p>You saw that <code>glimpse()</code> is one way to get a quick look at your data. Often, you’ll want to view your whole dataset. There are two ways to do this:</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><br>
-<strong>TIP:</strong> Recall that RStudio is split into four quadrants: Source (upper left), <strong>Environment</strong> (upper right), <strong>Console</strong> (bottom left), and Files / Plots / Packages / Help / Viewer (bottom right) <img src="rstudio.png" class="img-fluid"></p>
-</div></div><ol type="1">
-<li>type <code>View(volleyball)</code> in your <strong>Console</strong> and then click return/Enter on your keyboard.</li>
-<li>OR, in your <strong>Environment</strong> tab, double click the name of the dataset you want to view.</li>
-</ol>
-<p>This will open up your data in a new viewer tab so that you can view it like a spreadsheet (like Google Sheets or Excel*). Once open, you can sort the data by clicking on a column.</p>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p>*Unlike Google Sheets or Excel, however, you won’t be able to <em>edit</em> the data directly in the spreadsheet.</p>
-</div></div><div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 2">
+<section id="using-summarize-to-compute-chosen-summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="using-summarize-to-compute-chosen-summary-statistics">Using <code>summarize()</code> to compute chosen summary statistics</h2>
+<p><strong><em>How old do people who are stopped, questioned, and frisked by the NYPD tend to be?</em></strong></p>
+<p>The following code allows us to answer this question:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_age =</span> <span class="fu">mean</span>(suspect_reported_age, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  avg_age
+    &lt;dbl&gt;
+1    27.7</code></pre>
+</div>
+</div>
+<p>We would read the above code as “take the <code>sqf_selected</code> dataset, and then <code>summarize</code> it by calculating the <code>mean</code> of <code>suspect_reported_age</code>. When calculating the mean, remove any missing values (<code>na.rm = TRUE</code>).”</p>
+<p>We call the <code>|&gt;</code> symbol the “pipe” operator, and we read it as “and then”. E.g. “take the dataset and then pipe it into the <code>summarize()</code> function”.</p>
+<p>Note, <code>avg_age</code> is a user-defined name of the summary statistic we’re computing. We could have called it <code>mean_age</code> instead if we wanted. Or <code>unicorn</code> for that matter. But, it’s best to give them INFORMATIVE names.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(suspect_reported_age, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  mean_age
+     &lt;dbl&gt;
+1     27.7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">unicorn =</span> <span class="fu">mean</span>(suspect_reported_age, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  unicorn
+    &lt;dbl&gt;
+1    27.7</code></pre>
+</div>
+</div>
+<p>As show in the lecture notes, we can compute multiple summary statistics within one <code>summarize()</code> function. We simply need to separate them by a comma. They will each be a new column in the output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(suspect_reported_age, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">var_age =</span> <span class="fu">var</span>(suspect_reported_age, </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(suspect_reported_age, </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  mean_age var_age sd_age
+     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+1     27.7    142.   11.9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Q1_age =</span> <span class="fu">quantile</span>(suspect_reported_age, <span class="fl">0.25</span>,   </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Q2_age =</span> <span class="fu">quantile</span>(suspect_reported_age, <span class="fl">0.5</span>, </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">med_age =</span> <span class="fu">median</span>(suspect_reported_age, </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">Q3_age =</span> <span class="fu">quantile</span>(suspect_reported_age, <span class="fl">0.75</span>, </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">IQR_age =</span> <span class="fu">IQR</span>(suspect_reported_age, </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+  Q1_age Q2_age med_age Q3_age IQR_age
+   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1     19     25      25     34      15</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 2">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -483,96 +406,48 @@ Exercise 2
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p><code>View</code> the <code>volleyball</code> data and sort it appropriately to answer the following questions:</p>
 <ol type="a">
-<li><p>Which NCAA Division I women’s volleyball team had the <strong>best</strong> record (highest win percentage) during the 2022-3 season?</p></li>
-<li><p>What percentage of their matches did this team win?</p></li>
-<li><p>What conference and region is this team in?</p></li>
-<li><p>Which team had the <strong>worst</strong> record?</p></li>
-<li><p>What percentage of their matches did they win?</p></li>
-<li><p>What conference and region is this team in?</p></li>
+<li><p>Copy, paste the relevant code above for computing the mean, variance, and standard deviation of suspect age as well as the 1st, 2nd, and 3rd quartiles and the median and IQR.</p></li>
+<li><p>What units are <code>mean_age</code>, <code>var_age</code>, and <code>sd_age</code> measured in? <em>Hint, they’re not all the same!</em></p></li>
+<li><p>Explain why <code>Q2_age</code> and <code>med_age</code> give the same number above. Would this be the case for a variable other than age?</p></li>
+<li><p>Explain how to use Q1, Q2, and/or Q3 to compute the IQR.</p></li>
+<li><p>What are the mean and median age of SQF suspects in 2023?</p></li>
+<li><p>Based on you answer to part e, do you expect the distribution of age to be left-skewed, right-skewed, or symmetric? Explain.</p></li>
+<li><p>Based on your answer to part f, is the mean or median the more appropriate measure of center? And is standard deviation or IQR the more appropriate measure of spread?</p></li>
+<li><p>Using the appropriate measure of center and spread determined in part g, interpret the summary statistics in context in order to provide an answer to the research question (How old do people who are stopped, questioned, and frisked by the NYPD tend to be?).</p></li>
 </ol>
 </div>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong>TIP</strong>: When viewing the data, clicking on a column once will sort the data according to that variable in <em>ascending</em> order; clicking twice will sort in <em>descending</em> order.</p>
-</div></div></section>
-<section id="creating-visualizations" class="level2">
-<h2 class="anchored" data-anchor-id="creating-visualizations">Creating visualizations</h2>
-<p>R (and the <code>tidyverse</code> package in particular) has some powerful functions for making visualizations. The type of visualization you should create depends on the type(s) of variable(s) you are exploring. In the remainder of this lab, you will explore the <code>volleyball</code> data via visualizations.</p>
 </section>
-</section>
-<section id="one-numerical-variable" class="level1 page-columns page-full">
-<h1>One numerical variable</h1>
-<div class="callout callout-style-default callout-caution no-icon callout-titled" title="Research question">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Research question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>How many kills are typically scored per set?</p>
-</div>
-</div>
-<p>Because <code>kills_per_set</code>is a <strong>numeric variable</strong>, it is appropriate to visualize it using a <strong>histogram</strong>. We can create a histogram of number of kills per set with the following code:</p>
+<section id="summarizing-categorical-data" class="level2">
+<h2 class="anchored" data-anchor-id="summarizing-categorical-data">Summarizing categorical data</h2>
+<p>Recall that during a search &amp; frisk, if police discover contraband or evidence of criminal activity, they can issue an arrest or a summons to appear in court. If no evidence of wrongdoing is found, the person is free to go. Therefore, each stop, question, frisk encounter can end in three ways:</p>
+<ul>
+<li>the person is arrested (<code>suspect_arrested_flag</code> has the value “Y”)</li>
+<li>the person is issued a summons (<code>summons_issued_flag</code> has the value “Y”)</li>
+<li>no evidence of wrongdoing is found (both variables above have the value “N”)</li>
+</ul>
+<p>The first two mean some evidence of criminal activity was found &amp; reported and the third means no evidence of criminal activity was found &amp; reported. We will create one new variable (<code>criminal_offense_reported</code>) to indicate whether or not criminal activity was found &amp; reported.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(volleyball, <span class="fu">aes</span>(<span class="at">x =</span> kills_per_set)) <span class="sc">+</span> </span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="ot">&lt;-</span> sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">criminal_offense_reported =</span> <span class="fu">if_else</span>(suspect_arrested_flag <span class="sc">==</span> <span class="st">"Y"</span> <span class="sc">|</span> summons_issued_flag <span class="sc">==</span> <span class="st">"Y"</span>, <span class="st">"Y"</span>, <span class="st">"N"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This new variable, <code>criminal_offense_reported</code> is a categorical variable. We can summarize a categorical variable using a proportion. This proportion - of stops that result in evidence of criminal activity - is of policy interest. Critics say SQF results in too many innocent people having their civil liberties violated. Proponents say it is a necessary and useful program for keeping drugs and guns off the streets. Let’s investigate how often NYPD SQFs result in evidence of criminal activity being found.</p>
+<p><strong>What proportion of NYPD stop, question, frisk encounters find evidence of criminal activity?</strong></p>
+<p>We can again use the <code>summarize()</code> function to help us summarize the data. We’ll first calculate the number of stops made in total using the <code>n()</code> function and the number of stops where a crime was found using the <code>sum()</code> function. We’ll then use those counts to compute our desired proportion, <code>prop_crime_found</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_stops =</span> <span class="fu">n</span>(),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_crime_found =</span> <span class="fu">sum</span>(criminal_offense_reported <span class="sc">==</span> <span class="st">"Y"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_crime_found =</span> n_crime_found<span class="sc">/</span>n_stops)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  n_stops n_crime_found prop_crime_found
+    &lt;int&gt;         &lt;int&gt;            &lt;dbl&gt;
+1   16971          5358            0.316</code></pre>
 </div>
 </div>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong>TIP</strong>: Your code must refer to datasets and variable names <em>exactly</em> as they appear in your Environment/data. If, for example, we instead had saved the <code>volleyball</code> data as <code>vball</code> and the variable name was <code>Kills_per_set</code> (with a capital <code>K</code>), the first line of plotting code would instead need to be <code>ggplot(vball, aes(x = Kills_per_set))</code>. It’s usually a good idea to open your data in your Environment and/or run <code>glimpse()</code> on your data to verify the exact names.</p>
-</div><div class="">
-<p><strong>TIP</strong>: When you run the histogram code, you may see the default message: “<code>stat_bin() using bins = 30. Pick better value with binwidth</code>.” This is just a message, not an error. It’s simply informing you that by default <code>ggplot()</code> uses 30 bins when creating a histogram, but you can change this by adding <code>bins = XX</code> inside of <code>geom_histogram()</code>. For example, <code>geom_histogram(bins = 10)</code> will create a histogram with 10 bins. Alternatively, you can specify the <em>width</em> of each bin using <code>binwidth</code>. Try using <code>geom_histogram(binwidth = 1)</code> to see what happens.</p>
-</div></div>
-<div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-IMPORTANT SUMMARY: ggplot basics
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Every basic visualization created with <code>ggplot</code> must contain at least two “layers” that are added together with a <code>+</code> sign:</p>
-<ol type="1">
-<li>the <code>ggplot()</code> layer to initiate a blank visualization</li>
-<li>a <code>geom_xxxx()</code> layer to specify what type of <code>geom</code>etric object(s) you want to place in the visualization (e.g.&nbsp;points, bars, histogram, boxplot, etc).</li>
-</ol>
-<p>The <code>ggplot()</code> layer should always have two things:</p>
-<ol type="1">
-<li>the name of the dataset, provided as the first argument</li>
-<li>an <code>aes()</code> function that specifies how variables will get mapped to <code>aes</code>thetic elements of the plot, such as the <code>x</code> or <code>y</code> axis, or the <code>size</code> or <code>color</code> of dots or lines.</li>
-</ol>
-</div>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-We use the term “argument” to refer to the “inputs” to a function.</p>
-</div></div><div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 3">
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 3">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -583,18 +458,57 @@ Exercise 3
 </div>
 <div class="callout-body-container callout-body">
 <ol type="a">
-<li><p>Copy, paste the code above to reproduce the visualization in your document.</p></li>
-<li><p>Describe the shape of the distribution of <code>kills_per_set</code>. Make sure to comment on <strong>modality</strong>, <strong>skewness</strong>, and whether there are any <strong>potential outliers</strong>.</p></li>
-<li><p>Based on this histogram, how would you answer the research question (how many kills are typical per set)?</p></li>
+<li><p>Copy, paste the code above for computing the proportion of stops that result in criminal activity being found.</p></li>
+<li><p>Use the output to answer the question: What proportion of NYPD stop, question, frisk encounters find evidence of criminal activity?</p></li>
+<li><p>Based on your answer to part b, what proportion of stops result in NO criminal activity being found?</p></li>
+<li><p>Based on these findings, comment on your initial thoughts about the NYPD Stop, Question, Frisk policy. [There are no right or wrong answers here].</p></li>
 </ol>
 </div>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><br>
-<br>
-<strong>TIP</strong>: Read <a href="https://openintro-ims.netlify.app/explore-numerical#histograms">here</a> for a reminder of terminology and how to describe a distribution in terms of its modality and skewness.</p>
-</div></div><div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 4">
+</section>
+</section>
+<section id="comparing-across-groups" class="level1">
+<h1>Comparing across groups</h1>
+<p>In Lab 01, we saw that we could compare a numeric variable across groups using a faceted histogram. Below, we investigate age of persons stopped, questioned, and frisked by NYC borough.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sqf_selected, <span class="fu">aes</span>(<span class="at">x =</span> suspect_reported_age)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>stop_location_boro_name, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2529 rows containing non-finite outside the scale range
+(`stat_bin()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="using-group_by" class="level2">
+<h2 class="anchored" data-anchor-id="using-group_by">Using <code>group_by()</code></h2>
+<p>Often, we want actual numeric summaries of the data to supplement the visualizaion. We can very conveniently calculate the median (or any other summary statistic) for each level of a categorical variable by adding the group_by() function before we summarize.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(stop_location_boro_name) <span class="sc">|&gt;</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">med_age =</span> <span class="fu">median</span>(suspect_reported_age, </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  stop_location_boro_name med_age
+  &lt;fct&gt;                     &lt;dbl&gt;
+1 BRONX                        23
+2 BROOKLYN                     25
+3 MANHATTAN                    28
+4 QUEENS                       25
+5 STATEN ISLAND                25</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 4">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -605,20 +519,55 @@ Exercise 4
 </div>
 <div class="callout-body-container callout-body">
 <ol type="a">
-<li><p>Copy, paste, tweak the <code>ggplot()</code> code above to explore the distribution of <code>blocks_per_set</code>.</p></li>
-<li><p>Describe the shape of the distribution and interpret what you see.</p></li>
-<li><p>Copy, paste, tweak the <code>ggplot()</code> code above to explore the distribution of <code>aces_per_set</code>.</p></li>
-<li><p>Describe the shape of the distribution and interpret what you see.</p></li>
-<li><p>What is the most common way of scoring a point in volleyball (kill, block, or ace)?</p></li>
+<li><p>Copy, paste the code above to create both the faceted histogram and the medians by borough in your .qmd.</p></li>
+<li><p>Which borough had the lowest median age? Which had the highest?</p></li>
+<li><p>In the faceted histogram, what do the taller vs.&nbsp;shorter bars represent? Which borough had the most stop, question, frisk encounters with NYPD, and which had the least?</p></li>
+<li><p>One potential explanation for higher SQFs in certain places might be population size. That is, if more people live in an area, naturally more stops might be made. Check out the Wikipedia page on <a href="https://en.wikipedia.org/wiki/Boroughs_of_New_York_City">NYC Boroughs</a> to see the population sizes of the boroughs. Does population size explain what you observed in part c? That is, do the boroughs with the most/least people correspond to the most/least SQFs?</p></li>
 </ol>
 </div>
 </div>
-<p>Another common visualization for a numeric variable is a <strong>boxplot</strong>. The following image shows 3 boxplots and 3 histograms for the variables explored above.</p>
+<p>If certain areas are policed more than would be expected based on population size, we might want to investigate why. NYPD has been criticized for racial bias in its policing and “over-policing” neighborhoods of color. Former NYC Mayor Michael Bloomberg, who expanded Stop, Question, Frisk, speaking about the program said (Aspen Institute, 2015):</p>
+<blockquote class="blockquote">
+<p>“People say, ‘Oh my God, you are arresting kids for marijuana who are all minorities.’ Yes, that’s true. Why? Because we put all the cops in the minority neighborhoods. Yes, that’s true. Why’d we do it? Because that’s where all the crime is.”</p>
+</blockquote>
+<p>Today, advocates for Stop and Frisk make similar claims. Are these claims supported by the data? Let’s investigate. We’ll look at prevalence of criminal activity among Boroughs first, to see if we can explain the discrepancy in stop rates. Later, you will conduct the same analysis by race.</p>
+<p>The code below uses the same code as Exercise 3, but we now add a group by to see how often criminal activity is found in stops in each borough.</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(stop_location_boro_name) <span class="sc">|&gt;</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_stops =</span> <span class="fu">n</span>(),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_crime_found =</span> <span class="fu">sum</span>(criminal_offense_reported <span class="sc">==</span> <span class="st">"Y"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_crime_found =</span> n_crime_found<span class="sc">/</span>n_stops,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">prop_no_crime_found =</span> <span class="dv">1</span> <span class="sc">-</span> prop_crime_found)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  stop_location_boro_name n_stops n_crime_found prop_crime_found
+  &lt;fct&gt;                     &lt;int&gt;         &lt;int&gt;            &lt;dbl&gt;
+1 BRONX                      6689          1250            0.187
+2 BROOKLYN                   3984          1546            0.388
+3 MANHATTAN                  3343          1302            0.389
+4 QUEENS                     2393          1020            0.426
+5 STATEN ISLAND               562           240            0.427
+  prop_no_crime_found
+                &lt;dbl&gt;
+1               0.813
+2               0.612
+3               0.611
+4               0.574
+5               0.573</code></pre>
+</div>
+</div>
+<p>This same data is displayed as a segemented bar graph:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sqf_selected, <span class="fu">aes</span>(<span class="at">y =</span> stop_location_boro_name,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">fill =</span> criminal_offense_reported)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Proportion"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -633,39 +582,66 @@ Exercise 5
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>The histograms and boxplots are visualizing the same information, but each visualization types has different pros/cons.</p>
 <ol type="a">
-<li><p>Is modality visible in both types of visualizations? Explain.</p></li>
-<li><p>Is skewness visible in both types of visualizations? Explain.</p></li>
-<li><p>Are potential outliers visible in both types of visualizations? Explain.</p></li>
-<li><p>Is there any additional information in a boxplot that’s not provided by a histogram? Explain.</p></li>
+<li><p>Copy, paste the code above for computing the proportions and creating the segemented bar plot.</p></li>
+<li><p>Do the data suggest a relationship between borough and prevalence of criminal activity? Explain.</p></li>
+<li><p>Are the disproportionate SQF numbers by borough found in Exercise 4 explained / justified by the proportion of criminal activity found? That is, does the borough that gets policed the most correspond to the borough where the most criminal activity is found?</p></li>
 </ol>
 </div>
 </div>
-</section>
-<section id="one-categorical-variable" class="level1 page-columns page-full">
-<h1>One categorical variable</h1>
-<p>Let’s use visualization to explore another question:</p>
-<div class="callout callout-style-default callout-caution no-icon callout-titled" title="Research question">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Research question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p><strong>Which region has the most teams?</strong></p>
-</div>
-</div>
-<p>Because <code>region</code> is a <strong>categorical variable</strong>, it is appropriate to visualize it using a <strong>bar plot</strong>.</p>
-<p>The general template for creating a simple bar plot is:</p>
+<p>We know that location / neighborhood tends to be associated with racial/ethnic demographics. For example, as of the 2020 Census<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, the Bronx had a much higher proportion of Hispanic and Black residents and lower proportions of White and Asian residents compared to NYC as a whole.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Race/Ethnicity</th>
+<th>Bronx</th>
+<th>All of NYC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hispanic</td>
+<td>54.8%</td>
+<td>28.3%</td>
+</tr>
+<tr class="even">
+<td>White non-Hispanic</td>
+<td>8.9%</td>
+<td>30.9%</td>
+</tr>
+<tr class="odd">
+<td>Black non-Hispanic</td>
+<td>28.5%</td>
+<td>20.2%</td>
+</tr>
+<tr class="even">
+<td>Asian non-Hispanic</td>
+<td>4.6%</td>
+<td>15.6%</td>
+</tr>
+</tbody>
+</table>
+<p>One of the primary critiques of NYPD Stop, Question, Frisk is that is has disproportionately affected neighborhoods and people of color. In Mayor Bloomberg’s comments, he argues that people of color are getting arrested more frequently because they live in neighborhoods where more crime is happening. Again, let’s use the data to investigate both of these claims 1) whether people of color are stopped at dispropirtionate rates (critics claim) and 2) whether crime rates are higher among people of color (Mayor’s claim).</p>
+<p>The code below calculates the number and proportion of stops by race.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(data, <span class="fu">aes</span>(<span class="at">x =</span> variable)) <span class="sc">+</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(suspect_race_description) <span class="sc">|&gt;</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_stops =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_stops =</span> n_stops<span class="sc">/</span><span class="fu">sum</span>(n_stops))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+  suspect_race_description       n_stops prop_stops
+  &lt;fct&gt;                            &lt;int&gt;      &lt;dbl&gt;
+1 AMERICAN INDIAN/ALASKAN NATIVE      22    0.00130
+2 ASIAN / PACIFIC ISLANDER           288    0.0170 
+3 BLACK                             9939    0.586  
+4 BLACK HISPANIC                    1719    0.101  
+5 MIDDLE EASTERN/SOUTHWEST ASIAN     142    0.00837
+6 WHITE                              942    0.0555 
+7 WHITE HISPANIC                    3447    0.203  
+8 &lt;NA&gt;                               472    0.0278 </code></pre>
 </div>
-<p>Notice it follows the same general format as the histogram code, but now we use <code>geom_bar()</code> instead of <code>geom_histogram()</code> because we are dealing with one categorical instead of one numeric variable.</p>
+</div>
 <div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 6">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -677,49 +653,17 @@ Exercise 6
 </div>
 <div class="callout-body-container callout-body">
 <ol type="a">
-<li><p>Copy, paste, tweak the code above to create a bar plot for <code>region</code>.</p></li>
-<li><p>Which region has the most teams?</p></li>
+<li><p>Copy, paste the code above to reproduce the summary statistics in your qmd</p></li>
+<li><p>What proportion of NYPD stop, question, frisk encounters are of Black (non-hispanic) people? How does this compare to the overall proportion of the NYC population that is Black (non-hispanic) as reported in the table above?</p></li>
+<li><p>Repeat part b but for Hispanic people (combining both Black Hispanic and White Hispanic).</p></li>
+<li><p>Repeat part b but for White people (non-Hispanic)</p></li>
+<li><p>Repeat part b but for Asian people (non-Hispanic)</p></li>
+<li><p>Using the data, respond to critics claims: is there evidence that people of color are stopped, frisked, and questioned at disproportionate rates?</p></li>
 </ol>
 </div>
 </div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><br>
-<strong>TIP</strong>: In the template code, <code>data</code> and <code>variable</code> are just placeholders. Make sure to replace them with the appropriate dataset and variable names for this analysis.</p>
-</div></div></section>
-<section id="two-numeric-variables" class="level1 page-columns page-full">
-<h1>Two numeric variables</h1>
-<div class="callout callout-style-default callout-caution no-icon callout-titled" title="Research question">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Research question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>If your defense tends to be strong (e.g.&nbsp;lots of digs), does your offense also tend to be strong (lots of kills)?</p>
-</div>
-</div>
-<p>To investigate this question, we need a <strong>scatterplot</strong> because we are dealing with <strong>two numeric variables</strong>.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(volleyball, <span class="fu">aes</span>(<span class="at">x =</span> digs_per_set, <span class="at">y =</span> kills_per_set)) <span class="sc">+</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><br>
-</p>
-<p>Notice that the scatterplot code again follows the same general format of a <code>ggplot()</code> layer, with data and <code>aes</code>thetics sepcified inside, and a <code>geom_</code> layer, this time <code>geom_point()</code>. Because a scatterplot is for <em>two</em> variables instead of one, we must specify two variables, <code>x</code> and <code>y</code>, in the <code>aes()</code> function.</p>
-</div></div><div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 7">
+<p>There does seem to be evidence that some demographic groups are stopped, questioned, and frisked at rates disproportionate to their proportion of the population. Let’s now investigate whether there is evidence to back up Mayor Bloomberg’s claim that this is because of differences in criminal activity.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 7">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon no-icon"></i>
@@ -730,64 +674,45 @@ Exercise 7
 </div>
 <div class="callout-body-container callout-body">
 <ol type="a">
-<li><p>Copy, paste the scatterplot code into your .qmd to reproduce the visualization in your document.</p></li>
-<li><p>Use the scatterplot to answer the research question. Make sure to comment on the strength and direction of the relationship.</p></li>
+<li><p>Copy, paste, tweak relevant code to compute how often criminal activity is found in stops by race. <em>Hint: use the same code that did this for borough, and adapt it to compute the proportions by race instead</em></p></li>
+<li><p>Do the data suggest an association between race and prevalence of criminal activity?</p></li>
+<li><p>Are Mayor Bloomberg’s comments supported by this data? Explain.</p></li>
 </ol>
 </div>
 </div>
-</section>
-<section id="two-categorical-variables" class="level1">
-<h1>Two categorical variables</h1>
-<p>Consider our next research question:</p>
-<div class="callout callout-style-default callout-caution no-icon callout-titled" title="Research question">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Research question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Which conference had the most teams with winning seasons? Which conference had the least?</p>
-</div>
-</div>
-<p>Note that this is a question about <strong>two categorical variables,</strong> <code>conference</code> and <code>winning_season</code>, therefore, a <strong>stacked bar plot</strong> is appropriate for investigating this question. We can do this using the code below:</p>
+<p>Suppose an advocate for the Stop, Question, Frisk program takes the same data from the lab and performs a new analysis that looks at the racial breakdown among criminal offenses reported. They claim that their analysis provides strong evidence for Bloomberg’s claim. See their results below:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(volleyball, <span class="fu">aes</span>(<span class="at">y =</span> conference, <span class="at">fill =</span> winning_season)) <span class="sc">+</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(criminal_offense_reported <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> suspect_race_description)) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Racial Breakdown of Criminal Offenses Found"</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">x =</span> <span class="st">"Number of criminal offenses"</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> <span class="st">"Race"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-8-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
-</div>
-<div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Using <code>fill</code> in ggplot
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Note that we added the second categorical variable to the <code>fill</code> <code>aes</code>thetic because we “fill” the bar with the categories of <code>winning_season</code>. We can adapt the code further to turn the stacked bar plot into a <strong>standardized bar plot</strong>.</p>
-<p>Adding <code>position = "fill"</code> inside <code>geom_bar()</code> turns the stacked bar plot into a standardized bar plot. Since the x axis now shows proportions instead of counts, we use a <code>labs()</code> layer to change the x-axis label.</p>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(volleyball, <span class="fu">aes</span>(<span class="at">y =</span> conference, <span class="at">fill =</span> winning_season)) <span class="sc">+</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"proportion"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(criminal_offense_reported <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(suspect_race_description) <span class="sc">|&gt;</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_criminal_offenses =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n_criminal_offenses<span class="sc">/</span><span class="fu">sum</span>(n_criminal_offenses))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+  suspect_race_description       n_criminal_offenses    prop
+  &lt;fct&gt;                                        &lt;int&gt;   &lt;dbl&gt;
+1 AMERICAN INDIAN/ALASKAN NATIVE                   9 0.00168
+2 ASIAN / PACIFIC ISLANDER                       118 0.0220 
+3 BLACK                                         3154 0.589  
+4 BLACK HISPANIC                                 455 0.0849 
+5 MIDDLE EASTERN/SOUTHWEST ASIAN                  42 0.00784
+6 WHITE                                          375 0.0700 
+7 WHITE HISPANIC                                1129 0.211  
+8 &lt;NA&gt;                                            76 0.0142 </code></pre>
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 8">
@@ -800,71 +725,7 @@ Exercise 8
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ol type="a">
-<li><p>Copy, paste the code for both visualizations above to recreate them in your document.</p></li>
-<li><p>Comment on the differences between the stacked and standardized stacked bar plot.</p></li>
-<li><p>What conference had the <em>most</em> teams with winning seasons? Do the two visualizations lead to different interpretations of this question? Explain.</p></li>
-<li><p>What conference had the <em>least</em> teams with winning seasons? Do the two visualizations lead to different interpretations of this question? Explain.</p></li>
-<li><p>Which of the two visualizations would you choose to communicate an answer to these research questions? Comment on pros and cons of your choice.</p></li>
-</ol>
-</div>
-</div>
-</section>
-<section id="one-numeric-one-categorical-variable" class="level1">
-<h1>One numeric &amp; one categorical variable</h1>
-<div class="callout callout-style-default callout-caution no-icon callout-titled" title="Research question">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Research question
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Does the average number of attacks vary by region?</p>
-</div>
-</div>
-<p>Note that now we are interested in comparing a numeric variable (<code>team_attacks_per_set</code>) across groups of a categorical variable (<code>region</code>). To visualize one numeric + one categorical variable, we have a couple options:</p>
-<ul>
-<li><p>faceted histogram</p></li>
-<li><p>ridge plot</p></li>
-<li><p>side-by-side boxplot</p></li>
-</ul>
-<p>To create a faceted histogram, we simply add a layer called <code>facet_wrap()</code> to our visualization pipeline for a histogram, which specifies which categorical variable we want to <code>facet</code> by. We use <code>ncol = 1</code> to specify that we want the histograms to all appear in 1 column (by default it will place them all next to each other in 1 row).</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(volleyball, <span class="fu">aes</span>(<span class="at">x =</span> team_attacks_per_set)) <span class="sc">+</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"white"</span>, <span class="at">binwidth =</span> <span class="fl">0.5</span>) <span class="sc">+</span> </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> region, <span class="at">ncol =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<p>To create a ridge plot, we use the following code:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(volleyball, <span class="fu">aes</span>(<span class="at">x =</span> team_attacks_per_set, <span class="at">y =</span> region)) <span class="sc">+</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_density_ridges</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(volleyball, <span class="fu">aes</span>(<span class="at">x =</span> team_attacks_per_set, <span class="at">y =</span> region)) <span class="sc">+</span></span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>   <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
+<p>Does this new analysis provide compelling evidence for Bloomberg’s claim? Why or why not?</p>
 </div>
 </div>
 <div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 9">
@@ -877,198 +738,26 @@ Exercise 9
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<ol type="a">
-<li><p>Copy, paste the code for the three visualizations above to reproduce them in your document.</p></li>
-<li><p>All of the above visualizations display the same data. Comment on what you observe. Use the visualizations to answer the research question: do number of attacks differ by region?</p></li>
-<li><p>Comment on which of the three visualizations you prefer and why.</p></li>
-</ol>
-</div>
-</div>
-</section>
-<section id="more-than-2-variables" class="level1 page-columns page-full">
-<h1>More than 2 variables</h1>
-<p>We can utilize extra <code>aes</code>thetics (in addition to x- and y-axis) such as <code>color</code>, <code>shape</code>, or <code>size</code> to investigate relationships of more than two variables.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(volleyball, <span class="fu">aes</span>(<span class="at">x =</span> hitting_pctg, <span class="at">y =</span> opp_hitting_pctg,</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">color =</span> win_pctg)) <span class="sc">+</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">trans =</span> <span class="st">"reverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><strong>Note:</strong> the third layer here <code>scale_color_gradient()</code> is not strictly necessary. It simply reverses the order of the color scale so that larger numbers are darker and smaller numbers are lighter, which tends to align better with viewer’s intuition.</p>
-</div><div class="">
-<p><strong>EXTRA</strong>: We could add in a 4th or even 5th variable using additional aesthetics such as <code>size</code> or <code>alpha</code> (transparency), but often squeezing too many variables into one visualization makes it cognitively difficult to process and interpret. Alternatively, we may sometimes choose to “double encode” a variable (2 aesthetics for the same variable) to make a relationship in the data more visually salient. But there should be a clear reason for doing so, and you should make sure the extra encoding doesn’t confuse the viewer.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(volleyball, <span class="fu">aes</span>(<span class="at">x =</span> hitting_pctg, <span class="at">y =</span> opp_hitting_pctg,</span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>                        <span class="at">color =</span> win_pctg, <span class="at">size =</span> win_pctg)) <span class="sc">+</span></span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_color_gradient</span>(<span class="at">trans =</span> <span class="st">"reverse"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-</div></div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 10">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise 10
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<ol type="a">
-<li><p>Copy, paste the code above to recreate the visualization in your document.</p></li>
-<li><p>What are the variables being displayed in the visualization above? What types of variables are they?</p></li>
-<li><p>What insight can be gleaned from the above visualizations? Comment on 2 things the visualizations reveal about NCAA volleyball teams.</p></li>
-</ol>
-</div>
-</div>
-</section>
-<section id="practice-on-new-research-questions" class="level1 page-columns page-full">
-<h1>Practice on new research questions</h1>
-<div class="callout callout-style-default callout-important no-icon callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-IMPORTANT SUMMARY
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Data visualizations are a useful tool for exploring a dataset and investigating research questions. You’ve now been exposed to code for creating visualizations for many different data types. Now, it’s your turn to practice choosing an appropriate visualization for new research questions.</p>
-<p>To get started, you should always ask yourself a series of questions:</p>
-<ol type="1">
-<li>what variable(s) in my dataset are relevant for answering the research question?</li>
-<li>what type of variable is each one?</li>
-<li>what type of visualization is appropriate for the type(s) and number of variables I have?</li>
-</ol>
-<p>In the following exercises, once you determine the appropriate visualization for your question, you should copy, paste, tweak code from the appropriate section of this lab to visually investigate the research question.</p>
-<p>For example, if you identify that you have two numeric variables, you should copy paste code for scatterplots from the “Two numeric variables” section of this lab.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 11">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise 11
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Kills and blocks are both typically scored by tall players at the net. Is there a strong positive relationship between kills and blocks? In other words, if a team has strong hitters (that get lots of kills), are they also more likely to have strong blockers? Produce a visualization to investigate this question and comment on your findings.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 12">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise 12
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Produce one visualization to answer the following questions:</p>
-<ol type="a">
-<li><p>What conference has the most teams?</p></li>
-<li><p>About how many teams are in a typical conference? (You can “eyeball” this from the visualization - don’t need to calculate an actual number)</p></li>
-</ol>
-</div>
-</div>
-
-<div class="no-row-height column-margin column-container"><div class="">
-<p><br>
-<br>
-<br>
-<strong>TIP</strong>: If the x-axis of your visualization is too cluttered to read all the category labels, try switching the categorical variable to the y-axis instead. You can do this by simply specifying <code>y = variable</code> instead of <code>x = variable</code> inside <code>aes()</code>.</p>
-</div></div><div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 13">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise 13
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Produce a visualization to investigate the relationship between assists and kills. Comment on what you find and explain why the relationship is what it is.</p>
-</div>
-</div>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 14">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise 14
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Produce one visualization to investigate the following questions and comment on your findings:</p>
-<ol type="a">
-<li><p>Is there a wide range of win percentages across college volleyball teams, or do most teams win roughly 50% of their matches?</p></li>
-<li><p>Did any team have a perfect season? That is, did anyone win 100% of their matches?</p></li>
-<li><p>The name of the “best” team isn’t visible in your visualization, but in Exercise 2a you identified who this team was. Google to find out who won the championship in 2022-3. Was it the team with the best record?</p></li>
-</ol>
-</div>
-</div>
-</section>
-<section id="wrap-up-reflection" class="level1">
-<h1>Wrap-up / reflection</h1>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 15">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-Exercise 15
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Now that you’ve explored the <code>volleyball</code> data, spend a few minutes reflecting on your learning by responding to the following questions:</p>
+<p>Now that you’ve explored the NYPD Stop, Question, Frisk data, spend a few minutes reflecting on your learning by responding to the following questions:</p>
 <ol type="a">
 <li><p>What were the main statistical concepts covered in this assignment?</p></li>
 <li><p>What’s one piece of insight you gleaned from the data?</p></li>
 <li><p>What’s one thing you understand better after completing these exercises?</p></li>
 <li><p>What exercise(s) gave you the most trouble? What was difficult about them/where did you get stuck?</p></li>
+<li><p>What are you left wondering about / curious to explore further after completing this analysis?</p></li>
 </ol>
 </div>
 </div>
 </section>
-<section id="bonus-practice" class="level1">
-<h1>BONUS practice</h1>
-<div class="callout callout-style-default callout-note no-icon callout-titled" title="BONUS 1">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon no-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-BONUS 1
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>State an additional research question that can be investigated using the <code>volleyball</code> data, and create a visualization to investigate it. Comment on your findings.</p>
-</div>
-</div>
 </section>
 
-</main>
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>https://popfactfinder.planning.nyc.gov/explorer/cities/NYC?censusTopics=mutuallyExclusiveRaceHispanicOrigin%2CdetailedRaceAndEthnicity&amp;compareTo=2<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
 <!-- /main column -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {

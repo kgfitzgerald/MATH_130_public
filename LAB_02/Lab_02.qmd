@@ -1,0 +1,159 @@
+---
+title: "NYPD Stop, Question, Frisk"
+subtitle: "Lab 02"
+author: "YOUR NAME HERE"
+format:
+  html:
+    self-contained: true
+    toc: true
+    toc_float: true
+    number_section: false
+    highlight: tango
+editor: visual
+editor_options:
+  chunk_output_type: console
+---
+
+# Getting started: NYPD data
+
+```{r, message = FALSE}
+library(tidyverse) #load package
+
+sqf_2023 <- read_rds("sqf_2023.rds") #loads data
+```
+
+```{r}
+#creates dataset with fewer columns needed for analysis
+sqf_selected <- sqf_2023 |> 
+  select(1:15)
+
+glimpse(sqf_selected)
+
+options(tibble.width = Inf)
+```
+
+## Exercise 1
+
+a\. YOUR ANSWER HERE
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+# Summarizing data
+
+## Exercise 2
+
+a\.
+
+```{r}
+
+```
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+d\. YOUR ANSWER HERE
+
+e\. YOUR ANSWER HERE
+
+f\. YOUR ANSWER HERE
+
+g\. YOUR ANSWER HERE
+
+h\. YOUR ANSWER HERE
+
+```{r}
+#create new criminal_offense_reported variable
+sqf_selected <- sqf_selected |> 
+  mutate(criminal_offense_reported = if_else(suspect_arrested_flag == "Y" | summons_issued_flag == "Y", "Y", "N"))
+```
+
+## Exercise 3
+
+a\.
+
+```{r}
+
+```
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+d\. YOUR ANSWER HERE
+
+# Comparing across groups
+
+## Exercise 4
+
+a\.
+
+```{r}
+
+```
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+d\. YOUR ANSWER HERE
+
+## Exercise 5
+
+a\.
+
+```{r}
+
+```
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+## Exercise 6
+
+a\.
+
+```{r}
+
+```
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+d\. YOUR ANSWER HERE
+
+e\. YOUR ANSWER HERE
+
+f\. YOUR ANSWER HERE
+
+## Exercise 7
+
+a\.
+
+```{r}
+ 
+```
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+## Exercise 8
+
+YOUR ANSWER HERE
+
+## Exercise 9
+
+a\. YOUR ANSWER HERE
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+d\. YOUR ANSWER HERE
+
+e\. YOUR ANSWER HERE

@@ -1,5 +1,5 @@
 ---
-title: "Lab 02: Los Angeles County Poverty & Food Insecurity"
+title: "Lab 02: 2023 NYPD Stop, Question, Frisk"
 author:
   - name: Katie Fitzgerald
     email: kfitzgerald@apu.edu
@@ -11,63 +11,384 @@ format:
   html:
     grid:
       margin-width: 350px
+    table-scroll: true
+    options: 
+          dplyr.width: Inf
+          tibble.width: Inf
 toc: true
 toc-location: left
-description: Practice summarizing data 
+description: Practice summarizing data and investigating political claims
 editor_options:
   chunk_output_type: console
 callout-icon: false
 ---
 
+# Acknowledgements
+
+This lab is adapted from a [Skew the Script](https://skewthescript.org) activity.
+
 # Introduction
 
-In this lab, you will be analyzing data about poverty and food insecurity in Los Angeles County. The goal of this lab is to help you practice summarizing data by computing sums, proportions, and measures of center and spread. 
+New York City’s Stop, Question, Frisk program allows police to stop people on the street and search them for weapons or contraband. During a stop, if police find evidence of criminal items or activity, they report a criminal offense. Then, they can make an arrest or issue a summons. NYPD officers record detailed data on every stop. This NYPD data is publicly available on the [NYC.GOV website](https://www1.nyc.gov/site/nypd/stats/reports-analysis/stopfrisk.page). The `sqf_2023` dataset contains data from all stops in 2023.
 
-::: column-margin
-This data originates from the U.S. Census Bureau and was originally curated by [Neighborhood Data for Social Change](https://la.myneighborhooddata.org). Dr. Fitzgerald then combined multiple datasets for use in this lab.
+::: {.callout-caution collapse="true" title="Research Questions"}
+During this lab, you'll investigate the following research questions:
+
+-   How old do people who are stopped, questioned, and frisked by the NYPD tend to be?
+-   Do stop rates differ by Borough? 
+-   Are some Boroughs policed more than others, relative to their population size?
+-   Do stop rates differ by race?
+-   Do crime rates differ by Borough or race? 
+-   Do the data provide evidence to support critics' or proponents' claims about the policy?
 :::
+
+The goal of this lab is to use data to explore a social good question and to help you practice summarizing data by computing sums, proportions, and measures of center and spread.
 
 ::: {.callout-note title="Learning Objectives" appearance="minimal"}
 By the end of this lab, you will be able to:
 
-+ Compute summary statistics including mean, median, minimum, maximum, standard deviation, variance, quartiles, and IQR
+-   Compute summary statistics including mean, median, minimum, maximum, standard deviation, variance, quartiles, and IQR
 
-+ Compute summary statistics by group, i.e. for each level of a categorical variable
+-   Compute summary statistics by group, i.e. for each level of a categorical variable
 
-+ Use summary statistics to investigate research questions
+-   Use summary statistics to investigate research questions
 
-+ Choose appropriate summary statistics based on the distribution of data (i.e. whether it is skewed or symmetric)
+-   Choose appropriate summary statistics based on the distribution of data (i.e. whether it is skewed or symmetric)
 :::
 
-# Getting Started
+# Getting Started: NYPD Data
 
-::: {.callout-important}
-
+::: callout-important
 #### Action required
 
 To get started on Lab 02:
 
 1.  Log-in to Posit Cloud and navigate to the MATH_130_F24 workspace
 2.  Click "Start" on Lab 02
-3.  In the Files pane (lower right quadrant), click the file
-    "Lab_02.qmd" to open it
-4.  Run the code chunks at the top of the .qmd to load the necessary packages and data
+3.  In the Files pane (lower right quadrant), click the file "Lab_02.qmd" to open it
+4.  Click the grey/white Settings icon and select "Preview in Viewer Pane"
+5.  Click the Render button (blue arrow) to Render the .qmd into an html. The html should pop up on the right-hand side of Posit Cloud in the Viewer Pane.
+6.  Run the code chunks at the top of the .qmd to load the necessary packages and data.
 
+As you follow along in the lab, you should run each corresponding code chunk in your .qmd document. To "Run" a code chunk, you can press the green "Play" button in the top right corner of the code chunk in your .qmd. You can also place your cursor anywhere in the line(s) of code you want to run and press "command + return" (Mac) or "Ctrl + Enter" (Windows).
 :::
-
 
 ```{r, message = FALSE, warning = FALSE}
 library(tidyverse) #load package
 
-la_data_1522 <- read_csv("la_county_food_insecurity.csv")
+sqf_2023 <- read_rds("sqf_2023.rds") #loads data
 
-glimpse(la_data_1522)
+options(tibble.width = Inf)
 ```
 
-## The data
+The orginal data from NYPD has 82 columns, with details on many aspects of each stop, question, frisk encounter. For this analysis, we will explore only the first 15 columns. For convenience & ease of use, we will create a new dataset with just these 15 columns. We'll call the new data frame `sqf_selected`.
 
-[TO ADD]
+```{r}
+#creates dataset with fewer columns needed for analysis
+sqf_selected <- sqf_2023 |> 
+  select(1:15)
+
+glimpse(sqf_selected)
+```
+
+::: {.callout-note title="Exercise 1"}
+a.  What are the **dimensions** of this dataset?
+
+b.  What are the **observational units** for this data? That is, what does one row represent? *Hint: you may want to view the dataset as a spreadsheet to help you answer this*
+
+c.  Briefly summarize what information is recorded about these observational units. (You don't need to/shouldn't list all the variable names).
+:::
 
 # Summarizing Data
 
+## The `summary` function
+
+The `summary()` function in R is very convenient for getting a quick summary of every variable in a dataset.
+
+```{r}
+summary(sqf_selected)
+```
+
+For categorical variables, it will provide counts of the number of observations in each category level. For numeric variables, it will provide the minimum value, Q1, the median, the mean, Q3, and the maximum value. It also tells you the number of observations that are missing (NA) for each variable.
+
+## Using `summarize()` to compute chosen summary statistics
+
+***How old do people who are stopped, questioned, and frisked by the NYPD tend to be?***
+
+The following code allows us to answer this question:
+
+```{r}
+sqf_selected |> 
+  summarize(avg_age = mean(suspect_reported_age, 
+                                na.rm = TRUE))
+```
+
+We would read the above code as "take the `sqf_selected` dataset, and then `summarize` it by calculating the `mean` of `suspect_reported_age`. When calculating the mean, remove any missing values (`na.rm = TRUE`)."
+
+We call the `|>` symbol the "pipe" operator, and we read it as "and then". E.g. "take the dataset and then pipe it into the `summarize()` function".
+
+Note, `avg_age` is a user-defined name of the summary statistic we're computing. We could have called it `mean_age` instead if we wanted. Or `unicorn` for that matter. But, it's best to give them INFORMATIVE names.
+
+```{r}
+sqf_selected |> 
+  summarize(mean_age = mean(suspect_reported_age, 
+                              na.rm = TRUE))
+
+sqf_selected |> 
+  summarize(unicorn = mean(suspect_reported_age, 
+                              na.rm = TRUE))
+```
+
+As show in the lecture notes, we can compute multiple summary statistics within one `summarize()` function. We simply need to separate them by a comma. They will each be a new column in the output.
+
+```{r}
+sqf_selected |> 
+  summarize(mean_age = mean(suspect_reported_age, 
+                              na.rm = TRUE),
+            var_age = var(suspect_reported_age, 
+                              na.rm = TRUE),
+            sd_age = sd(suspect_reported_age, 
+                              na.rm = TRUE))
+
+sqf_selected |> 
+  summarize(Q1_age = quantile(suspect_reported_age, 0.25,   
+                              na.rm = TRUE),
+            Q2_age = quantile(suspect_reported_age, 0.5, 
+                              na.rm = TRUE),
+            med_age = median(suspect_reported_age, 
+                              na.rm = TRUE),
+            Q3_age = quantile(suspect_reported_age, 0.75, 
+                              na.rm = TRUE),
+            IQR_age = IQR(suspect_reported_age, 
+                              na.rm = TRUE))
+```
+
+::: {.callout-note title="Exercise 2"}
+a.  Copy, paste the relevant code above for computing the mean, variance, and standard deviation of suspect age as well as the 1st, 2nd, and 3rd quartiles and the median and IQR.
+
+b.  What units are `mean_age`, `var_age`, and `sd_age` measured in? *Hint, they're not all the same!*
+
+c.  Explain why `Q2_age` and `med_age` give the same number above. Would this be the case for a variable other than age?
+
+d.  Explain how to use Q1, Q2, and/or Q3 to compute the IQR.
+
+e.  What are the mean and median age of SQF suspects in 2023?
+
+f.  Based on you answer to part e, do you expect the distribution of age to be left-skewed, right-skewed, or symmetric? Explain.
+
+g.  Based on your answer to part f, is the mean or median the more appropriate measure of center? And is standard deviation or IQR the more appropriate measure of spread?
+
+h.  Using the appropriate measure of center and spread determined in part g, interpret the summary statistics in context in order to provide an answer to the research question (How old do people who are stopped, questioned, and frisked by the NYPD tend to be?).
+:::
+
+## Summarizing categorical data
+
+Recall that during a search & frisk, if police discover contraband or evidence of criminal activity, they can issue an arrest or a summons to appear in court. If no evidence of wrongdoing is found, the person is free to go. Therefore, each stop, question, frisk encounter can end in three ways:
+
+-   the person is arrested (`suspect_arrested_flag` has the value "Y")
+-   the person is issued a summons (`summons_issued_flag` has the value "Y")
+-   no evidence of wrongdoing is found (both variables above have the value "N")
+
+The first two mean some evidence of criminal activity was found & reported and the third means no evidence of criminal activity was found & reported. We will create one new variable (`criminal_offense_reported`) to indicate whether or not criminal activity was found & reported.
+
+```{r}
+sqf_selected <- sqf_selected |> 
+  mutate(criminal_offense_reported = if_else(suspect_arrested_flag == "Y" | summons_issued_flag == "Y", "Y", "N"))
+```
+
+This new variable, `criminal_offense_reported` is a categorical variable. We can summarize a categorical variable using a proportion. This proportion - of stops that result in evidence of criminal activity - is of policy interest. Critics say SQF results in too many innocent people having their civil liberties violated. Proponents say it is a necessary and useful program for keeping drugs and guns off the streets. Let's investigate how often NYPD SQFs result in evidence of criminal activity being found.
+
+**What proportion of NYPD stop, question, frisk encounters find evidence of criminal activity?**
+
+We can again use the `summarize()` function to help us summarize the data. We'll first calculate the number of stops made in total using the `n()` function and the number of stops where a crime was found using the `sum()` function. We'll then use those counts to compute our desired proportion, `prop_crime_found`.
+
+```{r}
+sqf_selected |> 
+  summarize(n_stops = n(),
+            n_crime_found = sum(criminal_offense_reported == "Y")) |> 
+  mutate(prop_crime_found = n_crime_found/n_stops)
+```
+
+::: {.callout-note title="Exercise 3"}
+a.  Copy, paste the code above for computing the proportion of stops that result in criminal activity being found.
+
+b.  Use the output to answer the question: What proportion of NYPD stop, question, frisk encounters find evidence of criminal activity?
+
+c.  Based on your answer to part b, what proportion of stops result in NO criminal activity being found?
+
+d.  Based on these findings, comment on your initial thoughts about the NYPD Stop, Question, Frisk policy. \[There are no right or wrong answers here\].
+:::
+
+# Comparing across groups
+
+In Lab 01, we saw that we could compare a numeric variable across groups using a faceted histogram. Below, we investigate age of persons stopped, questioned, and frisked by NYC borough.
+
+```{r}
+ggplot(sqf_selected, aes(x = suspect_reported_age)) +
+  facet_wrap(~stop_location_boro_name, ncol = 1) +
+  geom_histogram(color = "white")
+```
+
+## Using `group_by()`
+
+Often, we want actual numeric summaries of the data to supplement the visualizaion. We can very conveniently calculate the median (or any other summary statistic) for each level of a categorical variable by adding the group_by() function before we summarize.
+
+```{r}
+sqf_selected |> 
+  group_by(stop_location_boro_name) |> 
+  summarize(med_age = median(suspect_reported_age, 
+                              na.rm = TRUE))
+```
+
+::: {.callout-note title="Exercise 4"}
+a.  Copy, paste the code above to create both the faceted histogram and the medians by borough in your .qmd.
+
+b.  Which borough had the lowest median age? Which had the highest?
+
+c.  In the faceted histogram, what do the taller vs. shorter bars represent? Which borough had the most stop, question, frisk encounters with NYPD, and which had the least?
+
+d.  One potential explanation for higher SQFs in certain places might be population size. That is, if more people live in an area, naturally more stops might be made. Check out the Wikipedia page on [NYC Boroughs](https://en.wikipedia.org/wiki/Boroughs_of_New_York_City) to see the population sizes of the boroughs. Does population size explain what you observed in part c? That is, do the boroughs with the most/least people correspond to the most/least SQFs?
+:::
+
+If certain areas are policed more than would be expected based on population size, we might want to investigate why. NYPD has been criticized for racial bias in its policing and "over-policing" neighborhoods of color. Former NYC Mayor Michael Bloomberg, who expanded Stop, Question, Frisk, speaking about the program said (Aspen Institute, 2015):
+
+> “People say, 'Oh my God, you are arresting kids for marijuana who are all minorities.' Yes, that's true. Why? Because we put all the cops in the minority neighborhoods. Yes, that's true. Why'd we do it? Because that's where all the crime is.”
+
+Today, advocates for Stop and Frisk make similar claims. Are these claims supported by the data? Let’s investigate. We'll look at prevalence of criminal activity among Boroughs first, to see if we can explain the discrepancy in stop rates. Later, you will conduct the same analysis by race.
+
+The code below uses the same code as Exercise 3, but we now add a group by to see how often criminal activity is found in stops in each borough.
+
+```{r}
+sqf_selected |> 
+  group_by(stop_location_boro_name) |> 
+  summarize(n_stops = n(),
+            n_crime_found = sum(criminal_offense_reported == "Y")) |> 
+  mutate(prop_crime_found = n_crime_found/n_stops,
+         prop_no_crime_found = 1 - prop_crime_found)
+```
+
+This same data is displayed as a segemented bar graph:
+
+```{r}
+ggplot(sqf_selected, aes(y = stop_location_boro_name,
+                          fill = criminal_offense_reported)) +
+  geom_bar(position = "fill") +
+  labs(x = "Proportion",
+       y = "")
+```
+
+::: {.callout-note title="Exercise 5"}
+a.  Copy, paste the code above for computing the proportions and creating the segemented bar plot.
+
+b.  Do the data suggest a relationship between borough and prevalence of criminal activity? Explain.
+
+c.  Are the disproportionate SQF numbers by borough found in Exercise 4 explained / justified by the proportion of criminal activity found? That is, does the borough that gets policed the most correspond to the borough where the most criminal activity is found?
+:::
+
+We know that location / neighborhood tends to be associated with racial/ethnic demographics. For example, as of the 2020 Census[^1], the Bronx had a much higher proportion of Hispanic and Black residents and lower proportions of White and Asian residents compared to NYC as a whole.
+
+| Race/Ethnicity     | Bronx | All of NYC |
+|--------------------|-------|------------|
+| Hispanic           | 54.8% | 28.3%      |
+| White non-Hispanic | 8.9%  | 30.9%      |
+| Black non-Hispanic | 28.5% | 20.2%      |
+| Asian non-Hispanic | 4.6%  | 15.6%      |
+
+
+[^1]: https://popfactfinder.planning.nyc.gov/explorer/cities/NYC?censusTopics=mutuallyExclusiveRaceHispanicOrigin%2CdetailedRaceAndEthnicity&compareTo=2
+
+One of the primary critiques of NYPD Stop, Question, Frisk is that is has disproportionately affected neighborhoods and people of color. In Mayor Bloomberg's comments, he argues that people of color are getting arrested more frequently because they live in neighborhoods where more crime is happening. Again, let's use the data to investigate both of these claims 1) whether people of color are stopped at dispropirtionate rates (critics claim) and 2) whether crime rates are higher among people of color (Mayor's claim). 
+
+The code below calculates the number and proportion of stops by race.
+
+```{r}
+sqf_selected |> 
+  group_by(suspect_race_description) |> 
+  summarize(n_stops = n()) |> 
+  mutate(prop_stops = n_stops/sum(n_stops))
+```
+
+::: {.callout-note title="Exercise 6"}
+
+a. Copy, paste the code above to reproduce the summary statistics in your qmd
+
+b. What proportion of NYPD stop, question, frisk encounters are of Black (non-hispanic) people? How does this compare to the overall proportion of the NYC population that is Black (non-hispanic) as reported in the table above?
+
+c. Repeat part b but for Hispanic people (combining both Black Hispanic and White Hispanic).
+
+d. Repeat part b but for White people (non-Hispanic)
+
+e. Repeat part b but for Asian people (non-Hispanic)
+
+f. Using the data, respond to critics claims: is there evidence that people of color are stopped, frisked, and questioned at disproportionate rates?
+
+:::
+
+There does seem to be evidence that some demographic groups are stopped, questioned, and frisked at rates disproportionate to their proportion of the population. Let's now investigate whether there is evidence to back up Mayor Bloomberg's claim that this is because of differences in criminal activity.
+
+::: {.callout-note title="Exercise 7"}
+
+a. Copy, paste, tweak relevant code to compute how often criminal activity is found in stops by race. *Hint: use the same code that did this for borough, and adapt it to compute the proportions by race instead*
+
+b. Do the data suggest an association between race and prevalence of criminal activity? 
+
+c. Are Mayor Bloomberg's comments supported by this data? Explain.
+
+:::
+
+Suppose an advocate for the Stop, Question, Frisk program takes the same data from the lab and performs a new analysis that looks at the racial breakdown among criminal offenses reported. They claim that their analysis provides strong evidence for Bloomberg's claim. See their results below:
+
+```{r}
+sqf_selected |> 
+  filter(criminal_offense_reported == "Y") |> 
+  ggplot(aes(y = suspect_race_description)) +
+    geom_bar() +
+    labs(title = "Racial Breakdown of Criminal Offenses Found",
+          x = "Number of criminal offenses",
+          y = "Race")
+
+sqf_selected |> 
+  filter(criminal_offense_reported == "Y") |> 
+  group_by(suspect_race_description) |> 
+  summarize(n_criminal_offenses = n()) |> 
+  mutate(prop = n_criminal_offenses/sum(n_criminal_offenses))
+```
+
+::: {.callout-note title="Exercise 8"}
+
+Does this new analysis provide compelling evidence for Bloomberg’s claim? Why
+or why not?
+
+:::
+
+::: {.callout-note  title="Exercise 9"}
+
+Now that you've explored the NYPD Stop, Question, Frisk data, spend a few minutes reflecting on your learning by responding to the following questions:
+
+a. What were the main statistical concepts covered in this assignment?
+
+b. What's one piece of insight you gleaned from the data? 
+
+c. What's one thing you understand better after completing these exercises?
+
+d. What exercise(s) gave you the most trouble? What was difficult about them/where did you get stuck?
+
+e. What are you left wondering about / curious to explore further after completing this analysis? 
+
+:::
+
+```{r, echo=FALSE, eval = FALSE}
+sqf_selected |> 
+  group_by(suspect_race_description) |> 
+  summarize(n_stops = n(),
+            n_crime_found = sum(criminal_offense_reported == "Y")) |> 
+  mutate(prop_crime_found = n_crime_found/n_stops,
+         prop_no_crime_found = 1 - prop_crime_found)
+
+ggplot(sqf_selected, aes(y = suspect_race_description,
+                          fill = criminal_offense_reported)) +
+  geom_bar(position = "fill") +
+  labs(x = "Proportion",
+       y = "")
+```
 

@@ -1,5 +1,6 @@
 ---
-title: "Volleyball - Women's NCAA Division I"
+title: "NYPD Stop, Question, Frisk"
+subtitle: "Lab 02"
 author: "YOUR NAME HERE"
 format:
   html:
@@ -13,17 +14,22 @@ editor_options:
   chunk_output_type: console
 ---
 
-# Getting started: Volleyball data
+# Getting started: NYPD data
 
 ```{r, message = FALSE}
-library(tidyverse) #loads package
-library(ggridges)
+library(tidyverse) #load package
 
-volleyball <- read_csv("volleyball_ncaa_div1_2022_23_clean.csv") #loads data
+sqf_2023 <- read_rds("sqf_2023.rds") #loads data
 ```
 
 ```{r}
-glimpse(volleyball)
+#creates dataset with fewer columns needed for analysis
+sqf_selected <- sqf_2023 |> 
+  select(1:15)
+
+glimpse(sqf_selected)
+
+options(tibble.width = Inf)
 ```
 
 ## Exercise 1
@@ -34,13 +40,15 @@ b\. YOUR ANSWER HERE
 
 c\. YOUR ANSWER HERE
 
-d\. YOUR ANSWER HERE
-
-e\. YOUR ANSWER HERE
+# Summarizing data
 
 ## Exercise 2
 
-a\. YOUR ANSWER HERE
+a\.
+
+```{r}
+
+```
 
 b\. YOUR ANSWER HERE
 
@@ -52,153 +60,93 @@ e\. YOUR ANSWER HERE
 
 f\. YOUR ANSWER HERE
 
-# One numeric variable
+g\. YOUR ANSWER HERE
+
+h\. YOUR ANSWER HERE
+
+```{r}
+#create new criminal_offense_reported variable
+sqf_selected <- sqf_selected |> 
+  mutate(criminal_offense_reported = if_else(suspect_arrested_flag == "Y" | summons_issued_flag == "Y", "Y", "N"))
+```
 
 ## Exercise 3
 
 a\.
 
 ```{r}
-# your code here - remove the hashtag! 
+
 ```
 
 b\. YOUR ANSWER HERE
 
 c\. YOUR ANSWER HERE
+
+d\. YOUR ANSWER HERE
+
+# Comparing across groups
 
 ## Exercise 4
 
 a\.
 
 ```{r}
-#your code here - remove the hashtag! 
+
 ```
-
-b\. YOUR ANSWER HERE
-
-c\.
-
-```{r}
-#your code here - remove the hashtag! 
-```
-
-d\. YOUR ANSWER HERE
-
-e\. YOUR ANSWER HERE
-
-## Exercise 5
-
-a\. YOUR ANSWER HERE
 
 b\. YOUR ANSWER HERE
 
 c\. YOUR ANSWER HERE
 
 d\. YOUR ANSWER HERE
+
+## Exercise 5
+
+a\.
+
+```{r}
+
+```
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
 
 ## Exercise 6
 
 a\.
 
 ```{r}
-# your code here - remove the hashtag! 
+
 ```
 
 b\. YOUR ANSWER HERE
 
-# Two numeric variables
+c\. YOUR ANSWER HERE
+
+d\. YOUR ANSWER HERE
+
+e\. YOUR ANSWER HERE
+
+f\. YOUR ANSWER HERE
 
 ## Exercise 7
 
 a\.
 
 ```{r}
-# your code here - remove the hashtag! 
+ 
 ```
 
 b\. YOUR ANSWER HERE
 
-# Two categorical variables
+c\. YOUR ANSWER HERE
 
 ## Exercise 8
 
-a\.
-
-```{r}
-# your code here - remove the hashtag! 
-
-# your code here - remove the hashtag! 
-```
-
-b\. YOUR ANSWER HERE
-
-c\. YOUR ANSWER HERE
-
-# One numeric & one categorical variable
+YOUR ANSWER HERE
 
 ## Exercise 9
-
-a\.
-
-```{r}
-# your code here - remove the hashtag!
-
-# your code here - remove the hashtag!
-
-# your code here - remove the hashtag!
-```
-
-b\. YOUR ANSWER HERE
-
-c\. YOUR ANSWER HERE
-
-# More than two variables
-
-## Exercise 10
-
-a\.
-
-```{r}
-# your code here - remove the hashtag!
-```
-
-b\. YOUR ANSWER HERE
-
-c\. YOUR ANSWER HERE
-
-## Exercise 11
-
-```{r}
-# your code here - remove the hashtag!
-```
-
-YOUR ANSWER HERE
-
-## Exercise 12
-
-```{r}
-# your code here - remove the hashtag!
-```
-
-YOUR ANSWER HERE
-
-## Exercise 13
-
-```{r}
-# your code here - remove the hashtag!
-```
-
-YOUR ANSWER HERE
-
-## Exercise 14
-
-```{r}
-# your code here - remove the hashtag!
-```
-
-YOUR ANSWER HERE
-
-## Exercise 15
 
 a\. YOUR ANSWER HERE
 
@@ -208,10 +156,4 @@ c\. YOUR ANSWER HERE
 
 d\. YOUR ANSWER HERE
 
-## BONUS
-
-```{r}
-# your code here - remove the hashtag!
-```
-
-YOUR ANSWER HERE
+e\. YOUR ANSWER HERE
