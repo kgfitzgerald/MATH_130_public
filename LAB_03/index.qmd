@@ -1,0 +1,223 @@
+---
+title: "Lab 03: Normal Distribution Practice"
+author:
+  - name: Katie Fitzgerald
+    email: kfitzgerald@apu.edu
+    affiliation:
+      - id: apu
+        name: Azusa Pacific University
+date: October 16, 2024
+format:
+  html:
+    grid:
+      margin-width: 350px
+    table-scroll: true
+    options: 
+          dplyr.width: Inf
+          tibble.width: Inf
+toc: true
+toc-location: left
+description: Practice using the normal distribution to calculate probabilities and cutoff values.
+editor_options:
+  chunk_output_type: console
+callout-icon: false
+---
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(ggdist)
+library(distributional)
+```
+
+
+::: callout-important
+#### Action required
+
+To get started on Lab 03:
+
+1.  Log-in to Posit Cloud and navigate to the MATH_130_F24 workspace
+2.  Click "Start" on Lab 03
+3.  In the Files pane (lower right quadrant), click the file "Lab_03.qmd" to open it
+4.  Click the grey/white Settings icon and select "Preview in Viewer Pane"
+5.  Click the Render button (blue arrow) to Render the .qmd into an html. The html should pop up on the right-hand side of Posit Cloud in the Viewer Pane.
+:::
+
+# Introduction
+
+This lab will help you practice computing probabilities and percentile cut-offs from the normal distribution. Throughout this lab, you can use the [normal distribution applet](https://homepage.divms.uiowa.edu/~mbognar/applets/normal.html) to verify that your R code is giving you what you expect. This whole lab will make use of only two functions:
+
++ `pnorm()` for computing probabilities/percentages, and
++ `qnorm()` for computing cut-off values
+
+
+# Examples from lecture
+
+## Example 1: SAT Scores
+
+::: {.callout-caution title="Research question"}
+SAT scores are distributed nearly normally with mean 1500 and standard devia-on 300. If Marcus scored an 1800, what percentile was he in? In other words, what percentage of people did he score better than?
+
+```{r}
+pnorm(1800, mean = 1500, sd = 300)
+```
+
+> Marcus scored better than `r round(100*pnorm(1800, mean = 1500, sd = 300), 1)`% of people
+
+:::
+
+::: {.callout-important}
+When working with the normal distribution, you should ALWAYS DRAW A PICTURE to help you reason about the question and verify if your answer makes sense.
+:::
+
+```{r, warning = FALSE, message = FALSE, echo = FALSE}
+ggplot() +
+  stat_dist_halfeye(aes(y = "N(1500, 300)", 
+                        dist = dist_normal(mean = 1500, 
+sd = 300),
+                        fill = after_stat(x < 1800))) +
+  labs(y = "", x = "x") +
+  scale_fill_manual(values = c("grey", "navyblue")) +
+  theme_minimal()
+```
+
+
+::: {.callout-note title="Exercise 1"}
+a.  By default, does `pnorm()` tell you the probability to the LEFT or to the RIGHT of the cutoff? In other words, does it tell you the LOWER TAIL or UPPER TAIL probability? 
+
+b.  If you want to find the probability that falls ABOVE a cutoff value, what should you add to the `pnorm()` code? *Hint: see page 13 of lecture notes*
+
+c. If your cutoff value is less than the mean, will the probability that falls BELOW your cutoff be <50%, =50%, >50%, or impossible to tell?
+
+d. If your cutoff value is less than the mean, will the probability that falls ABOVE your cutoff be <50%, =50%, >50%, or impossible to tell?
+
+:::
+
+## Example 2: Heinz ketchup bottles
+
+::: {.callout-caution title="Research question"}
+
+At Heinz ketchup factory the amounts which go into bottles of ketchup are supposed to be normally distributed with mean 36 oz. and standard deviation 0.11 oz. Once every 30 minutes a bottle is selected from the production line, and its contents are noted precisely. If the amount of ketchup in the bottle is below 35.8 oz. or above 36.2 oz., then the bottle fails the quality control inspection.
+
+> What percent of bottles have less than 35.8 ounces of ketchup?
+
+```{r}
+pnorm(35.8, mean = 36, sd = 0.11)
+```
+
+> What percent of bottles have MORE than 36.2 ounces of ketchup?
+
+Two ways to find the same answer:
+
+```{r}
+pnorm(36.2, mean = 36, sd = 0.11, lower.tail = FALSE)
+
+1 - pnorm(36.2, mean = 36, sd = 0.11)
+```
+
+:::
+
+## Example 3: Body temperatures
+
+::: {.callout-caution title="Research question"}
+
+Body temperatures of healthy humans are distributed nearly normally with mean 98.2 (degrees Fahrenheit) and standard
+deviation 0.73.
+
+> What is the cutoff for the lowest 3% of human body temperatures?
+
+```{r}
+qnorm(0.03, mean = 98.2, sd = 0.73)
+```
+
+> What is the cutoff for the highest 10% of human body temperatures?
+
+Two ways to find the same answer:
+
+```{r}
+qnorm(0.10, mean = 98.2, sd = 0.73, lower.tail = FALSE)
+qnorm(0.90, mean = 98.2, sd = 0.73)
+```
+
+:::
+
+::: {.callout-note title="Exercise 2"}
+
+a. Explain where the 0.90 came from in the last `qnorm()` code above.
+b. Explain why the following code is INCORRECT:
+
+```{r}
+1 - qnorm(.10, mean = 98.2, sd = 0.73)
+```
+
+:::
+
+# New Context: Birthweight
+
+::: {.callout-note title="Exercise 3"}
+
+Suppose that birthweights of newborn babies in the United States follow a normal distribution with mean 3300 grams and standard deviation 500 grams. Babies who weigh less than 2500 grams at birth are classified as low birthweight. 
+
+Use code to answer each of the following:
+
+a. How many standard deviations below the mean is a baby classified as low birthweight? *Hint, you don't need to use `pnorm()` or `qnorm()` here, just use R as a calculator.*
+
+b. What percentage of newborn babies weigh less than 2500 grams?
+
+c. What is the probability that a randomly selected newborn baby weighs more than 10 pounds?
+
+d. What percentage of newborn babies weigh between 3000 and 4000 grams?
+
+e. How little must a baby weight to be among the lightest 2.5% of all newborns? Convert your answer to pounds. *Google to figure out the conversion!*
+
+f. How much must a baby weigh to be among the heaviest 10%? Convert your answer to pounds.
+
+:::
+
+# Z-score practice
+
+Recall that Z-scores are normally distributed with mean 0 and standard deviation 1. Find each of the following. Note, you should draw a picture to help you visualize what you are trying to find for each question (you do not need to turn in your sketches).
+
+::: {.callout-note title="Exercise 4"}
+
+Use code to compute each of the following probabilities:
+
+a. $P(Z < 1.25)$
+b. $P(Z > 1.25)$
+c. $P(Z < -1.25)$
+d. $P(Z > -1.25)$
+e. Explain how your answers in parts a & b relate to one another 
+f. Comment on **how** AND **why** your answers to a & b relate to your answers to Tasks c & d
+
+:::
+
+::: {.callout-note title="Exercise 5"}
+
+Use code to compute each of the following probabilities:
+
+a. $P(-1 < Z < 1)$
+b. $P(-2 < Z < 2)$
+c. $P(-3 < Z < 3)$
+d. Explain how your results in a - c relate to the Empirical Rule
+
+:::
+
+::: {.callout-note title="Exercise 6"}
+
+Use code to find the following probabilities:
+
+a. $P(-1.645 < Z < 1.645)$
+b. $P(-1.96 < Z < 1.96)$
+c. $P(-2.576 < Z < 2.576)$
+
+Use the `qnorm()` function to find:
+
+d. the 95th percentile of Z-scores
+e. the 5th percentile of Z-scores
+f. the 2.5th percentile of Z-scores
+g. the 97.5th percentile of Z-scores
+h. the 99.5th percentile of Z-score
+
+i. Comment on how AND why your answers to parts d - h relate to one another.
+j. Comment on how AND why your answers to parts d - h relate to parts a - c. 
+
+:::
