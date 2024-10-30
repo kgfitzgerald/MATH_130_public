@@ -1,0 +1,123 @@
+---
+title: "Lab 04 / Exam 2 Rough Draft"
+subtitle: "Hypothesis tests and confidence intervals"
+author: "YOUR NAME HERE"
+format:
+  html:
+    self-contained: true
+    toc: true
+    toc_float: true
+    number_section: false
+    highlight: tango
+editor: visual
+editor_options:
+  chunk_output_type: console
+---
+
+```{r, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(infer)
+
+gss2016 <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSXStAOCL3Y19OuZAoREVDHKzgiBycVo5h5NRvkU3l4IB81kx-BMU4hurcpWSdfYszJIRQJZ7QblJ8-/pub?output=csv")
+
+beach_vb <- readRDS("beach_vb_lab04.RDS")
+```
+
+## Exercise 1
+
+a\. YOUR ANSWER HERE
+
+b\. $paste your LaTeX syntax inside these dollar signs$
+
+c\. $paste your LaTeX syntax inside these dollar signs$
+
+## Exercise 2
+
+TYPE YOUR LaTeX syntax here - make sure to put it inside double dollar signs to center the equations.
+
+## Exercise 3
+
+```{r}
+# part a code 
+
+```
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+d\. YOUR ANSWER HERE
+
+## Exercise 4
+
+```{r}
+# part a code 
+
+```
+
+b\. YOUR ANSWER HERE
+
+## Exercise 5
+
+a\. YOUR ANSWER HERE
+
+b\. YOUR ANSWER HERE
+
+```{r}
+# part c code 
+
+```
+
+d\. YOUR ANSWER HERE
+
+e\. YOUR ANSWER HERE
+
+f\. YOUR ANSWER HERE
+
+g\. YOUR ANSWER HERE
+
+## Exercise 6
+
+```{r}
+# part a code 
+
+
+```
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+## Exercise 7
+
+a\. YOUR ANSWER HERE
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+## Exercise 8
+
+```{r}
+# part a code 
+
+
+```
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+## Exercise 9
+
+```{r}
+# part a code 
+
+
+```
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+d\. YOUR ANSWER HERE
