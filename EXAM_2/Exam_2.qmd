@@ -1,0 +1,156 @@
+---
+title: "Exam 2 - Group Takehome"
+subtitle: "GROUP # HERE (from Canvas)"
+author: "GROUP MEMBER NAMES HERE"
+date: "November 13, 2024"
+format:
+  html:
+    self-contained: true
+    toc: true
+    toc_float: true
+    number_section: false
+    highlight: tango
+editor: visual
+editor_options:
+  chunk_output_type: console
+---
+
+```{r, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(infer)
+library(kableExtra)
+
+hotels <- read_csv("./data/hotels.csv")
+```
+
+## Exercise 1
+
+a\. YOUR ANSWER HERE
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+d\.
+
+-   Numerical discrete:
+
+-   Numerical continuous:
+
+-   Categorical ordinal:
+
+-   Categorical non-ordinal
+
+## Exercise 2
+
+a\. YOUR ANSWER HERE
+
+```{r}
+#part b code here
+```
+
+c\. YOUR ANSWER HERE
+
+d\. YOUR ANSWER HERE
+
+e\. YOUR ANSWER HERE
+
+f\. YOUR ANSWER HERE
+
+```{r}
+#part g code here
+```
+
+h\. YOUR ANSWER HERE
+
+i\. YOUR ANSWER HERE
+
+```{r}
+#code to create summer variable here
+```
+
+## Exercise 3
+
+a\. YOUR ANSWER HERE
+
+```{r}
+# part b code here
+
+```
+
+c\. YOUR ANSWER HERE
+
+```{r}
+# part d code here
+```
+
+e\. YOUR ANSWER HERE
+
+## Exercise 4
+
+```{r}
+# part a code 
+
+```
+
+b\. YOUR ANSWER HERE
+
+c\. YOUR ANSWER HERE
+
+```{r}
+# part d code here
+```
+
+e\. YOUR ANSWER HERE
+
+f\. YOUR ANSWER HERE
+
+g\. YOUR ANSWER HERE
+
+h\. YOUR ANSWER HERE
+
+## Exercise 5
+
+```{r}
+
+```
+
+YOUR ANSWER HERE
+
+## Exercise 6
+
+a\. YOUR ANSWER HERE
+
+```{r}
+# part b code 
+
+
+```
+
+c\. YOUR ANSWER HERE
+
+```{r}
+# part d code here
+```
+
+e\. YOUR ANSWER HERE
+
+f\. YOUR ANSWER HERE
+
+g\. YOUR ANSWER HERE
+
+## BONUS 1
+
+YOUR ANSWER HERE
+
+```{r}
+
+```
+
+## BONUS 2
+
+a\. YOUR ANSWER HERE
+
+b\. YOUR ANSWER HERE
+
+## 

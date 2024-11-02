@@ -1,0 +1,248 @@
+---
+title: "Exam 2 Group Take-home"
+author:
+  - name: Katie Fitzgerald
+    email: kfitzgerald@apu.edu
+    affiliation:
+      - id: apu
+        name: Azusa Pacific University
+date: November 4, 2024
+format:
+  html:
+    grid:
+      margin-width: 350px
+    table-scroll: true
+    options: 
+          dplyr.width: Inf
+          tibble.width: Inf
+toc: true
+toc-location: left
+description: Assess ability to use R to conduct statistical inference.
+editor_options:
+  chunk_output_type: console
+callout-icon: false
+---
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(infer)
+library(kableExtra)
+```
+
+::: callout-important
+#### Action required
+
+To get started this Exam:
+
+1.  Log-in to Posit Cloud and navigate to the MATH_130_F24 workspace
+2.  Click "Start" on Exam 2
+3.  In the Files pane (lower right quadrant), click the file "Exam_2.qmd" to open it
+4.  Click the grey/white Settings icon and select "Preview in Viewer Pane"
+5.  Click the Render button (blue arrow) to Render the .qmd into an html. The html should pop up on the right-hand side of Posit Cloud in the Viewer Pane.
+
+As you follow along in the Exam, you should run each corresponding code chunk in your .qmd document. To "Run" a code chunk, you can press the green "Play" button in the top right corner of the code chunk in your .qmd. You can also place your cursor anywhere in the line(s) of code you want to run and press "command + return" (Mac) or "Ctrl + Enter" (Windows).
+:::
+
+## Instructions
+
+Groups are expected to submit their solutions to Canvas as an .html file, similar to how you submit your labs. **Only one person from the group needs to submit the exam** --- provided you have formed your group properly on Canvas. However, **everyone must fill out the [Google Form](https://forms.gle/m9JEerFAFxM9Mnz3A) to give feedback on group dynamics.** 
+
+Written answers should be in complete sentences within the context of the problem when appropriate. You are expected to also show all your work (i.e., include your R code).
+
+### Academic integrity guidelines
+
++ You MAY use your notes, the textbook, previous labs etc. 
++ You MAY use existing resources on the internet, but you may NOT post to any online forums or utilize AI to ask for help
++ You may NOT work with other groups 
++ You may NOT seek help from any other people (e.g. tutor, LA, friend, etc.) in or outside of APU
++ You MAY ask questions during the in-class work session in Week 11, and you may come to my student hours during Week 11, but I will not field exam questions outside of these time slots. Note there will NOT be student hours during Week 12 when it is due - plan accordingly.
+
+**Failure to abide by the above guidelines will be considered a violation of academic integrity and handled according to university policy.** Violations on an exam typically result in a 0 on the exam and an official report filed with the Office of the Provost, to be included in your official academic records.
+
+Each group member will be required to "sign" their name in the [Google Form](https://forms.gle/m9JEerFAFxM9Mnz3A) to attest to the fact that your group abided by these guidelines.
+
+------------------------------------------------------------------------
+
+## Needed Packages
+
+The following loads the packages that are needed for this Exam.
+
+```{r load-pkgs, message=FALSE, warning = FALSE}
+library(tidyverse)
+library(infer)
+library(kableExtra)
+```
+
+## Data: Hotels
+
+There is a data file called `hotels.csv` loaded in the `data` folder of your Exam 2 project on RStudio Cloud. The code below loads this data set.
+
+```{r, echo = FALSE, eval = FALSE, message = FALSE, warning = FALSE}
+hotels_f23 <- read_csv("./data/hotels_f23.csv")
+
+set.seed(437)
+hotels_f24 <- hotels_f23 |> 
+  sample_n(673)
+write_csv(hotels_f24, "./data/hotels.csv")
+```
+
+
+```{r, message = FALSE, warning = FALSE}
+hotels <- read_csv("./data/hotels.csv")
+```
+
+The `hotels` data set contains the following variables:
+
+-   `adr` = average daily rate (\$), i.e., average cost per night for the reservation
+-   `hotel_type` = whether the hotel reservation is at a City or Resort Hotel
+-   `is_canceled` = whether or not the hotel reservation was canceled
+-   `lead_time` = number of days in advance hotel reservation was made
+-   `arrival_date_year` = year of guest arrival (first day of reservation)
+-   `arrival_date_month` = month of guest arrival (first day of reservation)
+-   `arrival_date_week_number` = week number of guest arrival (first day of reservation)
+-   `arrival_date_day_of_month` = day of month of guest arrival (first day of reservation)
+-   `stays_in_weekend_nights` = number of weekend nights in the reservation
+-   `stays_in_week_nights` = number of week-day nights in the reservation
+-   `adults` = number of adults included in the reservation
+-   `children` = number of children included in the reservation
+-   `babies` = number of babies included in the reservation
+-   `is_repeated_guest` = 1 if guest has stayed there before, 0 otherwise
+-   `previous_cancellations` = number of previous cancellations by guest
+-   `previous_bookings_not_canceled` = number of previous reservations by guest that were not cancelled
+-   `reserved_room_type` = room type requested at reservation, rating scale A-H, with H being the highest quality category
+-   `assigned_room_type` = room type assigned to guest, rating scale A-H, with H being the highest quality category
+-   `booking_changes` = number of changes made to the reservation
+-   `deposit_type` = No Deposit, Refundable, or Non refundable
+-   `required_car_parking_spaces` = number of parking spaces requested
+-   `total_of_special_requests` = number of special requests made by guest
+-   `reservation_status` = Check-Out, Canceled, or No-Show
+-   `reservation_status_date` = date reservation status was recorded
+
+::: callout-important
+
+These data come from reservations made at hotels located in the US from July 2015 to September 2017. For the purposes of this exam, **you may consider these data to be a random sample of all US hotel reservations.**
+
+Unless stated otherwise, you should use $\alpha = 0.01$ for the hypothesis tests on this exam.
+
+:::
+
+::: {.callout-note title="Exercise 1 (6pts)"}
+Inspect the data to confirm that you have imported it correctly and gain a general sense of what is contained in the data set. Provide a quick overview/summary of the data set by answering the following questions:
+
+a. (1pt) What are the observational units in this data set?
+b. (1pt) How many observational units are there? How many variables?
+c. (4pts) Identify one variable that can be classified as each of following types: 
+    + Numerical discrete
+    + Numerical continuous
+    + Categorical ordinal
+    + Categorical non-ordinal
+:::
+
+::: {.callout-caution title="Research Question 1"}
+Do Resort Hotels or City Hotels have a higher daily rate, on average?
+:::
+
+::: {.callout-note title="Exercise 2 (20pts)"}
+
+a. (1pt) What is the response variable for the above research question? Use the name of the variable as it appears in the dataset.
+b. (2pts) Provide an appropriate visualization to investigate the distribution of this response variable.
+c. (1pts) Describe the shape of the distribution visualized in part b.
+d. (1pt) Does this research question imply an explanatory variable? If so, what is it? 
+e. (2pt) What is the parameter of interest for this research question? What notation is used for it?
+f. (4pt) State the hypotheses to investigate this research question (using symbols)
+g. (1pt) Copy, paste the following code that computes the average daily rate in each group and also conducts a t-test to investigate this research question.
+
+```{r}
+hotels |> 
+  group_by(hotel_type) |> 
+  summarize(mean_daily_rate = mean(daily_rate)) |> 
+  kable(digits = 2)
+
+t_test(hotels, response = daily_rate, explanatory = hotel_type, 
+       order = c("Resort Hotel", "City Hotel"))  |> 
+  kable(digits = 2)
+```
+
+h. (4pts) What is the point estimate for this hypothesis test, and what notation do we use for it?
+i. (4pts) What conclusion would you draw about whether Resort Hotels or City Hotels have a higher daily rate, on average? Justify your answer using the `t_test()` output above.
+:::
+
+::: {.callout-caution title="Research Question 2"}
+
+Conventional wisdom is that travel costs more during the "peak" summer months when demand is high. What is the difference in average daily rate for summer vs. non-summer reservations? 
+
+:::
+
+::: callout-important
+#### Action required
+
+The code below creates a new variable called `summer` that is "yes" if the reservation is for June, July, or August, and "no" otherwise. 
+
+Copy, paste this code into the code chunk between Exercises 2 and 3.
+
+```{r}
+hotels <- hotels |> 
+  mutate(summer = if_else(arrival_date_month %in% c("June", "July", "August"), 
+                          "yes", "no"))
+```
+
+:::
+
+::: {.callout-note title="Exercise 3 (20pts)"}
+
+a. (4pts) What is the parameter of interest for this research question? What notation do we use for it?
+b. (4pts) Compute the average daily rate for each group (summer vs. non-summer) for the reservations in this sample.
+c. (4pts) What is the point estimate for this research question? What notation do we use for it?
+d. (4pts) Construct an appropriate 99% confidence interval for this research question using R code.
+e. (4pts) Interpret your confidence interval in the context of the data.
+:::
+
+::: {.callout-caution title="Research Question 3"}
+How many days in advance are reservations made, on average?
+:::
+
+::: {.callout-note title="Exercise 4 (20pts)"}
+a. (2pts) Provide an appropriate visualization to investigate the the distribution of the response variable for this research question.
+b. (1pt) Does this research question imply an explanatory variable? If so, what is it? 
+c. (2pts) What is the parameter of interest for this research question? What notation is used for it?
+d. (4pts) Construct a 95% confidence interval to answer this research question. 
+e. (3pts) Interpret the confidence interval in context.
+f. (2pts) Suppose someone claims that people book their reservations at least two months in advance on average. Is there sufficient evidence to support this claim? Justify your answer using your confidence interval.
+g. (4pts) State the hypotheses you would use to evaluate the claim referenced in part f. 
+h. (2pts) If you were to conduct this hypothesis test, would you expect to get a p-value \< 0.05? Explain. *Note: you do not need to actually conduct the test or find the p-value.*
+
+:::
+
+::: {.callout-caution title="Research Question 4"}
+What proportion of all US hotel reservations are cancelled?
+:::
+
+::: {.callout-note title="Exercise 5 (10pts)"}
+Conduct an appropriate inference procedure (i.e. confidence interval or hypothesis test) to answer this research question using these data. Provide R code & output, and interpret your results in the context of the data.
+:::
+
+
+::: {.callout-caution title="Research Question 5"}
+Are reservations at City or Resort Hotels more likely to be cancelled?
+:::
+
+::: {.callout-note title="Exercise 6 (24pts)"}
+a. (2pts) What are the two variables relevant for this research question? Which one is response and which one is explanatory?
+b. (4pts) Create a standardized stacked bar chart to visualize the relationship between these two variables. *Hint: use `geom_bar` and set `position = "fill"`*
+c. (4pts) State the appropriate null and alternative hypotheses to investigate this question.
+d. (4pts) Conduct the hypothesis test using `prop_test()`. Use a significance level of  $\alpha = 0.01$.
+e. (4pts) State your conclusion, and justify it using the p-value.
+f. (4pts) What is the confidence interval for the difference in proportions between City and Resort Hotel reservations that get cancelled? Interpret the interval in context.
+g. (2pts) Comment on how the confidence interval could be used to draw a conclusion about the hypotheses above.
+:::
+
+::: {.callout-note title="BONUS 1 (3pts)"}
+State another research question you could investigate using this data and produce a relevant visualization to help you explore your question.
+:::
+
+::: {.callout-note title="BONUS 2 (3pts)"}
+The inference procedures you used on this exam (for confidence intervals and hypothesis tests) relied on the normal and/or t-distributions.
+
+a. Comment on how you can tell from your analysis that `daily_rate` and `days_in_advance` do NOT follow a normal or a t-distribution.
+b. Comment on why it was still appropriate to use the normal and/or t-distribution inference procedures for research questions regarding these variables.
+:::
