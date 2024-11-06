@@ -93,7 +93,7 @@ hotels <- read_csv("./data/hotels.csv")
 
 The `hotels` data set contains the following variables:
 
--   `adr` = average daily rate (\$), i.e., average cost per night for the reservation
+-   `daily_rate` = average daily rate (\$), i.e., average cost per night for the reservation
 -   `hotel_type` = whether the hotel reservation is at a City or Resort Hotel
 -   `is_canceled` = whether or not the hotel reservation was canceled
 -   `days_in_advance` = number of days in advance hotel reservation was made
