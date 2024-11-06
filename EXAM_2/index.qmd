@@ -96,7 +96,7 @@ The `hotels` data set contains the following variables:
 -   `adr` = average daily rate (\$), i.e., average cost per night for the reservation
 -   `hotel_type` = whether the hotel reservation is at a City or Resort Hotel
 -   `is_canceled` = whether or not the hotel reservation was canceled
--   `lead_time` = number of days in advance hotel reservation was made
+-   `days_in_advance` = number of days in advance hotel reservation was made
 -   `arrival_date_year` = year of guest arrival (first day of reservation)
 -   `arrival_date_month` = month of guest arrival (first day of reservation)
 -   `arrival_date_week_number` = week number of guest arrival (first day of reservation)
