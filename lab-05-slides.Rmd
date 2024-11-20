@@ -1,0 +1,149 @@
+---
+title: "Lab 05 slides"
+subtitle: "MATH 130"
+author: "Katie Fitzgerald"
+output:
+  xaringan::moon_reader:
+    css: ["xaringan-themer.css", "slides.css"]
+    lib_dir: libs
+    nature:
+      ratio: "16:9"
+      highlightLines: true
+      highlightStyle: solarized-light
+      countIncrementalSlides: false
+---
+
+```{r child = "setup.Rmd"}
+```
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(gghighlight)
+library(broom)
+library(palmerpenguins)
+```
+
+
+
+class: middle
+
+# Regression in R (new code for Lab 05)
+
+---
+
+## The data
+
+```{r, warning = FALSE}
+scorecard <- read_csv("data/scorecard.csv")
+glimpse(scorecard)
+```
+
+
+---
+
+## Fitting a regression model
+
+```{r, eval = FALSE}
+model_name <- lm(y_variable ~ x_variable, dataset)
+
+tidy(model_name)
+```
+
++ `lm` stands for "linear model" and is the function that actually fits the least squares regression model
+
+--
+
++ Nothing will appear in output after running the first line of code, but a new object called `model_name` will appear in your Environment
+
+--
+
++ `tidy()` is the function we use to see the regression table output
+
+--
+
++ Whatever you name your model is what should go inside `tidy()`
+
+---
+
+## Fitting a regression model: `lm()` and `tidy()`
+
+```{r fit-tidy, fig.show='hide'}
+model1 <- lm(pell_pct ~ firstgen_pct, scorecard)
+
+tidy(model1)
+```
+
+
+
+--
+
+The `estimate` column contains the intercept $(b_0)$ and slope $(b_1)$!
+
+When you see a table of output like this, you don't have to calculate the intercept or slope!
+
+--
+
+$$\hat{y} = 6.92 + 0.967x$$
+---
+
+## Visualizing a regression model
+
+.panelset[
+.panel[.panel-name[Output]
+```{r ref.label = "reg-viz", echo = FALSE, warning = FALSE, out.width = "70%", fig.width = 8}
+
+```
+]
+.panel[.panel-name[Code]
+
+```{r reg-viz, fig.show='hide', eval = FALSE}
+ggplot(scorecard, aes(x = firstgen_pct, y = pell_pct)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+]
+]
+
+---
+
+## Calculating $R^2$
+
+The `glance()` function will calculate $R^2$
+
+```{r}
+glance(model1)
+glance(model1)[1]
+```
+
+Whatever you name your model is what you should put inside `glance()`
+
+---
+
+## Recap: Regression in R
+
+```{r, eval = FALSE}
+model_name <- lm(______ ~ ______, ______)
+
+tidy(______)
+
+ggplot(______, aes(x = ______, y = ______)) +
+  geom____() +
+  geom____(method = "lm", se = FALSE)
+
+glance(______)[1]
+```
+
+--
+
+```{r, eval = FALSE}
+model_name <- lm(y_variable ~ x_variable, dataset)
+
+tidy(model_name)
+
+ggplot(dataset, aes(x = x_variable, y = y_variable)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+glance(model_name)[1]
+```
+

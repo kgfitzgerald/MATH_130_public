@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Lab 05 slides</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Katie Fitzgerald" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.min.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.min.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# Lab 05 slides
+]
+.subtitle[
+## MATH 130
+]
+.author[
+### Katie Fitzgerald
+]
+
+---
+
+
+
+
+
+layout: true
+  
+
+
+---
+
+
+
+
+
+class: middle
+
+# Regression in R (new code for Lab 05)
+
+---
+
+## The data
+
+
+``` r
+scorecard &lt;- read_csv("data/scorecard.csv")
+glimpse(scorecard)
+```
+
+```
+## Rows: 1,712
+## Columns: 14
+## $ unitid       &lt;dbl&gt; 210492, 446048, 441982, 445692, 445708, 44…
+## $ name         &lt;chr&gt; "Bryn Athyn College of the New Church", "A…
+## $ state        &lt;chr&gt; "PA", "FL", "MA", "UT", "NC", "NJ", "NC", …
+## $ type         &lt;chr&gt; "Private, nonprofit", "Private, nonprofit"…
+## $ admrate      &lt;dbl&gt; 0.8880, 0.8295, 0.1572, 0.8408, 0.8569, 0.…
+## $ satavg       &lt;dbl&gt; 1113, 1169, 1522, NA, NA, NA, NA, NA, NA, …
+## $ cost         &lt;dbl&gt; 30889, 34484, 70289, 33452, 47543, 16000, …
+## $ netcost      &lt;dbl&gt; 19048, 17981, 21370, 25270, 26835, 7975, 1…
+## $ avgfacsal    &lt;dbl&gt; 65475, 68202, 110907, 84042, 84087, 41400,…
+## $ comprate     &lt;dbl&gt; 0.5556, 0.5551, 0.9259, 0.6184, 0.5717, 0.…
+## $ debt         &lt;dbl&gt; 12000, 12000, 12537, 24500, 16500, NA, 920…
+## $ locale       &lt;chr&gt; "Suburb", "Rural", "Suburb", "City", "City…
+## $ pell_pct     &lt;dbl&gt; 40.48, 25.93, 9.21, 56.25, 58.01, 41.90, 2…
+## $ firstgen_pct &lt;dbl&gt; 33.81295, 17.63393, NA, 30.41958, 34.64141…
+```
+
+
+---
+
+## Fitting a regression model
+
+
+``` r
+model_name &lt;- lm(y_variable ~ x_variable, dataset)
+
+tidy(model_name)
+```
+
++ `lm` stands for "linear model" and is the function that actually fits the least squares regression model
+
+--
+
++ Nothing will appear in output after running the first line of code, but a new object called `model_name` will appear in your Environment
+
+--
+
++ `tidy()` is the function we use to see the regression table output
+
+--
+
++ Whatever you name your model is what should go inside `tidy()`
+
+---
+
+## Fitting a regression model: `lm()` and `tidy()`
+
+
+``` r
+model1 &lt;- lm(pell_pct ~ firstgen_pct, scorecard)
+
+tidy(model1)
+```
+
+```
+## # A tibble: 2 × 5
+##   term         estimate std.error statistic   p.value
+##   &lt;chr&gt;           &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt;
+## 1 (Intercept)     6.92     1.02        6.79 1.61e- 11
+## 2 firstgen_pct    0.967    0.0304     31.9  3.78e-172
+```
+
+
+
+--
+
+The `estimate` column contains the intercept `\((b_0)\)` and slope `\((b_1)\)`!
+
+When you see a table of output like this, you don't have to calculate the intercept or slope!
+
+--
+
+`$$\hat{y} = 6.92 + 0.967x$$`
+---
+
+## Visualizing a regression model
+
+.panelset[
+.panel[.panel-name[Output]
+&lt;img src="lab-05-slides_files/figure-html/unnamed-chunk-4-1.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.panel[.panel-name[Code]
+
+
+``` r
+ggplot(scorecard, aes(x = firstgen_pct, y = pell_pct)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+```
+]
+]
+
+---
+
+## Calculating `\(R^2\)`
+
+The `glance()` function will calculate `\(R^2\)`
+
+
+``` r
+glance(model1)
+```
+
+```
+## # A tibble: 1 × 12
+##   r.squared adj.r.squared sigma statistic   p.value    df logLik
+##       &lt;dbl&gt;         &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+## 1     0.393         0.393  12.4     1015. 3.78e-172     1 -6173.
+## # ℹ 5 more variables: AIC &lt;dbl&gt;, BIC &lt;dbl&gt;, deviance &lt;dbl&gt;,
+## #   df.residual &lt;int&gt;, nobs &lt;int&gt;
+```
+
+``` r
+glance(model1)[1]
+```
+
+```
+## # A tibble: 1 × 1
+##   r.squared
+##       &lt;dbl&gt;
+## 1     0.393
+```
+
+Whatever you name your model is what you should put inside `glance()`
+
+---
+
+## Recap: Regression in R
+
+
+``` r
+model_name &lt;- lm(______ ~ ______, ______)
+
+tidy(______)
+
+ggplot(______, aes(x = ______, y = ______)) +
+  geom____() +
+  geom____(method = "lm", se = FALSE)
+
+glance(______)[1]
+```
+
+--
+
+
+``` r
+model_name &lt;- lm(y_variable ~ x_variable, dataset)
+
+tidy(model_name)
+
+ggplot(dataset, aes(x = x_variable, y = y_variable)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE)
+
+glance(model_name)[1]
+```
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
