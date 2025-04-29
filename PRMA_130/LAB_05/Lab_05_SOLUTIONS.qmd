@@ -1,0 +1,176 @@
+---
+title: "Lab 05"
+subtitle: "Regression"
+author: "YOUR NAME HERE"
+format:
+  html:
+    self-contained: true
+    toc: true
+    toc_float: true
+    number_section: false
+    highlight: tango
+editor: visual
+editor_options:
+  chunk_output_type: console
+---
+
+## Grading notes
+
+Each part (a,b,c, etc) is worth 0.5 point (16 points total) + 4 points for neatness and organization.
+
+```{r, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(broom)
+library(gghighlight)
+
+scorecard <- read_csv("data/scorecard.csv")
+```
+
+## Exercise 1
+
+a. The relationship will be positive: as % first gen increases, % Pell elligible will also tend to increase.
+
+```{r}
+#part b
+ggplot(scorecard, aes(x = firstgen_pct, y = pell_pct)) +
+  geom_point()
+```
+
+c. There is a moderately strong, positive, linear relationship. There is one potential outlier with over 80% first gen students.
+
+d. Yes
+
+## Exercise 2 
+
+```{r}
+#part a
+scorecard %>% 
+  summarize(correlation = cor(pell_pct, firstgen_pct, 
+                              use = "complete.obs"))
+```
+
+b. The correlation of 0.627 indicates a moderately strong positive linear relationship.
+
+## Exercise 3
+
+```{r}
+#part a
+model1 <- lm(pell_pct ~ firstgen_pct, scorecard)
+tidy(model1)
+```
+
+b.  $\hat{y} = `r round(tidy(model1)[1,2],3)` + `r round(tidy(model1)[2,2],3)`x$
+
+c.  For an institution with 0% first generation students, we would expect the 6.92% of its students to be Pell elligible, on average.
+
+d.  For every one percentage point increase in first generation, % Pell elligible increases by 0.967 percentage points on average.
+
+## Exercise 4
+
+```{r}
+#part a code
+glance(model1)[1]
+```
+
+b.  39.3% of the variability in % Pell elligible can be explained by % First gen.
+
+## Exercise 5
+
+```{r}
+#part a code
+apu <- scorecard |> 
+  filter(name == "Azusa Pacific University")
+```
+
+b.  32.6%
+
+c.  37.98%
+
+d.  (count correct even if rounding slightly off) $\hat{y} = `r round(tidy(model1)[1,2],3)` + `r round(tidy(model1)[2,2],3)`*37.9826 = `r round(tidy(model1)[1,2]  +  tidy(model1)[2,2]*37.9826,3)`$
+
+```{r}
+#part d code (rounded)
+yhat <- 6.92 + 0.97*37.98
+yhat
+```
+
+```{r}
+#part e code
+32.6 - yhat 
+```
+
+```{r}
+#part f code
+ggplot(scorecard, aes(y = pell_pct, x = firstgen_pct)) +
+  geom_point(color = "#990000") +
+  gghighlight(name == "Azusa Pacific University", 
+              label_key = name)
+```
+
+g.  overestimate
+
+## Exercise 6
+
+```{r}
+#part a code
+model1_aug <- augment(model1)
+ggplot(data = model1_aug, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  labs(x = "Fitted values",
+       y = "Residuals")
+```
+
+b.  Yes, a linear model is appropriate because there is no apparent pattern in the residual plot. The residuals are randomly scattered around 0.
+
+## Exercise 7
+
+```{r}
+#part a code
+ggplot(scorecard, aes(x = cost, y = pell_pct)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+```
+
+```{r}
+#part b code
+model2 <- lm(pell_pct ~ cost, scorecard)
+tidy(model2)
+```
+
+c.  `r tidy(model2)[2,2]`
+
+```{r}
+#part d code
+glance(model2)[1]
+```
+
+d.  First generation was a better predictor, because it explained more of the variability in % Pell eligibility, as evidenced by a higher $R^2$
+
+## Exercise 8
+
+```{r}
+#part a-c code
+ggplot(scorecard, aes(x = satavg, y = pell_pct)) +
+  geom_point() +
+  geom_smooth(method = "lm")
+model3 <- lm(pell_pct ~ satavg, scorecard)
+tidy(model3)
+glance(model3)[1]
+```
+
+d.  `satavg` has a stronger relationship with `pell_pct` compared to `cost` and `firstgen`. It explains 52.7% of the variability, making it the best predictor of the three.
+
+## Exercise 9
+
+(1pt: graded on completion) Our analysis suggests that as average SAT score of a university goes up, % of Pell eligible students tends to go down. The article notes that rich students tend to do better on standardized tests such as the SAT for reasons unrelated to ability and potential. Therefore, low-income students may be disproportionately excluded from “elite” schools with competitive admissions processes. A university concerned with equity and inclusion should ensure that its admissions criteria do not unfairly screen out low-income students.
+
+### BONUS
+
+a.  0.3 pts for research question
+
+```{r}
+#0.4 pts for visualization / summary stat / model
+```
+
+c.  0.3 pts for comments on findings

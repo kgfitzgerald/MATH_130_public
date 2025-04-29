@@ -1,0 +1,137 @@
+---
+title: "Lab 04 / Exam 2 Rough Draft"
+subtitle: "Hypothesis tests and confidence intervals"
+author: "YOUR NAME HERE"
+format:
+  html:
+    self-contained: true
+    toc: true
+    toc_float: true
+    number_section: false
+    highlight: tango
+editor: visual
+editor_options:
+  chunk_output_type: console
+---
+
+## Grading notes
+
+Each part (a,b,c, etc) is worth 0.5 point (15 points total) + 5 points for neatness and organization. 
+
+```{r, warning = FALSE, message = FALSE}
+library(tidyverse)
+library(infer)
+
+gss2016 <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSXStAOCL3Y19OuZAoREVDHKzgiBycVo5h5NRvkU3l4IB81kx-BMU4hurcpWSdfYszJIRQJZ7QblJ8-/pub?output=csv")
+
+beach_vb <- readRDS("beach_vb_lab04.RDS")
+```
+
+## Exercise 1
+
+a\. The difference in proportions (between women and men who believe in life after death) (OK if they just state the first part)
+
+b\. $p_1 - p_2$
+
+c\. $\hat{p}_1 - \hat{p}_2$
+
+## Exercise 2
+
+(either of the following sets of hypotheses are correct)
+
+$$H_0: p_1 - p_2 = 0$$ $$H_A: p_1 - p_2 \neq 0$$
+
+$$H_0: p_1 = p_2$$ $$H_A: p_1 \neq p_2$$
+
+## Exercise 3
+
+```{r}
+ggplot(data = gss2016, aes(x = sex, fill = postlife)) +
+  geom_bar(position = "fill")
+
+```
+
+b\. sex
+
+c\. postlife
+
+d\. you would change "postlife" to "cappun"
+
+## Exercise 4
+
+```{r}
+gss2016 %>% 
+  group_by(sex) %>% 
+  summarize(count = sum(postlife == "YES"),
+            n = n()) %>% 
+  mutate(p_hat = count/n)
+
+```
+
+b\. $\hat{p}_1 - \hat{p}_2 = .859 - .712 = .147$
+
+## Exercise 5
+
+a\. Was there random sampling? Are there at least 10 "successes" and 10 "failures" in each group? 
+
+b\. Yes. The GSS uses a random sample of Americans. And we also have at least 10 success/failures in each group (73 and 12 for females, 37 and 15 for males).
+
+```{r}
+prop_test(gss2016, response = postlife, explanatory = sex, 
+          success = "YES", z = TRUE)
+
+```
+
+d\. Z = 2.10
+
+e\. p-value = 0.0355
+
+f\. The probability of observing a difference in proportions as extreme as 0.147, assuming the null hypothesis is true (there is no true difference), is 0.0355. 
+
+g\. Our p-value is greater than alpha, so we fail to reject the null hypothesis. There is insufficient evidence to claim men and women believe in the afterlife at different rates. 
+
+## Exercise 6
+
+```{r}
+prop_test(gss2016, response = postlife, 
+          explanatory = sex, success = "YES", 
+          z = TRUE, conf_level = 0.99)
+```
+
+b\. We are 99% confident that the true difference in proportions between females and males who believe in the afterlife is between -0.0415 and 0.336.
+
+c\. Because the null value (0) is contained in the interval, we fail to reject the null hypothesis (this agrees with the decision based off of the p-value).
+
+## Exercise 7
+
+a\. $$H_0: \mu_1 = \mu_2 \text{ OR } \mu_1 - \mu_2 = 0$$
+$$H_A: \mu_1 \neq \mu_2 \text{ OR } \mu_1 - \mu_2 \neq 0$$
+
+b\. Difference in means, $\mu_1 - \mu_2$
+
+c\. $\bar{x}_1 - \bar{x}_2$
+
+## Exercise 8
+
+```{r}
+beach_vb %>% 
+  group_by(gender) %>% 
+  summarize(mean_age = mean(player_age, na.rm = TRUE))
+```
+
+b\. $\bar{x}_1 - \bar{x}_2 = 29.0 - 27.7 = 1.3$
+
+c\. you should change `player_age` to `player_height`, and update the summary statistic label to be `mean_height` instead of `mean_age`
+
+## Exercise 9
+
+```{r}
+t_test(beach_vb, response = player_age, explanatory = gender,
+       conf_level = 0.99)
+```
+
+b\. We can reject the null hypothesis because our p-value (1.92e-11) is very very small, and definitely less than alpha (0.01). This means there is sufficient evidence to claim the average age of beach volleyball players differs by gender. 
+
+c\. We are 99% confident that the true difference in average age of beach volleyball players between men and women is between 0.811 and 1.82 years (men tend to be older).  
+
+d\. The null value (0) is not in the confidence interval, so we can reject H0. 

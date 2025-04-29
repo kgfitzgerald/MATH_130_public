@@ -1,0 +1,276 @@
+---
+title: "Lab 05: Regression"
+author:
+  - name: Katie Fitzgerald
+    email: kfitzgerald@apu.edu
+    affiliation:
+      - id: apu
+        name: Azusa Pacific University
+date: December 5, 2024
+format:
+  html:
+    grid:
+      margin-width: 350px
+    table-scroll: true
+    options: 
+          dplyr.width: Inf
+          tibble.width: Inf
+toc: true
+toc-location: left
+description: Practice conducting regression analysis in R.
+editor_options:
+  chunk_output_type: console
+callout-icon: false
+---
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+```
+
+::: callout-important
+#### Action required
+
+To get started on Lab 05:
+
+1.  Log-in to Posit Cloud and navigate to the MATH_130_F24 workspace
+2.  Click "Start" on Lab 05
+3.  In the Files pane (lower right quadrant), click the file "Lab_05.qmd" to open it
+4.  Click the grey/white Settings icon and select "Preview in Viewer Pane"
+5.  Click the Render button (blue arrow) to Render the .qmd into an html. The html should pop up on the right-hand side of Posit Cloud in the Viewer Pane.
+
+As you follow along in the lab, you should run each corresponding code chunk in your .qmd document. To "Run" a code chunk, you can press the green "Play" button in the top right corner of the code chunk in your .qmd. You can also place your cursor anywhere in the line(s) of code you want to run and press "command + return" (Mac) or "Ctrl + Enter" (Windows).
+:::
+
+# Introduction
+
+This lab will help you practice conducting regression analysis in R. You will be analyzing a dataset called `scorecard`, which includes information originally obtained from the [U.S. Department of Education's College Scorecard](https://collegescorecard.ed.gov/data/) for 1712 colleges and universities during the 2018 - 2019 academic year.
+
+
+::: {.callout}
+### Objectives
+
+At the end of this lab you will able to:
+
+-   Compute and interpret the correlation between two numeric variables
+-   Fit a linear regression model and interpret the output
+-   Compute and interpret $R^2$
+-   Compute and interpret a predicted value and a residual for particular observation
+-   Determine whether a linear model is appropriate using visual diagnostics
+-   Compare models using $R^2$ as a criteria
+:::
+
+In this lab, you will explore and visualize the data using the **tidyverse** suite of packages. You'll use the **broom** package to tidy regression output and the `gghighlight` package to highlight data points in a visualization.
+
+Let's load the packages.
+
+```{r}
+#| label: load-packages
+#| message: false
+library(tidyverse)
+library(broom)
+library(gghighlight)
+```
+
+### The data
+
+The following code reads in the `scorecard` data from a .csv file stored in the `data` folder in your `Files` tab in Posit Cloud.
+
+```{r}
+#| message: false
+scorecard <- read_csv("data/scorecard.csv")
+```
+
+In this lab, we will be working with the following variables:
+
+-   `pell_pct` - The percentage of students who are elligible for a Pell Grant
+-   `firstgen_pct` - The percentage of students who are First Generation college students
+-   `cost` - The cost to attend the institution
+-   `satavg` - The average SAT score of admitted students
+
+The Pell Grant is a need-based financial aid grant from the U.S. Department of Education to assist low-income students in paying for college. The percentage of students at an institution who are Pell-elligible can be considered one metric for how accessible an institution is to low-income students.
+
+::: {.callout-caution title="Research Question"}
+
+What factors help explain variation in universities' Pell elligibility percentages?
+
+:::
+
+### Visualizing the data
+
+::: {.callout-note title="Exercise 1"}
+
+Let's begin by exploring the relationship between percentage of Pell elligible students and percentage of first generation students.
+
+a. Before visualizing, do you expect the relationship between these two variables to be positive or negative? Explain your reasoning.
+b. Visualize the relationship between these two variables using a scatterplot. *Hint: you may want to reference your code from Lab 01 for how to create a scatterplot.*
+c. Describe the relationship between the two variables. Make sure to comment on direction, strength, and any unusual observations.
+d. Does it appear that a linear model would be appropriate for this data?
+
+:::
+
+::: column-margin
+\
+\
+\
+*Note: you will likely get a warning message that some rows were removed due to missing values. It's useful to note when there is missing data, but you can suppress this warning message from showing up in your .html by adding `#| warning: false` as the first line in your code chunk.*
+:::
+
+### Correlation
+
+After we've confirmed visually that two variables have a linear relationship, we can quantify the strength of this linear relationship by computing the correlation.
+
+::: column-margin
+\
+\
+\
+\
+Note this code uses the same `summarize()` function you saw in Lab 02, but instead of computing the median or IQR, for example, it instead uses `cor()` function to compute a different summary statistic (the correlation). Because there are some missing values in the data, the argument `use = "complete.obs"` is added to tell R to remove missing values (incomplete observations) before computing the correlation.
+
+:::
+
+```{r}
+scorecard |> 
+  summarize(correlation = cor(pell_pct, firstgen_pct, 
+                              use = "complete.obs"))
+```
+
+::: {.callout-note title="Exercise 2"}
+
+a. Copy, paste the code above to compute the correlation in your .qmd
+b. Interpret the correlation value from part a
+
+:::
+
+### Fitting a linear model
+
+R can very easily find the line of best fit (a.k.a the least squares regression line) for our data using the function `lm()`, which stand for "linear model". The general syntax is given by `lm(y ~ x, data)`. We then save the output of `lm()` into a object name of our choice.
+
+The following code fits a linear regression model with `pell_pct` as the response variable and `firstgen_pct` as the explanatory variable, and saves it into an object called `model1`. Once you run this code chunk, you should see a new object `model1` in your Environment. We can view a summary of the model results using the `tidy()` function.
+
+```{r}
+model1 <- lm(pell_pct ~ firstgen_pct, scorecard)
+tidy(model1)
+```
+
+The `estimate` column contains the information needed to write out our regression equation. The first row `(Intercept)` provides the estimate for the intercept, $b_0$, and the second row `firstgen_pct` provides the estimate for the slope.
+
+With this table output, we can write out the regression model:
+
+$$\hat{y} = 6.92 + 0.967x$$
+
+::: {.callout-note title="Exercise 3"}
+
+a. Copy, paste the code above into your .qmd to fit the regression model and view the output.
+b. Write out the equation of the model in your .qmd. Recall that \$\\hat{y}\$ will create the "y-hat" symbol.
+c. Interpret the intercept in the context of the data
+d. Interpret the slope in the context of the data
+:::
+
+### $R^2$
+
+We can obtain the $R^2$ value for our model using the `glance()` function.
+
+```{r}
+glance(model1)[1]
+```
+
+::: {.callout-note title="Exercise 4"}
+a. Copy, paste the code above to compute the $R^2$ value for this model in your .qmd
+b. Interpret $R^2$ for this model, in the context of the data.
+
+:::
+
+## APU's data
+
+APU is actually included in this dataset. Let's extract APU's data using the following code:
+
+```{r}
+apu <- scorecard |> 
+  filter(name == "Azusa Pacific University")
+```
+
+::: {.callout-note title="Exercise 5"}
+
+a. Copy, paste the code above into your .qmd
+b. What percentage of APU students are Pell elligible according to this data? (*Hint: view the `apu` dataset in your Environment*)
+c. What percentage of APU students are First Generation according to this data?
+d. What would our `model1` regression line predict % Pell elligible would be for APU? That is, find $\hat{y}$ for APU. *Note: you can use R as a calculator in the code chunk provided - use the asterisk (\*) for multiplication*
+e. Compute the residual for APU.
+f. The following code creates a scatterplot with APU's datapoint highlighted. Copy, paste it into your .qmd
+
+```{r}
+#| warning: false
+ggplot(scorecard, aes(y = pell_pct, x = firstgen_pct)) +
+  geom_point(color = "#990000") +
+  gghighlight(name == "Azusa Pacific University", 
+              label_key = name)
+```
+
+g. Does the regression line overestimate or underestimate the percentage of APU students who are Pell elligible?
+:::
+
+## Residual Plot
+
+Rather than having to calculate all the predicted values and residuals by hand for all 1500+ observations, we can use the `augment()` function.
+
+```{r}
+model1_aug <- augment(model1)
+```
+
+After running the above code chunk, check out the new object in your Environment called `model1_aug`. The first column (`.rownames`) gives the row number for the corresponding observation in the original data. The next two columns are the y and x variables from the data you used to fit the model. `.fitted` gives the "fitted" or "predicted" values for each school, based on the regression line you fit, and `.resid` gives the residuals for each observation. APU has `.rownames = 689`. Find the fitted value and residual for APU in the `model1_aug` dataset to verify your answer to Exercise 5.
+
+We can use this new dataframe `model1_aug` to create a residual plot. Remember residual plots have the predicted (fitted) vales on the x-axis, and the residuals on the y-axis.
+
+```{r}
+ggplot(data = model1_aug, aes(x = .fitted, y = .resid)) +
+  geom_point() +
+  geom_hline(yintercept = 0, linetype = "dashed", color = "red") +
+  labs(x = "Fitted values",
+       y = "Residuals")
+```
+
+We're getting a little fancy with the code here. After creating the scatterplot (the `ggplot()` and `geom_point()` layers), we add a new layer called `geom_hline()` to overlay a red horizontal dashed line at `y = 0` (to help us check whether the residuals are distributed around 0), and we also rename the axis labels to be more informative by adding a `labs()` layer.
+
+::: {.callout-note title="Exercise 6"}
+
+a. Copy, paste code from the two code chunks above to re-produce the residual plot in your .qmd
+b. Interpret the residual plot. Is the linear model appropriate?
+:::
+
+## Fitting other models
+
+An important part of the modeling process in statistics and data science is investigating which variables best explain the response variable of interest. In the next two exercises, you will apply what you've learned above to fit two additional models to investigate how useful other variables are in explaining % Pell elligible.
+
+::: {.callout-note title="Exercise 7"}
+
+a. Create a scatterplot to explore the relationship betwee `pell_pct` and `cost`. Add the layer `geom_smooth(method = "lm")` to your `ggplot()` code to display the regression line on your visualization.
+b. Fit a linear model and display the summary output using `tidy()`. Note, you should call this model `model2`.
+c. What is the slope for this model?
+d. Obtain the $R^2$ for this model.
+e. Based on the $R^2$ value for `model1` and `model2`, which variable does a better job of explaining `pell_pct`?
+:::
+
+::: {.callout-note title="Exercise 8"}
+
+Repeat the same steps as in Exercise 7, this time exploring the relationship between `pell_pct` and `satavg`:
+
+a. Provide a scatterplot, 
+b. regression table output, 
+c. and the $R^2$ value for the new model.
+d. Comment on how your findings compare to the other two models.
+:::
+
+::: {.callout-note title="Exercise 9"}
+
+Note, there is lots of education research to suggest that standardized tests may be more of a signal of a student's socio-economic status than their true ability. See this [brief article](https://www.cnbc.com/2019/10/03/rich-students-get-better-sat-scores-heres-why.html) for a summary of the issues.
+
+How does your analysis relate to the above article? Are schools with strict admissions criteria based on standardized tests likely to have a high percentage of low-income students? Comment on these issues from an equity and inclusion perspective.
+
+:::
+
+::: {.callout-note title="BONUS"}
+
+a. State an additional question you could explore using this data.
+b. Provide a visualization, summary statistic, and/or linear regression analysis to investigate your question.
+c. Comment on your findings.
+:::

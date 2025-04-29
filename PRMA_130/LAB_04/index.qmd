@@ -1,0 +1,348 @@
+---
+title: "Lab 04 / Exam 2 Rough Draft"
+author:
+  - name: Katie Fitzgerald
+    email: kfitzgerald@apu.edu
+    affiliation:
+      - id: apu
+        name: Azusa Pacific University
+date: October 16, 2024
+format:
+  html:
+    grid:
+      margin-width: 350px
+    table-scroll: true
+    options: 
+          dplyr.width: Inf
+          tibble.width: Inf
+toc: true
+toc-location: left
+description: Practice conducting hypothesis tests and confidence intervals in R.
+editor_options:
+  chunk_output_type: console
+callout-icon: false
+---
+
+```{r, echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(infer)
+```
+
+::: callout-important
+#### Action required
+
+To get started on Lab 04:
+
+1.  Log-in to Posit Cloud and navigate to the MATH_130_F24 workspace
+2.  Click "Start" on Lab 04
+3.  In the Files pane (lower right quadrant), click the file "Lab_04.qmd" to open it
+4.  Click the grey/white Settings icon and select "Preview in Viewer Pane"
+5.  Click the Render button (blue arrow) to Render the .qmd into an html. The html should pop up on the right-hand side of Posit Cloud in the Viewer Pane.
+
+As you follow along in the lab, you should run each corresponding code chunk in your .qmd document. To "Run" a code chunk, you can press the green "Play" button in the top right corner of the code chunk in your .qmd. You can also place your cursor anywhere in the line(s) of code you want to run and press "command + return" (Mac) or "Ctrl + Enter" (Windows).
+:::
+
+# Introduction
+
+This lab will help you practice conducting hypothesis tests and constructing confidence intervals in R. This is the type of analysis you will be asked to conduct on Exam 2. This whole lab will make use of two main functions:
+
+-   `prop_test()` for conducting inference about proportions
+-   `t_test()` for conducting inference about means
+
+For this analysis, we need the `tidyverse`, and `infer` packages and data from the General Social Survey (GSS) and beach volleyball. The following code loads the package and data for this lab. Note, GSS was conducted on a random sample of U.S. adults.
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(infer)
+
+gss2016 <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vSXStAOCL3Y19OuZAoREVDHKzgiBycVo5h5NRvkU3l4IB81kx-BMU4hurcpWSdfYszJIRQJZ7QblJ8-/pub?output=csv")
+
+beach_vb <- readRDS("beach_vb_lab04.RDS")
+```
+
+
+::: {.callout-important}
+
+## LaTeX: How to type mathematical symbols in R / Posit Cloud
+
+You can type mathematical symbols/equations by typing what's known as LaTeX code inside dollar signs. Below are some examples of LaTeX syntax for how to type common mathematical symbols we use in this class. Placing the LaTeX code inside dollar signs (but NOT in a code chunk) will tell R/Quarto to format it as mathematical symbols.
+
+-   Greek letter $\mu$
+    -   \\mu
+-   Greek letter $\alpha$
+    -   \\alpha
+-   Sample mean $\bar{X}$
+    -   \\bar\{X\}
+-   Sample proportion \$hat{p}$
+    -   \\hat\{p\}
+-   Null hypothesis $H_0$
+    -   H\_0
+-   Alternative hypothesis $H_A$
+    -   H\_A
+-   Not equal to sign $\neq$
+    -   \\neq
+
+In general, underscores \_ allow you to create subscripts. Note, you don't need a separate pair of dollar signs for every symbol. The following example combines several of the above pieces of LaTeX code to write out the alternative hypothesis for a difference in proportions:
+
+\\$\$H\_A: p\_1 \\neq p\_2\$\$
+
+$$H_A: p_1 \neq p_2$$
+
+:::
+
+::: {.callout-caution title="Research Question 1: Belief in afterlife"}
+
+In 2016, one of the questions on the General Social Survey (GSS) was whether or not respondents believed in life after death. Suppose we are interested in investigating the question: **do women and men believe in life after death at different rates?**
+
+:::
+
+::: {.callout-note title="Exercise 1"}
+a. What is the parameter of interest? 
+b. What notation do we use for this parameter of interest? You should copy the relevant syntax from the red box at the top of this lab and paste it inside dollar signs in your .qmd. Render to make sure the symbols appear as intended.
+c. What notation will we use for a point estimate of this parameter of interest? 
+:::
+
+
+::: {.callout-note title="Exercise 2"}
+
+State the hypotheses to investigate this question (using symbols). You might want to start by copy, paste, tweaking the alternative hypothesis syntax provided in the red LaTeX box at the top of these instructions. 
+
+:::
+
+The following code gives a glimpse of the data and then creates a stacked bar plot to investigate whether males and females believe in the afterlife at different rates.
+
+```{r}
+glimpse(gss2016)
+
+ggplot(data = gss2016, aes(x = sex, fill = postlife)) +
+  geom_bar(position = "fill")
+```
+
+::: {.callout-note title="Exercise 3"}
+
+a. Copy, paste the code above to re-create the visualization in your .qmd. 
+
+b. What is the explanatory variable in this case?
+
+c. What is the response variable?
+
+d. If you instead wanted to investigate whether males and females support the death penalty at different rates, what would you change about the code for the stacked bar plot? Note: the variable `cappun` records respondents' beliefs on the death penalty (capital punishment). You do not need to actually create the new visualization, just describe what must change in the code. 
+
+:::
+
+## Computing the point estimate
+
+The following code computes proportions of each sex who believe in life after death.
+
+```{r}
+gss2016 %>% 
+  group_by(sex) %>% 
+  summarize(count = sum(postlife == "YES"),
+            n = n()) %>% 
+  mutate(p_hat = count/n)
+```
+
+::: {.callout-note title="Exercise 4"}
+
+Recall our research question: *Do the sample data provide strong evidence that males and females believe in the afterlife at different rates?* 
+
+a. Copy, paste the code above to reproduce the output in your .qmd
+b. Based on the above output, what is the relevant point estimate for this research question? (Hint: this will involve subtraction). Your answer should include both the numeric answer and the appropriate notation (refer back to Exercise 1c)
+
+:::
+
+## Conducting the hypothesis test
+
+::: {.callout-important}
+
+Similar to inference for one proportion, `prop_test()` is the function we use to conduct a hypothesis test for a difference in proportions. It returns the appropriate p-value. As a reminder, the HW 08 packet discussed the following inputs to `prop_test()` for a test of one proportion:
+
+-   the first input should be the name of the dataset
+-   `response` = the name of the variable of interest
+-   `p` = the value specified under the null hypothesis
+-   `success` = the category corresponding to a "success". You should put the name of the category in quotations
+-   `z` = TRUE - this specifies that we want to use the normal distribution and a z-score to conduct the test.
+-   `conf_level` = a numeric value between 0 and 1 to specify the level of confidence. Default value is 0.95.
+
+The same code applies for a test of two proportions, with two changes:
+
+-   remove the `p` argument
+-   add the argument `explanatory` to specify the name of the explanatory variable (that specifies the two groups)
+
+:::
+
+::: {.callout-note title="Exercise 5"}
+
+a. What conditions do we need to check in order to use the normal distribution for this test of a difference in proportions? 
+b. Are the conditions met in this case?
+c. Fill in the appropriate code to conduct the test for the difference in proportions in this context.
+
+```{r, eval = FALSE}
+prop_test(_______, response = _______, explanatory = _____, 
+          success = "YES", z = TRUE)
+```
+
+d. Based on the above output, what is the Z-score for this test?
+e. Based on the above output, what is the p-value for this test?
+f. Interpret the p-value. Think: "Probability of what, assuming what?"
+g. State the conclusion that can be drawn from this study. (use the p-value, state your conclusion in terms of the hypotheses, and assume the researchers used a *α* threshold of 0.01).
+:::
+
+::: {.callout-note title="Exercise 6"}
+
+Note the `prop_test()` output also gave a confidence interval. However, the default is to use a 95% confidence interval (conf_level = 0.95 by default). Since we used an *α* threshold of 0.01, we should use a 99% confidence interval instead.
+
+a. Copy, paste, tweak code from Exercise 5 to construct a 99% confidence interval. *Hint: you can add an argument called `conf_level` to `prop_test()`*
+b. Interpret the confidence interval in the context of the problem.
+c. How could we use the confidence interval to make a decision about the hypothesis test above?
+:::
+
+::: {.callout-caution title="Research Question 2: Volleyball"}
+
+**Is the average age of beach volleyball players older for men or women?** 
+
+For the remainder of the exercises, you will use the same `beach_vb` dataset that was introduced in HW 08. You should refer back to that for context on the data.
+
+:::
+
+::: {.callout-note title="Exercise 7"}
+
+a. State the hypotheses to investigate this research question (using symbols)
+b. What is the parameter of interest for this research question? What notation do we use for it?
+c. What notation will we use for a point estimate of this parameter of interest? 
+
+:::
+
+## Computing the point estimate
+
+The following code computes the average age for each group (gender).
+
+```{r}
+beach_vb %>% 
+  group_by(gender) %>% 
+  summarize(mean_age = mean(player_age, na.rm = TRUE))
+```
+
+::: {.callout-note title="Exercise 8"}
+
+a. Copy, paste the code above to reproduce the output in your .qmd
+b. Based on the above output, what is the relevant point estimate for this research question? (Hint: this will involve subtraction). Your answer should include both the numeric answer and the appropriate notation (refer back to Exercise 7c)
+c. What would you need to change about the code above if you wanted to compute average height by gender instead? (You do not actually need to provide the code, just describe what changes).
+:::
+
+::: {.callout-important}
+
+## Conducting a test for a difference in means using `t_test()`
+
+Let's conduct a hypothesis test to investigate the question of whether males or females are older on average in professional beach volleyball, using significance level *α* = 0.01. 
+
+Similar to inference for one mean, `t_test()` is the function we use to conduct a hypothesis test for a difference in means. It returns the appropriate point estimate and p-value. As a reminder, the input needed for `t_test()` for a test of one mean is:
+
+-   the first input should be the name of the dataset
+-   `response` = the name of the variable of interest
+-   `mu` = the value specified under the null hypothesis
+-   `alternative` = "two-sided" by default, can be changed to "greater" or "less" depending on how the alternative hypothesis is specified.
+-   `conf_level` = a numeric value between 0 and 1 to specify the level of confidence. Default value is 0.95.
+
+The same code applies for a test of two means, with one change:
+
+-   add the argument `explanatory` to specify the name of the explanatory variable (that determines the two groups whose means should be compared)
+
+Additionally, note that the null value for a difference in means is often 0, which is the default value of `mu` in `t_test()`, so this argument does not have to be included in this case.
+
+:::
+
+::: {.callout-note title="Exercise 9"}
+
+a. Fill in the code to conduct the hypothesis test for the difference in male and female age. Use *α* = 0.01. 
+
+```{r, eval = FALSE}
+t_test(___, response = ___, explanatory = ___,
+       conf_level = ___)
+```
+
+b. What conclusion would you draw from this hypothesis test? Justify your conclusion using the p-value.
+
+c. Interpret the confidence interval provided by the output above.
+
+d. Explain how you could use this confidence interval to make a decision about your hypothesis test.
+
+:::
+
+
+
+# HW 08 Code for Reference
+
+## Child choice / proportion inference
+
+```{r}
+#load child_choice data
+child_choice <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQpRItBQtDXie32T2QZygOPNBEOui1Gqz6XP-Q-g-zj4tRCkg7W8_-3Y6u8vFK8AoJkH4wHxNLiRLth/pub?gid=0&single=true&output=csv")
+
+#glimpse the dataset to see dimensions, variable names, etc
+glimpse(child_choice)
+
+#computing the sample proportion
+child_choice %>%
+  summarize(n = n(),
+count = sum(choice == "candy")) %>% mutate(p_hat = count/n)
+
+#hypothesis test for one proportion
+prop_test(child_choice, response = choice, p = 0.5, 
+          success = "candy", z = TRUE)
+
+#computing Z score "by hand"
+p_hat <- 0.523
+p0 <- 0.5
+n <- 283
+SE <- sqrt(p0*(1-p0)/n) 
+Z <- (p_hat - p0)/SE
+Z
+
+#computing p-value "by hand"
+2*pnorm(Z, lower.tail = FALSE)
+
+#confidence interval for one proportion
+prop_test(child_choice, response = choice, 
+          success = "candy", z = TRUE)
+
+#lower bound of CI "by hand"
+p_hat - 1.96*sqrt(p_hat*(1- p_hat)/n)
+#upper bound of CI "by hand"
+p_hat + 1.96*sqrt(p_hat*(1- p_hat)/n)
+
+```
+
+## Beach volleyball example
+
+```{r}
+#plot the height variable
+ggplot(beach_vb, aes(x = player_height)) +
+  geom_histogram(color = "white", binwidth = 1)
+
+#conduct a hypothesis test for whether average height is greater than 72
+t_test(beach_vb, response = player_height, mu = 72,
+        alternative = "greater", conf_level = 0.99)
+
+#compute summary statistics for player height
+summary(beach_vb$player_height)
+
+#construct 99% confidence interval for player height
+t_test(beach_vb, response = player_height, mu = 72, conf_level = 0.99)
+
+#compute test statistic and p-value "by hand"
+xbar <- 73.5
+mu0 <- 72
+n <- 3615
+s <- sd(beach_vb$player_height)
+SE <- s/sqrt(n)
+T <- (xbar - mu0)/SE
+T
+pt(T, df = n - 1, lower.tail = FALSE)
+
+#compute 99% confidence interval "by hand"
+lb <- xbar - qt(.995, n - 1)*SE
+ub <- xbar + qt(.995, n - 1)*SE
+c(lb, ub)
+```
+

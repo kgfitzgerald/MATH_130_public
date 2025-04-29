@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.4.554">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Katie Fitzgerald">
+<meta name="dcterms.date" content="2024-08-19">
+<meta name="description" content="Practice summarizing data and investigating political claims">
+
+<title>Lab 02: 2023 NYPD Stop, Question, Frisk</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="index_files/libs/quarto-html/quarto.js"></script>
+<script src="index_files/libs/quarto-html/popper.min.js"></script>
+<script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="index_files/libs/quarto-html/anchor.min.js"></script>
+<link href="index_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="index_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="index_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="index_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="index_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article toc-left">
+<div id="quarto-sidebar-toc-left" class="sidebar toc-left">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#acknowledgements" id="toc-acknowledgements" class="nav-link active" data-scroll-target="#acknowledgements">Acknowledgements</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#getting-started-nypd-data" id="toc-getting-started-nypd-data" class="nav-link" data-scroll-target="#getting-started-nypd-data">Getting Started: NYPD Data</a></li>
+  <li><a href="#summarizing-data" id="toc-summarizing-data" class="nav-link" data-scroll-target="#summarizing-data">Summarizing Data</a>
+  <ul class="collapse">
+  <li><a href="#the-summary-function" id="toc-the-summary-function" class="nav-link" data-scroll-target="#the-summary-function">The <code>summary</code> function</a></li>
+  <li><a href="#using-summarize-to-compute-chosen-summary-statistics" id="toc-using-summarize-to-compute-chosen-summary-statistics" class="nav-link" data-scroll-target="#using-summarize-to-compute-chosen-summary-statistics">Using <code>summarize()</code> to compute chosen summary statistics</a></li>
+  <li><a href="#summarizing-categorical-data" id="toc-summarizing-categorical-data" class="nav-link" data-scroll-target="#summarizing-categorical-data">Summarizing categorical data</a></li>
+  </ul></li>
+  <li><a href="#comparing-across-groups" id="toc-comparing-across-groups" class="nav-link" data-scroll-target="#comparing-across-groups">Comparing across groups</a>
+  <ul class="collapse">
+  <li><a href="#using-group_by" id="toc-using-group_by" class="nav-link" data-scroll-target="#using-group_by">Using <code>group_by()</code></a></li>
+  </ul></li>
+  </ul>
+</nav>
+</div>
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Lab 02: 2023 NYPD Stop, Question, Frisk</h1>
+</div>
+
+<div>
+  <div class="description">
+    Practice summarizing data and investigating political claims
+  </div>
+</div>
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Katie Fitzgerald <a href="mailto:kfitzgerald@apu.edu" class="quarto-title-author-email"><i class="bi bi-envelope"></i></a> </p>
+  </div>
+  <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Azusa Pacific University
+          </p>
+      </div>
+  </div>
+
+<div class="quarto-title-meta">
+
+      
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">August 19, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="acknowledgements" class="level1">
+<h1>Acknowledgements</h1>
+<p>This lab is adapted from a <a href="https://skewthescript.org">Skew the Script</a> activity.</p>
+</section>
+<section id="introduction" class="level1">
+<h1>Introduction</h1>
+<p>New York City’s Stop, Question, Frisk program allows police to stop people on the street and search them for weapons or contraband. During a stop, if police find evidence of criminal items or activity, they report a criminal offense. Then, they can make an arrest or issue a summons. NYPD officers record detailed data on every stop. This NYPD data is publicly available on the <a href="https://www1.nyc.gov/site/nypd/stats/reports-analysis/stopfrisk.page">NYC.GOV website</a>. The <code>sqf_2023</code> dataset contains data from all stops in 2023.</p>
+<div class="callout callout-style-default callout-caution no-icon callout-titled" title="Research Questions">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Research Questions
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>During this lab, you’ll investigate the following research questions:</p>
+<ul>
+<li>How old do people who are stopped, questioned, and frisked by the NYPD tend to be?</li>
+<li>Do stop rates differ by Borough?</li>
+<li>Are some Boroughs policed more than others, relative to their population size?</li>
+<li>Do stop rates differ by race?</li>
+<li>Do crime rates differ by Borough or race?</li>
+<li>Do the data provide evidence to support critics’ or proponents’ claims about the policy?</li>
+</ul>
+</div>
+</div>
+</div>
+<p>The goal of this lab is to use data to explore a social good question and to help you practice summarizing data by computing sums, proportions, and measures of center and spread.</p>
+<div class="callout callout-style-simple callout-note no-icon callout-titled" title="Learning Objectives">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Learning Objectives
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>By the end of this lab, you will be able to:</p>
+<ul>
+<li><p>Compute summary statistics including mean, median, minimum, maximum, standard deviation, variance, quartiles, and IQR</p></li>
+<li><p>Compute summary statistics by group, i.e.&nbsp;for each level of a categorical variable</p></li>
+<li><p>Use summary statistics to investigate research questions</p></li>
+<li><p>Choose appropriate summary statistics based on the distribution of data (i.e.&nbsp;whether it is skewed or symmetric)</p></li>
+</ul>
+</div>
+</div>
+</section>
+<section id="getting-started-nypd-data" class="level1">
+<h1>Getting Started: NYPD Data</h1>
+<div class="callout callout-style-default callout-important no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Action required
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>To get started on Lab 02:</p>
+<ol type="1">
+<li>Log-in to Posit Cloud and navigate to the MATH_130_F24 workspace</li>
+<li>Click “Start” on Lab 02</li>
+<li>In the Files pane (lower right quadrant), click the file “Lab_02.qmd” to open it</li>
+<li>Click the grey/white Settings icon and select “Preview in Viewer Pane”</li>
+<li>Click the Render button (blue arrow) to Render the .qmd into an html. The html should pop up on the right-hand side of Posit Cloud in the Viewer Pane.</li>
+<li>Run the code chunks at the top of the .qmd to load the necessary packages and data.</li>
+</ol>
+<p>As you follow along in the lab, you should run each corresponding code chunk in your .qmd document. To “Run” a code chunk, you can press the green “Play” button in the top right corner of the code chunk in your .qmd. You can also place your cursor anywhere in the line(s) of code you want to run and press “command + return” (Mac) or “Ctrl + Enter” (Windows).</p>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse) <span class="co">#load package</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>sqf_2023 <span class="ot">&lt;-</span> <span class="fu">read_rds</span>(<span class="st">"sqf_2023.rds"</span>) <span class="co">#loads data</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">tibble.width =</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The orginal data from NYPD has 82 columns, with details on many aspects of each stop, question, frisk encounter. For this analysis, we will explore only the first 15 columns. For convenience &amp; ease of use, we will create a new dataset with just these 15 columns. We’ll call the new data frame <code>sqf_selected</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#creates dataset with fewer columns needed for analysis</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="ot">&lt;-</span> sqf_2023 <span class="sc">|&gt;</span> </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">15</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(sqf_selected)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Rows: 16,971
+Columns: 15
+$ stop_id                  &lt;dbl&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14…
+$ stop_frisk_date          &lt;date&gt; 2023-01-01, 2023-01-01, 2023-01-01, 2023-01-…
+$ stop_frisk_time          &lt;chr&gt; "00:44:00", "00:49:00", "05:31:00", "04:59:00…
+$ year2                    &lt;dbl&gt; 2023, 2023, 2023, 2023, 2023, 2023, 2023, 202…
+$ month2                   &lt;ord&gt; January, January, January, January, January, …
+$ day2                     &lt;ord&gt; Sunday, Sunday, Sunday, Sunday, Sunday, Sunda…
+$ stop_duration_minutes    &lt;dbl&gt; 10, 3, 5, 2, 14, 19, 1, 5, 25, 10, 13, 1, 10,…
+$ suspect_arrested_flag    &lt;fct&gt; N, Y, N, N, Y, N, N, N, N, Y, Y, N, Y, Y, N, …
+$ summons_issued_flag      &lt;fct&gt; N, N, N, N, N, N, N, N, N, N, N, N, N, N, N, …
+$ suspect_reported_age     &lt;dbl&gt; 32, 23, 30, 20, 25, 14, 26, 41, NA, 65, 29, N…
+$ suspect_sex              &lt;fct&gt; MALE, MALE, MALE, MALE, MALE, MALE, MALE, MAL…
+$ suspect_race_description &lt;fct&gt; BLACK, WHITE HISPANIC, WHITE HISPANIC, BLACK,…
+$ suspect_height           &lt;dbl&gt; 6.10, 5.70, 6.00, 6.00, 6.00, 6.10, 5.40, 5.9…
+$ suspect_weight           &lt;dbl&gt; 150, 150, NA, 275, 190, 145, 170, 148, 180, 2…
+$ stop_location_boro_name  &lt;fct&gt; MANHATTAN, BROOKLYN, BROOKLYN, QUEENS, BRONX,…</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 1">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 1
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>What are the <strong>dimensions</strong> of this dataset?</p></li>
+<li><p>What are the <strong>observational units</strong> for this data? That is, what does one row represent? <em>Hint: you may want to view the dataset as a spreadsheet to help you answer this</em></p></li>
+<li><p>Briefly summarize what information is recorded about these observational units. (You don’t need to/shouldn’t list all the variable names).</p></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="summarizing-data" class="level1">
+<h1>Summarizing Data</h1>
+<section id="the-summary-function" class="level2">
+<h2 class="anchored" data-anchor-id="the-summary-function">The <code>summary</code> function</h2>
+<p>The <code>summary()</code> function in R is very convenient for getting a quick summary of every variable in a dataset.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(sqf_selected)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    stop_id      stop_frisk_date      stop_frisk_time        year2     
+ Min.   :    1   Min.   :2023-01-01   Length:16971       Min.   :2023  
+ 1st Qu.: 4244   1st Qu.:2023-04-02   Class :character   1st Qu.:2023  
+ Median : 8486   Median :2023-06-27   Mode  :character   Median :2023  
+ Mean   : 8486   Mean   :2023-06-29                      Mean   :2023  
+ 3rd Qu.:12728   3rd Qu.:2023-10-03                      3rd Qu.:2023  
+ Max.   :16971   Max.   :2023-12-31                      Max.   :2023  
+                                                                       
+     month2            day2      stop_duration_minutes suspect_arrested_flag
+ October:1734   Sunday   :2283   Min.   :  0.000       N:12071              
+ May    :1647   Monday   :1771   1st Qu.:  2.000       Y: 4900              
+ April  :1544   Tuesday  :2614   Median :  5.000                            
+ January:1468   Wednesday:2790   Mean   :  8.231                            
+ July   :1439   Thursday :2501   3rd Qu.: 10.000                            
+ March  :1407   Friday   :2466   Max.   :581.000                            
+ (Other):7732   Saturday :2546                                              
+ summons_issued_flag suspect_reported_age suspect_sex   
+ N:16459             Min.   :  0.00       FEMALE: 1028  
+ Y:  512             1st Qu.: 19.00       MALE  :15669  
+                     Median : 25.00       NA's  :  274  
+                     Mean   : 27.75                     
+                     3rd Qu.: 34.00                     
+                     Max.   :118.00                     
+                     NA's   :2529                       
+             suspect_race_description suspect_height  suspect_weight 
+ BLACK                   :9939        Min.   :0.000   Min.   :  0.0  
+ WHITE HISPANIC          :3447        1st Qu.:5.300   1st Qu.:150.0  
+ BLACK HISPANIC          :1719        Median :5.700   Median :160.0  
+ WHITE                   : 942        Mean   :5.644   Mean   :165.7  
+ ASIAN / PACIFIC ISLANDER: 288        3rd Qu.:5.900   3rd Qu.:180.0  
+ (Other)                 : 164        Max.   :9.200   Max.   :760.0  
+ NA's                    : 472        NA's   :1482    NA's   :1825   
+  stop_location_boro_name
+ BRONX        :6689      
+ BROOKLYN     :3984      
+ MANHATTAN    :3343      
+ QUEENS       :2393      
+ STATEN ISLAND: 562      
+                         
+                         </code></pre>
+</div>
+</div>
+<p>For categorical variables, it will provide counts of the number of observations in each category level. For numeric variables, it will provide the minimum value, Q1, the median, the mean, Q3, and the maximum value. It also tells you the number of observations that are missing (NA) for each variable.</p>
+</section>
+<section id="using-summarize-to-compute-chosen-summary-statistics" class="level2">
+<h2 class="anchored" data-anchor-id="using-summarize-to-compute-chosen-summary-statistics">Using <code>summarize()</code> to compute chosen summary statistics</h2>
+<p><strong><em>How old do people who are stopped, questioned, and frisked by the NYPD tend to be?</em></strong></p>
+<p>The following code allows us to answer this question:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">avg_age =</span> <span class="fu">mean</span>(suspect_reported_age, </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>                                <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  avg_age
+    &lt;dbl&gt;
+1    27.7</code></pre>
+</div>
+</div>
+<p>We would read the above code as “take the <code>sqf_selected</code> dataset, and then <code>summarize</code> it by calculating the <code>mean</code> of <code>suspect_reported_age</code>. When calculating the mean, remove any missing values (<code>na.rm = TRUE</code>).”</p>
+<p>We call the <code>|&gt;</code> symbol the “pipe” operator, and we read it as “and then”. E.g. “take the dataset and then pipe it into the <code>summarize()</code> function”.</p>
+<p>Note, <code>avg_age</code> is a user-defined name of the summary statistic we’re computing. We could have called it <code>mean_age</code> instead if we wanted. Or <code>unicorn</code> for that matter. But, it’s best to give them INFORMATIVE names.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(suspect_reported_age, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  mean_age
+     &lt;dbl&gt;
+1     27.7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">unicorn =</span> <span class="fu">mean</span>(suspect_reported_age, </span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 1
+  unicorn
+    &lt;dbl&gt;
+1    27.7</code></pre>
+</div>
+</div>
+<p>As show in the lecture notes, we can compute multiple summary statistics within one <code>summarize()</code> function. We simply need to separate them by a comma. They will each be a new column in the output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">mean_age =</span> <span class="fu">mean</span>(suspect_reported_age, </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">var_age =</span> <span class="fu">var</span>(suspect_reported_age, </span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_age =</span> <span class="fu">sd</span>(suspect_reported_age, </span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  mean_age var_age sd_age
+     &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+1     27.7    142.   11.9</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">Q1_age =</span> <span class="fu">quantile</span>(suspect_reported_age, <span class="fl">0.25</span>,   </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">Q2_age =</span> <span class="fu">quantile</span>(suspect_reported_age, <span class="fl">0.5</span>, </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>            <span class="at">med_age =</span> <span class="fu">median</span>(suspect_reported_age, </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">Q3_age =</span> <span class="fu">quantile</span>(suspect_reported_age, <span class="fl">0.75</span>, </span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">IQR_age =</span> <span class="fu">IQR</span>(suspect_reported_age, </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 5
+  Q1_age Q2_age med_age Q3_age IQR_age
+   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1     19     25      25     34      15</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 2">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 2
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Copy, paste the relevant code above for computing the mean, variance, and standard deviation of suspect age as well as the 1st, 2nd, and 3rd quartiles and the median and IQR.</p></li>
+<li><p>What units are <code>mean_age</code>, <code>var_age</code>, and <code>sd_age</code> measured in? <em>Hint, they’re not all the same!</em></p></li>
+<li><p>Explain why <code>Q2_age</code> and <code>med_age</code> give the same number above. Would this be the case for a variable other than age?</p></li>
+<li><p>Explain how to use Q1, Q2, and/or Q3 to compute the IQR.</p></li>
+<li><p>What are the mean and median age of SQF suspects in 2023?</p></li>
+<li><p>Based on you answer to part e, do you expect the distribution of age to be left-skewed, right-skewed, or symmetric? Explain.</p></li>
+<li><p>Based on your answer to part f, is the mean or median the more appropriate measure of center? And is standard deviation or IQR the more appropriate measure of spread?</p></li>
+<li><p>Using the appropriate measure of center and spread determined in part g, interpret the summary statistics in context in order to provide an answer to the research question (How old do people who are stopped, questioned, and frisked by the NYPD tend to be?).</p></li>
+</ol>
+</div>
+</div>
+</section>
+<section id="summarizing-categorical-data" class="level2">
+<h2 class="anchored" data-anchor-id="summarizing-categorical-data">Summarizing categorical data</h2>
+<p>Recall that during a search &amp; frisk, if police discover contraband or evidence of criminal activity, they can issue an arrest or a summons to appear in court. If no evidence of wrongdoing is found, the person is free to go. Therefore, each stop, question, frisk encounter can end in three ways:</p>
+<ul>
+<li>the person is arrested (<code>suspect_arrested_flag</code> has the value “Y”)</li>
+<li>the person is issued a summons (<code>summons_issued_flag</code> has the value “Y”)</li>
+<li>no evidence of wrongdoing is found (both variables above have the value “N”)</li>
+</ul>
+<p>The first two mean some evidence of criminal activity was found &amp; reported and the third means no evidence of criminal activity was found &amp; reported. We will create one new variable (<code>criminal_offense_reported</code>) to indicate whether or not criminal activity was found &amp; reported.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="ot">&lt;-</span> sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">criminal_offense_reported =</span> <span class="fu">if_else</span>(suspect_arrested_flag <span class="sc">==</span> <span class="st">"Y"</span> <span class="sc">|</span> summons_issued_flag <span class="sc">==</span> <span class="st">"Y"</span>, <span class="st">"Y"</span>, <span class="st">"N"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This new variable, <code>criminal_offense_reported</code> is a categorical variable. We can summarize a categorical variable using a proportion. This proportion - of stops that result in evidence of criminal activity - is of policy interest. Critics say SQF results in too many innocent people having their civil liberties violated. Proponents say it is a necessary and useful program for keeping drugs and guns off the streets. Let’s investigate how often NYPD SQFs result in evidence of criminal activity being found.</p>
+<p><strong>What proportion of NYPD stop, question, frisk encounters find evidence of criminal activity?</strong></p>
+<p>We can again use the <code>summarize()</code> function to help us summarize the data. We’ll first calculate the number of stops made in total using the <code>n()</code> function and the number of stops where a crime was found using the <code>sum()</code> function. We’ll then use those counts to compute our desired proportion, <code>prop_crime_found</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_stops =</span> <span class="fu">n</span>(),</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_crime_found =</span> <span class="fu">sum</span>(criminal_offense_reported <span class="sc">==</span> <span class="st">"Y"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_crime_found =</span> n_crime_found<span class="sc">/</span>n_stops)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 1 × 3
+  n_stops n_crime_found prop_crime_found
+    &lt;int&gt;         &lt;int&gt;            &lt;dbl&gt;
+1   16971          5358            0.316</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 3">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 3
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Copy, paste the code above for computing the proportion of stops that result in criminal activity being found.</p></li>
+<li><p>Use the output to answer the question: What proportion of NYPD stop, question, frisk encounters find evidence of criminal activity?</p></li>
+<li><p>Based on your answer to part b, what proportion of stops result in NO criminal activity being found?</p></li>
+<li><p>Based on these findings, comment on your initial thoughts about the NYPD Stop, Question, Frisk policy. [There are no right or wrong answers here].</p></li>
+</ol>
+</div>
+</div>
+</section>
+</section>
+<section id="comparing-across-groups" class="level1">
+<h1>Comparing across groups</h1>
+<p>In Lab 01, we saw that we could compare a numeric variable across groups using a faceted histogram. Below, we investigate age of persons stopped, questioned, and frisked by NYC borough.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sqf_selected, <span class="fu">aes</span>(<span class="at">x =</span> suspect_reported_age)) <span class="sc">+</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>stop_location_boro_name, <span class="at">ncol =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_histogram</span>(<span class="at">color =</span> <span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 2529 rows containing non-finite outside the scale range
+(`stat_bin()`).</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<section id="using-group_by" class="level2">
+<h2 class="anchored" data-anchor-id="using-group_by">Using <code>group_by()</code></h2>
+<p>Often, we want actual numeric summaries of the data to supplement the visualizaion. We can very conveniently calculate the median (or any other summary statistic) for each level of a categorical variable by adding the group_by() function before we summarize.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(stop_location_boro_name) <span class="sc">|&gt;</span> </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">med_age =</span> <span class="fu">median</span>(suspect_reported_age, </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>                              <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 2
+  stop_location_boro_name med_age
+  &lt;fct&gt;                     &lt;dbl&gt;
+1 BRONX                        23
+2 BROOKLYN                     25
+3 MANHATTAN                    28
+4 QUEENS                       25
+5 STATEN ISLAND                25</code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 4">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 4
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Copy, paste the code above to create both the faceted histogram and the medians by borough in your .qmd.</p></li>
+<li><p>Which borough had the lowest median age? Which had the highest?</p></li>
+<li><p>In the faceted histogram, what do the taller vs.&nbsp;shorter bars represent? Which borough had the most stop, question, frisk encounters with NYPD, and which had the least?</p></li>
+<li><p>One potential explanation for higher SQFs in certain places might be population size. That is, if more people live in an area, naturally more stops might be made. Check out the Wikipedia page on <a href="https://en.wikipedia.org/wiki/Boroughs_of_New_York_City">NYC Boroughs</a> to see the population sizes of the boroughs. Does population size explain what you observed in part c? That is, do the boroughs with the most/least people correspond to the most/least SQFs?</p></li>
+</ol>
+</div>
+</div>
+<p>If certain areas are policed more than would be expected based on population size, we might want to investigate why. NYPD has been criticized for racial bias in its policing and “over-policing” neighborhoods of color. Former NYC Mayor Michael Bloomberg, who expanded Stop, Question, Frisk, speaking about the program said (Aspen Institute, 2015):</p>
+<blockquote class="blockquote">
+<p>“People say, ‘Oh my God, you are arresting kids for marijuana who are all minorities.’ Yes, that’s true. Why? Because we put all the cops in the minority neighborhoods. Yes, that’s true. Why’d we do it? Because that’s where all the crime is.”</p>
+</blockquote>
+<p>Today, advocates for Stop and Frisk make similar claims. Are these claims supported by the data? Let’s investigate. We’ll look at prevalence of criminal activity among Boroughs first, to see if we can explain the discrepancy in stop rates. Later, you will conduct the same analysis by race.</p>
+<p>The code below uses the same code as Exercise 3, but we now add a group by to see how often criminal activity is found in stops in each borough.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(stop_location_boro_name) <span class="sc">|&gt;</span> </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_stops =</span> <span class="fu">n</span>(),</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">n_crime_found =</span> <span class="fu">sum</span>(criminal_offense_reported <span class="sc">==</span> <span class="st">"Y"</span>)) <span class="sc">|&gt;</span> </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_crime_found =</span> n_crime_found<span class="sc">/</span>n_stops,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>         <span class="at">prop_no_crime_found =</span> <span class="dv">1</span> <span class="sc">-</span> prop_crime_found)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+  stop_location_boro_name n_stops n_crime_found prop_crime_found
+  &lt;fct&gt;                     &lt;int&gt;         &lt;int&gt;            &lt;dbl&gt;
+1 BRONX                      6689          1250            0.187
+2 BROOKLYN                   3984          1546            0.388
+3 MANHATTAN                  3343          1302            0.389
+4 QUEENS                     2393          1020            0.426
+5 STATEN ISLAND               562           240            0.427
+  prop_no_crime_found
+                &lt;dbl&gt;
+1               0.813
+2               0.612
+3               0.611
+4               0.574
+5               0.573</code></pre>
+</div>
+</div>
+<p>This same data is displayed as a segemented bar graph:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(sqf_selected, <span class="fu">aes</span>(<span class="at">y =</span> stop_location_boro_name,</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>                          <span class="at">fill =</span> criminal_offense_reported)) <span class="sc">+</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>) <span class="sc">+</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Proportion"</span>,</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>       <span class="at">y =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 5">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 5
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Copy, paste the code above for computing the proportions and creating the segemented bar plot.</p></li>
+<li><p>Do the data suggest a relationship between borough and prevalence of criminal activity? Explain.</p></li>
+<li><p>Are the disproportionate SQF numbers by borough found in Exercise 4 explained / justified by the proportion of criminal activity found? That is, does the borough that gets policed the most correspond to the borough where the most criminal activity is found?</p></li>
+</ol>
+</div>
+</div>
+<p>We know that location / neighborhood tends to be associated with racial/ethnic demographics. For example, as of the 2020 Census<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>, the Bronx had a much higher proportion of Hispanic and Black residents and lower proportions of White and Asian residents compared to NYC as a whole.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>Race/Ethnicity</th>
+<th>Bronx</th>
+<th>All of NYC</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Hispanic</td>
+<td>54.8%</td>
+<td>28.3%</td>
+</tr>
+<tr class="even">
+<td>White non-Hispanic</td>
+<td>8.9%</td>
+<td>30.9%</td>
+</tr>
+<tr class="odd">
+<td>Black non-Hispanic</td>
+<td>28.5%</td>
+<td>20.2%</td>
+</tr>
+<tr class="even">
+<td>Asian non-Hispanic</td>
+<td>4.6%</td>
+<td>15.6%</td>
+</tr>
+</tbody>
+</table>
+<p>One of the primary critiques of NYPD Stop, Question, Frisk is that is has disproportionately affected neighborhoods and people of color. In Mayor Bloomberg’s comments, he argues that people of color are getting arrested more frequently because they live in neighborhoods where more crime is happening. Again, let’s use the data to investigate both of these claims 1) whether people of color are stopped at dispropirtionate rates (critics claim) and 2) whether crime rates are higher among people of color (Mayor’s claim).</p>
+<p>The code below calculates the number and proportion of stops by race.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(suspect_race_description) <span class="sc">|&gt;</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_stops =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop_stops =</span> n_stops<span class="sc">/</span><span class="fu">sum</span>(n_stops))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+  suspect_race_description       n_stops prop_stops
+  &lt;fct&gt;                            &lt;int&gt;      &lt;dbl&gt;
+1 AMERICAN INDIAN/ALASKAN NATIVE      22    0.00130
+2 ASIAN / PACIFIC ISLANDER           288    0.0170 
+3 BLACK                             9939    0.586  
+4 BLACK HISPANIC                    1719    0.101  
+5 MIDDLE EASTERN/SOUTHWEST ASIAN     142    0.00837
+6 WHITE                              942    0.0555 
+7 WHITE HISPANIC                    3447    0.203  
+8 &lt;NA&gt;                               472    0.0278 </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 6">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 6
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Copy, paste the code above to reproduce the summary statistics in your qmd</p></li>
+<li><p>What proportion of NYPD stop, question, frisk encounters are of Black (non-hispanic) people? How does this compare to the overall proportion of the NYC population that is Black (non-hispanic) as reported in the table above?</p></li>
+<li><p>Repeat part b but for Hispanic people (combining both Black Hispanic and White Hispanic).</p></li>
+<li><p>Repeat part b but for White people (non-Hispanic)</p></li>
+<li><p>Repeat part b but for Asian people (non-Hispanic)</p></li>
+<li><p>Using the data, respond to critics claims: is there evidence that people of color are stopped, frisked, and questioned at disproportionate rates?</p></li>
+</ol>
+</div>
+</div>
+<p>There does seem to be evidence that some demographic groups are stopped, questioned, and frisked at rates disproportionate to their proportion of the population. Let’s now investigate whether there is evidence to back up Mayor Bloomberg’s claim that this is because of differences in criminal activity.</p>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 7">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 7
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ol type="a">
+<li><p>Copy, paste, tweak relevant code to compute how often criminal activity is found in stops by race. <em>Hint: use the same code that did this for borough, and adapt it to compute the proportions by race instead</em></p></li>
+<li><p>Do the data suggest an association between race and prevalence of criminal activity?</p></li>
+<li><p>Are Mayor Bloomberg’s comments supported by this data? Explain.</p></li>
+</ol>
+</div>
+</div>
+<p>Suppose an advocate for the Stop, Question, Frisk program takes the same data from the lab and performs a new analysis that looks at the racial breakdown among criminal offenses reported. They claim that their analysis provides strong evidence for Bloomberg’s claim. See their results below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(criminal_offense_reported <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">y =</span> suspect_race_description)) <span class="sc">+</span></span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>() <span class="sc">+</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Racial Breakdown of Criminal Offenses Found"</span>,</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>          <span class="at">x =</span> <span class="st">"Number of criminal offenses"</span>,</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>          <span class="at">y =</span> <span class="st">"Race"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="index_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>sqf_selected <span class="sc">|&gt;</span> </span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(criminal_offense_reported <span class="sc">==</span> <span class="st">"Y"</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(suspect_race_description) <span class="sc">|&gt;</span> </span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_criminal_offenses =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span> </span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">prop =</span> n_criminal_offenses<span class="sc">/</span><span class="fu">sum</span>(n_criminal_offenses))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+  suspect_race_description       n_criminal_offenses    prop
+  &lt;fct&gt;                                        &lt;int&gt;   &lt;dbl&gt;
+1 AMERICAN INDIAN/ALASKAN NATIVE                   9 0.00168
+2 ASIAN / PACIFIC ISLANDER                       118 0.0220 
+3 BLACK                                         3154 0.589  
+4 BLACK HISPANIC                                 455 0.0849 
+5 MIDDLE EASTERN/SOUTHWEST ASIAN                  42 0.00784
+6 WHITE                                          375 0.0700 
+7 WHITE HISPANIC                                1129 0.211  
+8 &lt;NA&gt;                                            76 0.0142 </code></pre>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 8">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 8
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Does this new analysis provide compelling evidence for Bloomberg’s claim? Why or why not?</p>
+</div>
+</div>
+<div class="callout callout-style-default callout-note no-icon callout-titled" title="Exercise 9">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Exercise 9
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Now that you’ve explored the NYPD Stop, Question, Frisk data, spend a few minutes reflecting on your learning by responding to the following questions:</p>
+<ol type="a">
+<li><p>What were the main statistical concepts covered in this assignment?</p></li>
+<li><p>What’s one piece of insight you gleaned from the data?</p></li>
+<li><p>What’s one thing you understand better after completing these exercises?</p></li>
+<li><p>What exercise(s) gave you the most trouble? What was difficult about them/where did you get stuck?</p></li>
+<li><p>What are you left wondering about / curious to explore further after completing this analysis?</p></li>
+</ol>
+</div>
+</div>
+</section>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>https://popfactfinder.planning.nyc.gov/explorer/cities/NYC?censusTopics=mutuallyExclusiveRaceHispanicOrigin%2CdetailedRaceAndEthnicity&amp;compareTo=2<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
